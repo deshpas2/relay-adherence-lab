@@ -1,8 +1,9 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
-import type { Database } from "@/lib/types/database";
+import { decideRoute } from "@/lib/auth/routing";
+import type { AppDatabase } from "@/lib/types/app-database";
 
-/** Refreshes the auth session cookie. Role routing arrives in Phase 1. */
+/** Refreshes the auth session cookie, then applies role routing. */
 export async function updateSession(request: NextRequest) {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
@@ -17,8 +18,9 @@ export async function updateSession(request: NextRequest) {
   }
 
   let response = NextResponse.next({ request });
+  let sessionHeaders: Record<string, string> = {};
 
-  const supabase = createServerClient<Database>(url, anonKey, {
+  const supabase = createServerClient<AppDatabase>(url, anonKey, {
     cookies: {
       getAll() {
         return request.cookies.getAll();
@@ -32,7 +34,8 @@ export async function updateSession(request: NextRequest) {
           response.cookies.set(name, value, options),
         );
         // Stops CDNs caching a response that carries a session token.
-        Object.entries(headers ?? {}).forEach(([key, value]) =>
+        sessionHeaders = headers ?? {};
+        Object.entries(sessionHeaders).forEach(([key, value]) =>
           response.headers.set(key, value),
         );
       },
@@ -40,7 +43,32 @@ export async function updateSession(request: NextRequest) {
   });
 
   // Must run straight after creating the client: it triggers the refresh.
-  await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
-  return response;
+  // A failed lookup leaves role null, which denies access rather than grants it.
+  const { data: profile } = user
+    ? await supabase
+        .from("profiles")
+        .select("role")
+        .eq("id", user.id)
+        .maybeSingle()
+    : { data: null };
+
+  const decision = decideRoute({
+    pathname: request.nextUrl.pathname,
+    signedIn: Boolean(user),
+    role: profile?.role ?? null,
+  });
+
+  if (decision.type === "allow") return response;
+
+  // A refreshed session must survive the redirect, or the user gets signed out.
+  const redirect = NextResponse.redirect(new URL(decision.to, request.url));
+  response.cookies.getAll().forEach((cookie) => redirect.cookies.set(cookie));
+  Object.entries(sessionHeaders).forEach(([key, value]) =>
+    redirect.headers.set(key, value),
+  );
+  return redirect;
 }
