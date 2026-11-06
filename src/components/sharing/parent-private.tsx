@@ -8,7 +8,7 @@ export function ParentPrivate({ name, mode }: { name: string; mode: SharingMode 
   const waiting = mode === "adult_needs_consent";
   const Icon = waiting ? Hourglass : EyeOff;
   return (
-    <section role="status" className="flex flex-col items-center gap-3 rounded-3xl border bg-card px-6 py-10 text-center">
+    <section role="status" className="flex flex-col items-center gap-3 rounded-xl border bg-card px-6 py-10 text-center">
       <span className="grid size-16 place-items-center rounded-full bg-muted text-muted-foreground">
         <Icon aria-hidden className="size-8" />
       </span>

@@ -3,24 +3,24 @@ import { cn } from "@/lib/utils";
 import type { DoseCell, PatientStatus } from "@/lib/fixtures/clinic";
 
 const PILL: Record<PatientStatus, string> = {
-  green: "bg-[#e2f5e9] text-[#2b8a54]",
-  amber: "bg-[#fbf0d6] text-[#8a6210]",
-  red: "bg-[#fde8e8] text-[#b0352a]",
+  green: "bg-success-soft text-success",
+  amber: "bg-warning-soft text-warning",
+  red: "bg-danger-soft text-danger",
 };
 
 /** On track / Follow-up due / Needs attention. Text carries the meaning, color helps. */
 export function StatusPill({ status }: { status: PatientStatus }) {
   const t = useTranslations("Clinic");
   return (
-    <span className={cn("inline-block rounded-full px-3 py-1 text-xs font-bold whitespace-nowrap", PILL[status])}>
+    <span className={cn("inline-block rounded-full px-2.5 py-0.5 text-xs font-semibold whitespace-nowrap", PILL[status])}>
       {t(`status_${status}`)}
     </span>
   );
 }
 
-/** Green 85%+, amber 70%+, red below. */
+/** On-time rate color: 85%+ success, 70%+ warning, below that danger. Always shown with the number. */
 export function adhColor(x: number) {
-  return x >= 0.85 ? "#1f9d57" : x >= 0.7 ? "#b07d16" : "#c0392b";
+  return x >= 0.85 ? "var(--success)" : x >= 0.7 ? "var(--warning)" : "var(--danger)";
 }
 
 export function MiniBar({ value, color }: { value: number; color: string }) {
@@ -33,8 +33,8 @@ export function MiniBar({ value, color }: { value: number; color: string }) {
 
 export function StatTile({ value, label, color }: { value: string; label: string; color?: string }) {
   return (
-    <div className="rounded-xl border bg-card p-4 shadow-sm">
-      <p className="font-heading text-3xl leading-none font-bold tabular-nums" style={{ color }}>
+    <div className="border-t-2 border-primary/80 bg-card px-4 pt-3 pb-4">
+      <p className="text-3xl leading-none font-semibold tracking-tight tabular-nums" style={{ color }}>
         {value}
       </p>
       <p className="mt-2 text-xs text-muted-foreground">{label}</p>
@@ -44,7 +44,7 @@ export function StatTile({ value, label, color }: { value: string; label: string
 
 export function Panel({ title, children, className }: { title: string; children: React.ReactNode; className?: string }) {
   return (
-    <section className={cn("rounded-xl border bg-card p-5 shadow-sm", className)}>
+    <section className={cn("rounded-lg border bg-card p-5", className)}>
       <h2 className="mb-3 font-sans text-xs font-bold tracking-wider text-muted-foreground uppercase">{title}</h2>
       {children}
     </section>
@@ -52,9 +52,9 @@ export function Panel({ title, children, className }: { title: string; children:
 }
 
 const CELL: Record<DoseCell["status"], string> = {
-  taken: "bg-[#1f9d57]",
-  late: "bg-[#b07d16]",
-  missed: "bg-[#c0392b]",
+  taken: "bg-success",
+  late: "bg-warning",
+  missed: "bg-danger",
 };
 
 /** Last 28 doses, oldest first. A white dot marks a parent-verified dose. */
@@ -69,7 +69,7 @@ export function DoseHeatmap({ doses }: { doses: DoseCell[] }) {
             title={`${t(`dose_${d.status}`)}${d.verified ? ` · ${t("verifiedShort")}` : ""}`}
             className={cn("relative aspect-square rounded-[4px]", CELL[d.status])}
           >
-            {d.verified && <span className="absolute right-0.5 bottom-0.5 size-1.5 rounded-full bg-white" />}
+            {d.verified && <span className="absolute right-0.5 bottom-0.5 size-1.5 rounded-full bg-card" />}
           </li>
         ))}
       </ol>
@@ -80,8 +80,8 @@ export function DoseHeatmap({ doses }: { doses: DoseCell[] }) {
           </span>
         ))}
         <span className="inline-flex items-center gap-1.5">
-          <span className="grid size-2.5 place-items-center rounded-sm bg-[#5f7186]">
-            <span className="size-1 rounded-full bg-white" />
+          <span className="grid size-2.5 place-items-center rounded-sm bg-muted-foreground">
+            <span className="size-1 rounded-full bg-card" />
           </span>
           {t("verifiedShort")}
         </span>

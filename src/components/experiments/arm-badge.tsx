@@ -7,7 +7,7 @@ export function ArmBadge({ arm, className }: { arm: Arm; className?: string }) {
     <span
       aria-hidden
       className={cn(
-        "inline-grid size-8 shrink-0 place-items-center rounded-full font-heading text-base font-bold",
+        "inline-grid size-8 shrink-0 place-items-center rounded-full text-base font-bold",
         arm === "A" ? "bg-secondary text-secondary-foreground" : "bg-xp text-xp-foreground",
         className,
       )}

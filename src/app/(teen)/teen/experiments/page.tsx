@@ -21,7 +21,7 @@ export default async function QuestsPage() {
         {active ? (
           <ExperimentCard experiment={active} />
         ) : (
-          <p className="rounded-2xl border border-dashed p-5 text-center text-muted-foreground">{t("noActive")}</p>
+          <p className="rounded-lg border border-dashed p-5 text-center text-muted-foreground">{t("noActive")}</p>
         )}
         <Link href="/teen/experiments/new" className={buttonVariants({ variant: active ? "outline" : "default", size: "lg", className: "w-full" })}>
           <Plus aria-hidden /> {t("newTest")}

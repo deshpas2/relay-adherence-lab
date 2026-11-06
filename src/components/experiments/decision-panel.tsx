@@ -19,7 +19,7 @@ export function DecisionPanel({ winner, decision, busy, onDecide }: DecisionPane
 
   if (decision) {
     return (
-      <Card role="status" className="bg-accent text-center font-heading text-xl font-semibold">
+      <Card role="status" className="bg-accent text-center text-xl font-semibold">
         {t(`decided_${decision}`, { arm: winner ?? "B" })}
       </Card>
     );
@@ -48,8 +48,8 @@ export function DecisionPanel({ winner, decision, busy, onDecide }: DecisionPane
             onClick={() => onDecide(key)}
             className={
               i === 0
-                ? "flex min-h-14 items-center gap-3 rounded-2xl bg-primary px-4 py-3 text-left text-primary-foreground transition-opacity hover:opacity-90 disabled:opacity-50"
-                : "flex min-h-14 items-center gap-3 rounded-2xl border-2 bg-card px-4 py-3 text-left transition-colors hover:bg-muted disabled:opacity-50"
+                ? "flex min-h-14 items-center gap-3 rounded-lg bg-primary px-4 py-3 text-left text-primary-foreground transition-opacity hover:opacity-90 disabled:opacity-50"
+                : "flex min-h-14 items-center gap-3 rounded-lg border-2 bg-card px-4 py-3 text-left transition-colors hover:bg-muted disabled:opacity-50"
             }
           >
             <Icon aria-hidden className="size-5 shrink-0" />

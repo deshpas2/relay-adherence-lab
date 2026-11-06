@@ -42,7 +42,7 @@ export function LogDayCard({ arm, armText, busy, onSave }: LogDayCardProps) {
     <Card className="flex flex-col gap-5 border-2 border-primary/30 p-6">
       <div className="flex flex-col gap-3">
         <h2 className="text-2xl">{t("logTitle")}</h2>
-        <div className="flex items-center gap-3 rounded-2xl bg-muted p-3">
+        <div className="flex items-center gap-3 rounded-lg bg-muted p-3">
           <ArmBadge arm={arm} />
           <span className="flex flex-col">
             <span className="text-sm text-muted-foreground">{t("logArm", { arm })}</span>

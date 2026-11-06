@@ -14,7 +14,7 @@ export function TodayList({ slots }: { slots: DoseSlot[] }) {
   return (
     <section aria-labelledby="today" className="flex flex-col gap-3">
       <h2 id="today" className="text-xl">{t("today")}</h2>
-      <ol className="flex flex-col divide-y rounded-2xl border bg-card">
+      <ol className="flex flex-col divide-y rounded-lg border bg-card">
         {slots.map((slot) => {
           const done = slot.status === "taken" || slot.status === "late";
           const missed = slot.status === "missed";

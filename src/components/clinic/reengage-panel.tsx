@@ -67,7 +67,7 @@ export function ReengagePanel({ name, nurse, daysQuiet, done: initialDone }: Pro
               <span
                 className={cn(
                   "z-10 grid size-10 shrink-0 place-items-center rounded-full border-2",
-                  s.state === "action_needed" && "border-[#c0392b] bg-[#fde8e8] text-[#b0352a]",
+                  s.state === "action_needed" && "border-danger bg-danger-soft text-danger",
                   (s.state === "sent" || s.state === "done") && "border-primary bg-primary text-primary-foreground",
                   s.state === "upcoming" && "border-border bg-card text-muted-foreground",
                 )}
@@ -81,7 +81,7 @@ export function ReengagePanel({ name, nurse, daysQuiet, done: initialDone }: Pro
                   <p
                     className={cn(
                       "text-sm",
-                      s.state === "action_needed" ? "font-bold text-[#b0352a]" : "text-muted-foreground",
+                      s.state === "action_needed" ? "font-semibold text-danger" : "text-muted-foreground",
                     )}
                   >
                     {stateLabel(s)}
@@ -117,7 +117,7 @@ export function ReengagePanel({ name, nurse, daysQuiet, done: initialDone }: Pro
 
       <Sheet open={preview !== null} onOpenChange={(o) => !o && setPreview(null)} title={t("previewTitle", { name })}>
         {preview && (
-          <div className="rounded-3xl bg-[#081621] p-4" data-app="teen">
+          <div className="rounded-lg bg-[#0e1a28] p-4">
             <TeenMessage channel={preview} name={name} nurse={nurse} />
           </div>
         )}

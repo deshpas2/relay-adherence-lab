@@ -35,7 +35,7 @@ export default async function PatientPage({ params }: PageProps<"/clinic/home/[i
   const ideas = ideaLibrary.map((i) => ({ key: i.key, title: tIdea(`${i.key}.title`), hypothesis: tIdea(`${i.key}.hypothesis`) }));
   const profile = getSampleProfile(p.id, await getLocale());
   const reaching = (
-    <Panel title={tR("panelTitle")} className={quiet ? "border-[#e8a8a2]" : undefined}>
+    <Panel title={tR("panelTitle")} className={quiet ? "border-danger/40" : undefined}>
       <ReengagePanel name={first} nurse={SAMPLE_NURSE} daysQuiet={p.lastCheckinDays} done={p.reengageDone ?? []} />
     </Panel>
   );
@@ -71,7 +71,7 @@ export default async function PatientPage({ params }: PageProps<"/clinic/home/[i
         <StatTile value={t("daysAgo", { n: p.lastCheckinDays })} label={t("statLastCheckin")} />
       </div>
 
-      <section className="flex flex-wrap items-center gap-x-4 gap-y-2 rounded-xl border bg-card px-5 py-3 shadow-sm">
+      <section className="flex flex-wrap items-center gap-x-4 gap-y-2 rounded-lg border bg-card px-5 py-3">
         <span className="text-xs font-bold tracking-wider text-muted-foreground uppercase">{tF("colWeather")}</span>
         <WeatherBadge weather={p.weather ?? "fog"} label={tF(`weather_${p.weather ?? "fog"}`)} />
         <span className="text-sm font-semibold">{tF(`signal_${weatherSignal(p.weather)}`)}</span>
@@ -98,7 +98,7 @@ export default async function PatientPage({ params }: PageProps<"/clinic/home/[i
 
       <div className="grid gap-5 md:grid-cols-2">
         <Panel title={t("focusTitle")}>
-          <p className="font-heading text-2xl font-bold">{t(`barrier_${p.primary}`)}</p>
+          <p className="text-2xl font-bold">{t(`barrier_${p.primary}`)}</p>
           <p className="mb-3 text-xs font-semibold text-blue">{t("teenChosen")}</p>
           <div className="flex flex-wrap gap-2">
             {p.barriers.map((b) => (
@@ -143,7 +143,7 @@ export default async function PatientPage({ params }: PageProps<"/clinic/home/[i
                     <span className="h-2 overflow-hidden rounded-full border bg-muted">
                       <span
                         className="block h-full"
-                        style={{ width: pct(adh), background: e.result.winner === arm ? "#1f9d57" : "#5f7186" }}
+                        style={{ width: pct(adh), background: e.result.winner === arm ? "var(--success)" : "var(--muted-foreground)" }}
                       />
                     </span>
                     <span className="text-right font-bold tabular-nums">{pct(adh)}</span>

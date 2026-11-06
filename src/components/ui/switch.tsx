@@ -9,12 +9,12 @@ function Switch({ className, ...props }: SwitchPrimitive.Root.Props) {
     <SwitchPrimitive.Root
       data-slot="switch"
       className={cn(
-        "relative inline-flex h-8 w-13 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent bg-xp-track transition-colors data-[checked]:bg-primary",
+        "relative inline-flex h-8 w-13 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent bg-input transition-colors data-[checked]:bg-primary",
         className,
       )}
       {...props}
     >
-      <SwitchPrimitive.Thumb className="block size-6 translate-x-0.5 rounded-full bg-white shadow-sm transition-transform data-[checked]:translate-x-5.5" />
+      <SwitchPrimitive.Thumb className="block size-6 translate-x-0.5 rounded-full bg-[var(--mist)] ring-1 ring-black/10 transition-transform data-[checked]:translate-x-5.5 data-[checked]:bg-primary-foreground" />
     </SwitchPrimitive.Root>
   );
 }

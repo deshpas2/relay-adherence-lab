@@ -75,7 +75,7 @@ export function PersonalSettings({ profile }: { profile: PersonalProfile }) {
       <h1 className="text-3xl">{t("meTitle")}</h1>
 
       {/* Preview first: it changes live as the teen edits below. */}
-      <section aria-labelledby="preview" className="flex flex-col gap-3 rounded-3xl border bg-card p-5">
+      <section aria-labelledby="preview" className="flex flex-col gap-3 rounded-xl border bg-card p-5">
         <div className="flex items-center justify-between gap-3">
           <h2 id="preview" className="text-xl">{t("previewHeading")}</h2>
           <span className="inline-flex items-center gap-1.5 rounded-full bg-secondary px-3 py-1 text-sm font-semibold">
@@ -94,7 +94,7 @@ export function PersonalSettings({ profile }: { profile: PersonalProfile }) {
       <section aria-labelledby="push" className="flex flex-col gap-3">
         <h2 id="push" className="text-xl">{t("pushHeading")}</h2>
         {status === "on" ? (
-          <p className="flex items-center gap-2 rounded-2xl bg-accent p-3 font-semibold">
+          <p className="flex items-center gap-2 rounded-lg bg-accent p-3 font-semibold">
             <BellRing aria-hidden className="size-5 text-primary" /> {t("pushEnabled")}
           </p>
         ) : status === "blocked" ? (
@@ -128,12 +128,12 @@ export function PersonalSettings({ profile }: { profile: PersonalProfile }) {
                 <label
                   key={v}
                   className={cn(
-                    "flex min-h-20 cursor-pointer flex-col items-center justify-center gap-1 rounded-2xl border-2 p-2 text-center transition-colors has-[:focus-visible]:outline-3 has-[:focus-visible]:outline-ring",
+                    "flex min-h-20 cursor-pointer flex-col items-center justify-center gap-1 rounded-lg border-2 p-2 text-center transition-colors has-[:focus-visible]:outline-3 has-[:focus-visible]:outline-ring",
                     on ? "border-primary bg-accent" : "border-border bg-card hover:bg-muted",
                   )}
                 >
                   <input type="radio" name="tone" className="sr-only" checked={on} onChange={() => setTone(v)} />
-                  <span className="font-heading text-sm font-bold">{t(`tone_${v}`)}</span>
+                  <span className="text-sm font-bold">{t(`tone_${v}`)}</span>
                   <span className="text-xs text-muted-foreground">{t(`toneHint_${v}`)}</span>
                 </label>
               );
@@ -141,7 +141,7 @@ export function PersonalSettings({ profile }: { profile: PersonalProfile }) {
           </div>
         </fieldset>
 
-        <div className="flex items-center gap-4 rounded-2xl border bg-card p-4">
+        <div className="flex items-center gap-4 rounded-lg border bg-card p-4">
           <label htmlFor={discreetId} className="flex flex-1 cursor-pointer flex-col">
             <span className="font-medium">{t("discreetLabel")}</span>
             <span className="text-sm text-muted-foreground">{t("discreetHint")}</span>
@@ -162,7 +162,7 @@ export function PersonalSettings({ profile }: { profile: PersonalProfile }) {
               <label
                 key={key}
                 className={cn(
-                  "flex min-h-14 cursor-pointer flex-col justify-center rounded-2xl border-2 px-4 py-2 transition-colors has-[:focus-visible]:outline-3 has-[:focus-visible]:outline-ring",
+                  "flex min-h-14 cursor-pointer flex-col justify-center rounded-lg border-2 px-4 py-2 transition-colors has-[:focus-visible]:outline-3 has-[:focus-visible]:outline-ring",
                   on ? "border-primary bg-accent" : "border-border bg-card hover:bg-muted",
                 )}
               >

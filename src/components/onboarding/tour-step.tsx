@@ -21,15 +21,15 @@ export function TourStep({ onDone }: { onDone: () => void }) {
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="flex flex-col items-center gap-4 rounded-3xl bg-secondary p-5">
+      <div className="flex flex-col items-center gap-4 rounded-xl bg-secondary p-5">
         {/* speech bubble */}
-        <div aria-live="polite" className="w-full rounded-2xl bg-card p-4 text-center shadow-sm">
-          <p className="font-heading text-xl font-semibold">{tNav(tab.labelKey)}</p>
+        <div aria-live="polite" className="w-full rounded-lg bg-card p-4 text-center">
+          <p className="text-xl font-semibold">{tNav(tab.labelKey)}</p>
           <p className="mt-1">{t(`tour_${tab.labelKey}`)}</p>
         </div>
 
         {/* mini tab bar */}
-        <div className="grid w-full gap-1 rounded-2xl bg-card p-1.5 shadow-sm" style={{ gridTemplateColumns: `repeat(${TABS.length}, minmax(0, 1fr))` }} aria-hidden>
+        <div className="grid w-full gap-1 rounded-lg bg-card p-1.5" style={{ gridTemplateColumns: `repeat(${TABS.length}, minmax(0, 1fr))` }} aria-hidden>
           {TABS.map((item, i) => {
             const Icon = item.icon;
             const active = i === index;

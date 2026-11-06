@@ -39,12 +39,11 @@ export function MedExplorer({ name, form, color, content }: MedExplorerProps) {
       </Link>
 
       <header
-        className="flex flex-col items-center gap-1 rounded-3xl px-5 py-7 text-center text-white"
-        style={{ background: `linear-gradient(150deg, ${color}, color-mix(in srgb, ${color} 72%, #000))` }}
+        className="flex flex-col items-center gap-1 rounded-lg border bg-secondary px-5 py-7 text-center text-secondary-foreground"
       >
-        <PillArt form={form} color={color} size={96} white />
-        <h1 className="mt-2 text-3xl text-white">{content.nick}</h1>
-        <p className="text-sm font-semibold tracking-wide uppercase opacity-80">{name}</p>
+        <PillArt form={form} color={color} size={96} />
+        <h1 className="mt-2 text-3xl">{content.nick}</h1>
+        <p className="text-xs font-semibold tracking-[0.12em] uppercase opacity-75">{name}</p>
         <p className="mt-1 max-w-[28ch] text-lg opacity-95">{content.hook}</p>
       </header>
 
@@ -61,7 +60,7 @@ export function MedExplorer({ name, form, color, content }: MedExplorerProps) {
                   <Icon aria-hidden className="size-5" />
                 </span>
                 <span className="flex flex-col pt-1">
-                  <span className="font-heading text-base font-bold">{step.title}</span>
+                  <span className="text-base font-bold">{step.title}</span>
                   <span className="text-muted-foreground">{step.text}</span>
                 </span>
               </li>
@@ -73,7 +72,7 @@ export function MedExplorer({ name, form, color, content }: MedExplorerProps) {
       <section aria-labelledby="facts" className="flex flex-col gap-2">
         <h2 id="facts" className="text-xl">{t("goodToKnow")}</h2>
         {content.facts.map(([q, a]) => (
-          <details key={q} className="group rounded-2xl border bg-card px-4 py-3">
+          <details key={q} className="group rounded-lg border bg-card px-4 py-3">
             <summary className="flex min-h-8 cursor-pointer list-none items-center justify-between gap-3 font-semibold">
               {q}
               <span aria-hidden className="text-xl text-muted-foreground transition-transform group-open:rotate-45">+</span>
@@ -84,7 +83,7 @@ export function MedExplorer({ name, form, color, content }: MedExplorerProps) {
       </section>
 
       {learned ? (
-        <p role="status" className="flex items-center gap-3 rounded-2xl bg-accent p-4 font-semibold">
+        <p role="status" className="flex items-center gap-3 rounded-lg bg-accent p-4 font-semibold">
           <BadgeCheck aria-hidden className="size-6 text-primary" />
           {t("learnedDone")}
         </p>
@@ -101,7 +100,7 @@ export function MedExplorer({ name, form, color, content }: MedExplorerProps) {
         </Button>
       )}
 
-      <p className="flex items-start gap-2 rounded-2xl border bg-card p-3 text-sm text-muted-foreground">
+      <p className="flex items-start gap-2 rounded-lg border bg-card p-3 text-sm text-muted-foreground">
         <Lock aria-hidden className="mt-0.5 size-4 shrink-0" />
         {tDis("medScreen")}
       </p>

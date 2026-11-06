@@ -97,14 +97,14 @@ export function ExperimentRunView({
     <div className="flex flex-col gap-6">
       {party && <Confetti />}
       {party && (
-        <div role="status" className="rounded-3xl bg-accent p-5 text-center">
-          <p className="font-heading text-2xl font-bold">{t("celebrateTitle")}</p>
+        <div role="status" className="rounded-xl bg-accent p-5 text-center">
+          <p className="text-2xl font-bold">{t("celebrateTitle")}</p>
           <p className="text-muted-foreground">{t("celebrateBody")}</p>
         </div>
       )}
       <header className="flex items-center gap-4">
         <ProgressRing value={logged / total} size={84} label={t("daysLogged", { n: logged, total })}>
-          <span className="font-heading text-lg font-semibold">
+          <span className="text-lg font-semibold">
             {logged}/{total}
           </span>
         </ProgressRing>
@@ -122,7 +122,7 @@ export function ExperimentRunView({
       ) : loggedToday || !todayRow ? (
         <Card role="status" className="flex flex-col items-center gap-2 py-6 text-center">
           <CalendarCheck aria-hidden className="size-10 text-primary" />
-          <p className="font-heading text-xl font-semibold">{t("savedTitle")}</p>
+          <p className="text-xl font-semibold">{t("savedTitle")}</p>
           {tomorrow && <p className="text-muted-foreground">{t("savedNext", { arm: tomorrow.arm })}</p>}
           {preview && tomorrow && (
             <Button variant="outline" size="sm" onClick={() => setToday(today + 1)}>

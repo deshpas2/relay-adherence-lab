@@ -15,9 +15,9 @@ export default async function OverviewPage() {
   const adopted = exps.filter((e) => e.decision === "adopted").length;
   const mean = ps.reduce((s, p) => s + p.onTime, 0) / ps.length;
   const status = [
-    { key: "green" as const, color: "#2b8a54" },
-    { key: "amber" as const, color: "#b07d16" },
-    { key: "red" as const, color: "#c0392b" },
+    { key: "green" as const, color: "var(--success)" },
+    { key: "amber" as const, color: "var(--warning)" },
+    { key: "red" as const, color: "var(--danger)" },
   ].map((s) => ({ ...s, n: ps.filter((p) => p.status === s.key).length }));
   const counts = new Map<ClinicBarrier, number>();
   ps.forEach((p) => p.barriers.forEach((b) => counts.set(b, (counts.get(b) ?? 0) + 1)));
@@ -50,14 +50,13 @@ export default async function OverviewPage() {
               <li key={p.id}>
                 <Link
                   href={`/clinic/home/${p.id}`}
-                  className="flex h-full flex-col items-center gap-1.5 rounded-xl border p-3 text-center transition-colors hover:border-[#2563ab]"
-                  style={{ background: soft }}
+                  className="flex h-full flex-col items-center gap-1.5 rounded-lg border bg-card p-3 text-center transition-colors hover:border-cyan-strong"
                 >
-                  <Icon aria-hidden className="size-9" style={{ color }} />
-                  <span className="text-sm font-bold">{p.name}</span>
-                  <span className="text-xs font-semibold" style={{ color }}>
-                    {tF(`weather_${w}`)}
+                  <span className="grid size-12 place-items-center rounded-full" style={{ background: soft, color }}>
+                    <Icon aria-hidden className="size-6" />
                   </span>
+                  <span className="text-sm font-semibold">{p.name}</span>
+                  <span className="text-xs font-semibold">{tF(`weather_${w}`)}</span>
                   <span className="text-[11px] text-muted-foreground">{tF(`signal_${weatherSignal(p.weather)}`)}</span>
                 </Link>
               </li>
@@ -69,8 +68,8 @@ export default async function OverviewPage() {
       <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
         <StatTile value={`${Math.round(mean * 100)}%`} label={t("statMeanOnTime")} color={adhColor(mean)} />
         <StatTile value={`${finished}/${exps.length}`} label={t("statFinished")} />
-        <StatTile value={String(adopted)} label={t("statAdopted")} color="#1f9d57" />
-        <StatTile value={String(attention.length)} label={t("statAttention")} color="#c0392b" />
+        <StatTile value={String(adopted)} label={t("statAdopted")} color="var(--success)" />
+        <StatTile value={String(attention.length)} label={t("statAttention")} color="var(--danger)" />
       </div>
 
       <div className="grid gap-5 md:grid-cols-2">
@@ -99,7 +98,7 @@ export default async function OverviewPage() {
               <li key={b} className="grid grid-cols-[9rem_1fr_1.5rem] items-center gap-3 text-sm">
                 <span className="truncate font-medium">{t(`barrier_${b}`)}</span>
                 <span className="h-2.5 overflow-hidden rounded-full border bg-muted">
-                  <span className="block h-full bg-[#163a5f]" style={{ width: `${(n / maxB) * 100}%` }} />
+                  <span className="block h-full bg-primary" style={{ width: `${(n / maxB) * 100}%` }} />
                 </span>
                 <span className="text-right font-bold tabular-nums">{n}</span>
               </li>

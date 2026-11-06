@@ -51,7 +51,7 @@ export function SignUpForm({ action }: { action?: FormAction }) {
                 <label
                   key={value}
                   className={cn(
-                    "flex cursor-pointer flex-col items-center gap-2 rounded-2xl border-2 p-4 text-center transition-colors has-[:focus-visible]:outline-3 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-ring",
+                    "flex cursor-pointer flex-col items-center gap-2 rounded-lg border-2 p-4 text-center transition-colors has-[:focus-visible]:outline-3 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-ring",
                     checked ? "border-primary bg-secondary" : "border-border bg-card hover:bg-muted",
                   )}
                 >
@@ -65,7 +65,7 @@ export function SignUpForm({ action }: { action?: FormAction }) {
                     className="sr-only"
                   />
                   <Icon aria-hidden className={cn("size-8", checked ? "text-primary" : "text-muted-foreground")} />
-                  <span className="font-heading text-lg font-semibold">{t(labelKey)}</span>
+                  <span className="text-lg font-semibold">{t(labelKey)}</span>
                   <span className="text-sm text-muted-foreground">{t(hintKey)}</span>
                 </label>
               );

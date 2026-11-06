@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { Sparkles } from "lucide-react";
 import { create } from "zustand";
 import { buzz } from "@/components/a11y/prefs-store";
+import { bubbleUp } from "@/components/game/bubbles";
 import { cn } from "@/lib/utils";
 
 type Toast = { id: number; text: string; tone: "xp" | "info" };
@@ -21,7 +22,11 @@ export const useToasts = create<ToastState>((set) => ({
   show: (text, tone = "info") => {
     const id = nextId++;
     set((s) => ({ toasts: [...s.toasts, { id, text, tone }].slice(-3) }));
-    if (tone === "xp") buzz(40);
+    // Every XP reward also gets hearts and smiley faces bubbling up.
+    if (tone === "xp") {
+      buzz(40);
+      bubbleUp();
+    }
   },
   dismiss: (id) => set((s) => ({ toasts: s.toasts.filter((t) => t.id !== id) })),
 }));
@@ -57,8 +62,8 @@ function ToastItem({ toast }: { toast: Toast }) {
     <div
       role="status"
       className={cn(
-        "flex items-center gap-2 rounded-full px-5 py-3 font-semibold shadow-lg animate-in fade-in slide-in-from-top-4",
-        toast.tone === "xp" ? "bg-xp text-xp-foreground" : "bg-foreground text-background",
+        "flex items-center gap-2 rounded-md px-4 py-2.5 text-sm font-semibold shadow-lg animate-in fade-in slide-in-from-top-4",
+        toast.tone === "xp" ? "bg-xp text-xp-foreground" : "bg-primary text-primary-foreground",
       )}
     >
       {toast.tone === "xp" && <Sparkles aria-hidden className="size-5" />}

@@ -25,7 +25,7 @@ export function ConfirmList({ teenName, doses }: { teenName: string; doses: Dose
       {doses.map((d) => {
         const done = confirmed.includes(d.id);
         return (
-          <li key={d.id} className={cn("flex items-center gap-3 rounded-2xl border bg-card p-4", done && "opacity-70")}>
+          <li key={d.id} className={cn("flex items-center gap-3 rounded-lg border bg-card p-4", done && "opacity-70")}>
             <span className="grid size-10 shrink-0 place-items-center rounded-xl border bg-muted text-primary">
               <Pill aria-hidden className="size-5" />
             </span>

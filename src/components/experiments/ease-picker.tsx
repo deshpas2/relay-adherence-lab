@@ -16,7 +16,7 @@ export function EasePicker({ value, onChange }: { value: number | null; onChange
             <label
               key={n}
               className={cn(
-                "grid h-12 cursor-pointer place-items-center rounded-xl border-2 font-heading text-lg font-semibold transition-colors has-[:focus-visible]:outline-3 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-ring",
+                "grid h-12 cursor-pointer place-items-center rounded-xl border-2 text-lg font-semibold transition-colors has-[:focus-visible]:outline-3 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-ring",
                 checked ? "border-primary bg-primary text-primary-foreground" : "border-border bg-card hover:bg-muted",
               )}
             >

@@ -16,10 +16,10 @@ export default async function FamilyPage() {
     <div className="flex flex-col gap-6">
       <h1 className="text-3xl">{t("familyTitle")}</h1>
 
-      <section className="flex flex-col items-center gap-1 rounded-3xl border bg-card p-5 text-center">
+      <section className="flex flex-col items-center gap-1 rounded-xl border bg-card p-5 text-center">
         <Link2 aria-hidden className="size-6 text-primary" />
         <p className="text-sm text-muted-foreground">{t("linkedTo", { name: f.teenName })}</p>
-        <p className="font-heading text-2xl font-bold tracking-[0.14em] text-primary">{f.inviteCode}</p>
+        <p className="text-2xl font-bold tracking-[0.14em] text-primary">{f.inviteCode}</p>
         <p className="text-sm text-muted-foreground">
           {t(sharing.mode === "minor_shared" ? "sharedMinor" : sharing.mode === "adult_shared" ? "sharedAdult" : "sharedNone", { name: f.teenName })}
         </p>

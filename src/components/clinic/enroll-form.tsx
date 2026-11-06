@@ -47,13 +47,13 @@ export function EnrollForm() {
 
   if (done && age !== null) {
     return (
-      <div role="status" className="flex flex-col gap-5 rounded-xl border bg-card p-6 shadow-sm">
+      <div role="status" className="flex flex-col gap-5 rounded-lg border bg-card p-6">
         <div className="flex items-center gap-3">
-          <CheckCircle2 aria-hidden className="size-8 text-[#1f9d57]" />
+          <CheckCircle2 aria-hidden className="size-8 text-success" />
           <h2 className="text-2xl">{t("doneTitle", { name })}</h2>
         </div>
         <p>{t("doneBody", { name: first.trim() })}</p>
-        <p className="self-start rounded-lg border bg-muted px-4 py-3 font-heading text-2xl font-bold tracking-[0.14em]">
+        <p className="self-start rounded-lg border bg-muted px-4 py-3 text-2xl font-bold tracking-[0.14em]">
           {demoCode(`${name}${birth}`)}
         </p>
         <Rule age={age} turnsLabel={turnsLabel} caregiver={caregiver.trim()} />
@@ -82,7 +82,7 @@ export function EnrollForm() {
 
   return (
     <form
-      className="flex flex-col gap-5 rounded-xl border bg-card p-6 shadow-sm"
+      className="flex flex-col gap-5 rounded-lg border bg-card p-6"
       onSubmit={(e) => {
         e.preventDefault();
         if (!first.trim() || !birth) return setError(t("missing"));
@@ -110,7 +110,7 @@ export function EnrollForm() {
         />
         {age !== null && isEnrollableAge(age) && (
           <div aria-live="polite" className="flex flex-col gap-2">
-            <p className="font-heading text-xl font-bold">{t("ageShown", { age })}</p>
+            <p className="text-xl font-bold">{t("ageShown", { age })}</p>
             <Rule age={age} turnsLabel={turnsLabel} caregiver={caregiver.trim()} />
           </div>
         )}
@@ -139,7 +139,7 @@ function Rule({ age, turnsLabel, caregiver }: { age: number; turnsLabel: string;
   const t = useTranslations("Enroll");
   const who = caregiver || t("theCaregiver");
   return age < ADULT_AGE ? (
-    <div className="flex items-start gap-3 rounded-lg bg-[#e5eefb] p-3 text-sm text-[#163a5f]">
+    <div className="flex items-start gap-3 rounded-md border-l-2 border-cyan bg-accent p-3 text-sm text-accent-foreground">
       <Users aria-hidden className="mt-0.5 size-4 shrink-0" />
       <span>
         <span className="block font-semibold">{t("ruleMinor", { who })}</span>
@@ -147,7 +147,7 @@ function Rule({ age, turnsLabel, caregiver }: { age: number; turnsLabel: string;
       </span>
     </div>
   ) : (
-    <div className="flex items-start gap-3 rounded-lg bg-[#e2f5e9] p-3 text-sm text-[#1b5e37]">
+    <div className="flex items-start gap-3 rounded-md border-l-2 border-success bg-success-soft p-3 text-sm text-foreground">
       <ShieldCheck aria-hidden className="mt-0.5 size-4 shrink-0" />
       <span className="font-semibold">{t("ruleAdult", { who })}</span>
     </div>

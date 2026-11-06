@@ -55,7 +55,7 @@
     "title": "Make Relay yours",
     "description": "Change how Relay looks and feels.",
     "theme": "Colors",
-    "theme_system": "Navy",
+    "theme_system": "Match my device",
     "theme_light": "Light",
     "theme_dark": "Dark",
     "highContrast": "High contrast",
@@ -67,7 +67,8 @@
     "haptics": "Buzz for alerts",
     "hapticsHint": "Your phone buzzes for alerts, if it can",
     "language": "Language",
-    "done": "Done"
+    "done": "Done",
+    "toggleTheme": "Dark mode"
   },
   "Auth": {
     "signInTitle": "Welcome back",

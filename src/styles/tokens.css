@@ -1,166 +1,162 @@
 /*
- * Relay design tokens, matching the demo prototype:
- * a deep-navy teen/parent world with green + blue accents, and a clean
- * light clinician portal. Components use these through Tailwind names
- * (bg-primary, text-xp, ...), mapped in globals.css.
+ * Relay design tokens: Midnight Clinical.
+ *   Midnight Navy #17283D · Mist White #F3F5F4 · Muted Cyan #83B5C0 · Pale Green #D5E0D8
+ * Every color in the app comes from here; components use Tailwind names
+ * (bg-primary, text-success, ...) mapped in globals.css.
  *
- * Switches on <html> (or a wrapper):
- *   data-theme="light"     user picked the light version (default is navy)
- *   data-app="clinic"      light blue-slate clinician portal
- *   data-contrast="high"   a11y: high contrast
- *   data-text="large"      a11y: larger text
+ * Status colors (success / warning / danger) are muted, dark-enough shades so
+ * text stays readable; they always appear with a word or icon, never alone.
+ *
+ * Switches on <html>:
+ *   data-theme="light" | "dark"   chosen with the theme toggle (none = follow the device)
+ *   data-contrast="high"          a11y: high contrast
+ *   data-text="large"             a11y: larger text
  */
 
-/* ---------- Teen + parent: deep navy (default) ---------- */
+/* ---------- Light (default) ---------- */
 :root {
+  color-scheme: light;
+
+  --navy: #17283d;
+  --mist: #f3f5f4;
+  --cyan: #83b5c0;
+  --pale-green: #d5e0d8;
+
+  --background: var(--mist);
+  --foreground: var(--navy);
+  --card: #fcfdfc;
+  --card-foreground: var(--navy);
+  --popover: #fcfdfc;
+  --popover-foreground: var(--navy);
+
+  --primary: var(--navy);
+  --primary-foreground: var(--mist);
+  --secondary: var(--pale-green);
+  --secondary-foreground: var(--navy);
+  --muted: #e7ebe9;
+  --muted-foreground: #4c5c6b;
+  /* selected / highlighted states: a light cyan tint */
+  --accent: #e1edef;
+  --accent-foreground: var(--navy);
+
+  /* cyan for fills and icons; the darker shade is for cyan-colored text/icons on light */
+  --cyan-strong: #3c717d;
+  --blue: var(--cyan-strong);
+  --blue-soft: var(--accent);
+
+  --xp: var(--cyan);
+  --xp-foreground: var(--navy);
+  --xp-track: var(--pale-green);
+
+  --success: #2f6b4a;
+  --success-soft: var(--pale-green);
+  --warning: #85621a;
+  --warning-soft: #efe6cf;
+  --amber: var(--warning);
+  /* form errors and "needs a person" only, never for a missed dose */
+  --destructive: #a13d33;
+  --danger: #a13d33;
+  --danger-soft: #f3e0dc;
+  --danger-foreground: #fcfdfc;
+
+  --border: #d6ddd9;
+  --input: #bfc9c4;
+  --ring: #3c717d;
+
+  --chart-1: var(--navy);
+  --chart-2: var(--cyan-strong);
+  --chart-3: #7f9a88;
+  --chart-4: var(--warning);
+  --chart-5: var(--danger);
+
+  /* bubble-up celebration */
+  --bubble-1: var(--cyan);
+  --bubble-2: var(--pale-green);
+  --bubble-3: var(--navy);
+  --bubble-face: var(--navy);
+
+  --radius: 0.375rem;
+}
+
+/* ---------- Dark ---------- */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --background: #0e1a28;
+    --foreground: var(--mist);
+    --card: var(--navy);
+    --card-foreground: var(--mist);
+    --popover: var(--navy);
+    --popover-foreground: var(--mist);
+    --primary: var(--cyan);
+    --primary-foreground: #0e1a28;
+    --secondary: #24392f;
+    --secondary-foreground: var(--pale-green);
+    --muted: #1d3045;
+    --muted-foreground: #a8b7c3;
+    --accent: #1e3a46;
+    --accent-foreground: var(--mist);
+    --cyan-strong: var(--cyan);
+    --xp: var(--cyan);
+    --xp-foreground: #0e1a28;
+    --xp-track: #26394e;
+    --success: #9ccaa9;
+    --success-soft: #1f3529;
+    --warning: #e0bd70;
+    --warning-soft: #3a3121;
+    --destructive: #eb9b90;
+    --danger: #eb9b90;
+    --danger-soft: #3d2624;
+    --danger-foreground: #0e1a28;
+    --border: #273b51;
+    --input: #3a5068;
+    --ring: var(--cyan);
+    --chart-1: var(--mist);
+    --chart-3: #9fb9a7;
+    --bubble-3: var(--mist);
+    --bubble-face: var(--navy);
+  }
+}
+:root[data-theme="dark"] {
   color-scheme: dark;
-
-  --background: #081621;
-  --foreground: #edf4f8;
-  --card: #0f2534;
-  --card-foreground: #edf4f8;
-  --popover: #0f2534;
-  --popover-foreground: #edf4f8;
-
-  --primary: #34c56a; /* green */
-  --primary-foreground: #042b12;
-  --secondary: #16303f;
-  --secondary-foreground: #edf4f8;
-  --muted: #16303f;
-  --muted-foreground: #8ba7bc;
-  --accent: #0f3222; /* green-soft */
-  --accent-foreground: #edf4f8;
-
-  --blue: #4a9eff;
-  --blue-soft: #102a44;
-  --amber: #e6a23c;
-
-  --xp: #34c56a;
-  --xp-foreground: #042b12;
-  --xp-track: #264a5f;
-  --success: #34c56a;
-  --success-soft: #0f3222;
-
-  /* form errors only, never for missed doses */
-  --destructive: #e8625f;
-
-  --border: #1d3b4d;
-  --input: #264a5f;
-  --ring: #34c56a;
-
-  --chart-1: #34c56a;
-  --chart-2: #4a9eff;
-  --chart-3: #e6a23c;
-  --chart-4: #e8625f;
-  --chart-5: #8ba7bc;
-
-  --radius: 1rem;
-}
-
-/* ---------- Teen + parent: light version (chosen in settings) ---------- */
-:root[data-theme="light"] {
-  color-scheme: light;
-  --background: #f2f6f9;
-  --foreground: #0d2433;
-  --card: #ffffff;
-  --card-foreground: #0d2433;
-  --popover: #ffffff;
-  --popover-foreground: #0d2433;
-  --primary: #1f9d57;
-  --primary-foreground: #ffffff;
-  --secondary: #e6eef3;
-  --secondary-foreground: #0d2433;
-  --muted: #e6eef3;
-  --muted-foreground: #4f6b7e;
-  --accent: #e2f5e9;
-  --accent-foreground: #0d2433;
-  --blue: #2563ab;
-  --blue-soft: #e5eefb;
-  --amber: #b07d16;
-  --xp: #1f9d57;
-  --xp-foreground: #ffffff;
-  --xp-track: #d4dfe7;
-  --success: #1f9d57;
-  --success-soft: #e2f5e9;
-  --destructive: #c0392b;
-  --border: #d8e2ea;
-  --input: #c3d1dc;
-  --ring: #1f9d57;
-  --chart-1: #1f9d57;
-  --chart-2: #2563ab;
-  --chart-3: #b07d16;
-  --chart-4: #c0392b;
-  --chart-5: #5f7186;
-}
-
-/* ---------- Clinician portal: clean light blue-slate ----------
- * Matches data-app on <html> or on the clinic shell wrapper, so the portal
- * gets its colors on first paint. */
-[data-app="clinic"] {
-  color-scheme: light;
-  --background: #eef1f5;
-  --foreground: #17304a;
-  --card: #ffffff;
-  --card-foreground: #17304a;
-  --popover: #ffffff;
-  --popover-foreground: #17304a;
-  --primary: #163a5f; /* navy */
-  --primary-foreground: #ffffff;
-  --secondary: #e5eefb;
-  --secondary-foreground: #163a5f;
-  --muted: #eef1f5;
-  --muted-foreground: #5f7186;
-  --accent: #e5eefb;
-  --accent-foreground: #163a5f;
-  --blue: #2563ab;
-  --blue-soft: #e5eefb;
-  --amber: #b07d16;
-  --xp: #1f9d57;
-  --xp-foreground: #ffffff;
-  --xp-track: #e3e8ef;
-  --success: #1f9d57;
-  --success-soft: #e2f5e9;
-  --destructive: #c0392b;
-  --border: #e3e8ef;
-  --input: #d4dce6;
-  --ring: #2563ab;
-  --chart-1: #1f9d57;
-  --chart-2: #2563ab;
-  --chart-3: #b07d16;
-  --chart-4: #c0392b;
-  --chart-5: #5f7186;
-  --radius: 0.75rem;
+  --background: #0e1a28;
+  --foreground: var(--mist);
+  --card: var(--navy);
+  --card-foreground: var(--mist);
+  --popover: var(--navy);
+  --popover-foreground: var(--mist);
+  --primary: var(--cyan);
+  --primary-foreground: #0e1a28;
+  --secondary: #24392f;
+  --secondary-foreground: var(--pale-green);
+  --muted: #1d3045;
+  --muted-foreground: #a8b7c3;
+  --accent: #1e3a46;
+  --accent-foreground: var(--mist);
+  --cyan-strong: var(--cyan);
+  --xp: var(--cyan);
+  --xp-foreground: #0e1a28;
+  --xp-track: #26394e;
+  --success: #9ccaa9;
+  --success-soft: #1f3529;
+  --warning: #e0bd70;
+  --warning-soft: #3a3121;
+  --destructive: #eb9b90;
+  --danger: #eb9b90;
+  --danger-soft: #3d2624;
+  --danger-foreground: #0e1a28;
+  --border: #273b51;
+  --input: #3a5068;
+  --ring: var(--cyan);
+  --chart-1: var(--mist);
+  --chart-3: #9fb9a7;
+  --bubble-3: var(--mist);
+  --bubble-face: var(--navy);
 }
 
 /* ---------- Accessibility: high contrast (wins over everything above) ---------- */
 :root[data-contrast="high"],
 :root[data-contrast="high"] [data-app] {
-  color-scheme: dark;
-  --background: #000000;
-  --foreground: #ffffff;
-  --card: #000000;
-  --card-foreground: #ffffff;
-  --popover: #000000;
-  --popover-foreground: #ffffff;
-  --primary: #5dff8f;
-  --primary-foreground: #000000;
-  --secondary: #000000;
-  --secondary-foreground: #ffffff;
-  --muted: #1a1a1a;
-  --muted-foreground: #ffffff;
-  --accent: #000000;
-  --accent-foreground: #ffffff;
-  --xp: #5dff8f;
-  --xp-foreground: #000000;
-  --xp-track: #555555;
-  --success: #5dff8f;
-  --success-soft: #000000;
-  --border: #ffffff;
-  --input: #ffffff;
-  --ring: #ffff00;
-}
-:root[data-contrast="high"][data-theme="light"],
-:root[data-contrast="high"][data-theme="light"] [data-app] {
   color-scheme: light;
   --background: #ffffff;
   --foreground: #000000;
@@ -168,22 +164,58 @@
   --card-foreground: #000000;
   --popover: #ffffff;
   --popover-foreground: #000000;
-  --primary: #0b5d2a;
+  --primary: #0b1724;
   --primary-foreground: #ffffff;
   --secondary: #ffffff;
   --secondary-foreground: #000000;
-  --muted: #f2f2f2;
+  --muted: #f0f0f0;
   --muted-foreground: #000000;
   --accent: #ffffff;
   --accent-foreground: #000000;
-  --xp: #0b5d2a;
+  --cyan-strong: #0d4652;
+  --xp: #0d4652;
   --xp-foreground: #ffffff;
-  --xp-track: #d4d4d4;
-  --success: #0b5d2a;
+  --xp-track: #cfcfcf;
+  --success: #0f4a2a;
   --success-soft: #ffffff;
+  --warning: #5c4100;
+  --warning-soft: #ffffff;
+  --danger: #7a1a12;
+  --danger-soft: #ffffff;
   --border: #000000;
   --input: #000000;
   --ring: #000000;
+}
+:root[data-contrast="high"][data-theme="dark"],
+:root[data-contrast="high"][data-theme="dark"] [data-app] {
+  color-scheme: dark;
+  --background: #000000;
+  --foreground: #ffffff;
+  --card: #000000;
+  --card-foreground: #ffffff;
+  --popover: #000000;
+  --popover-foreground: #ffffff;
+  --primary: #bfe9f2;
+  --primary-foreground: #000000;
+  --secondary: #000000;
+  --secondary-foreground: #ffffff;
+  --muted: #1a1a1a;
+  --muted-foreground: #ffffff;
+  --accent: #000000;
+  --accent-foreground: #ffffff;
+  --cyan-strong: #bfe9f2;
+  --xp: #bfe9f2;
+  --xp-foreground: #000000;
+  --xp-track: #555555;
+  --success: #b5f5c8;
+  --success-soft: #000000;
+  --warning: #ffe08a;
+  --warning-soft: #000000;
+  --danger: #ffb3a8;
+  --danger-soft: #000000;
+  --border: #ffffff;
+  --input: #ffffff;
+  --ring: #ffff00;
 }
 
 /* ---------- Accessibility: large text ---------- */

@@ -21,7 +21,7 @@ export function BirthdayDemo({ age, mode }: { age: number; mode: SharingMode }) 
   }
 
   return (
-    <section className="flex flex-col gap-3 rounded-2xl border bg-card p-5">
+    <section className="flex flex-col gap-3 rounded-lg border bg-card p-5">
       <div className="flex items-center gap-3">
         <span className="grid size-11 place-items-center rounded-xl bg-accent text-primary">
           <Cake aria-hidden className="size-5" />

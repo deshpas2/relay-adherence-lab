@@ -15,8 +15,8 @@ export function TeenMessage({ channel, name, nurse }: { channel: ReengageChannel
 
   if (channel === "app") {
     return (
-      <div className="flex items-start gap-3 rounded-2xl bg-[#1b2a35] p-3.5 text-[#edf4f8] shadow-md">
-        <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-[#34c56a] text-[#042b12]">
+      <div className="flex items-start gap-3 rounded-lg bg-[#17283d] p-3.5 text-[#f3f5f4]">
+        <span className="grid size-9 shrink-0 place-items-center rounded-md bg-[#83b5c0] text-[#17283d]">
           <Bell aria-hidden className="size-4" />
         </span>
         <span className="flex flex-col">
@@ -34,7 +34,7 @@ export function TeenMessage({ channel, name, nurse }: { channel: ReengageChannel
         <span className="flex items-center gap-1.5 text-xs font-semibold text-muted-foreground">
           <MessageSquare aria-hidden className="size-3.5" /> {t("sms_from")}
         </span>
-        <p className="max-w-[85%] rounded-2xl rounded-bl-md bg-[#e9ecef] px-4 py-2.5 text-sm text-[#17202a]">
+        <p className="max-w-[85%] rounded-xl rounded-bl-sm bg-[#d5e0d8] px-4 py-2.5 text-sm text-[#17283d]">
           {t("sms_body", { name })}
         </p>
       </div>
@@ -43,7 +43,7 @@ export function TeenMessage({ channel, name, nurse }: { channel: ReengageChannel
 
   if (channel === "nurse_voice") {
     return (
-      <div className="flex flex-col gap-2 rounded-2xl border bg-card p-3.5">
+      <div className="flex flex-col gap-2 rounded-lg border bg-card p-3.5">
         <span className="text-xs font-semibold text-muted-foreground">{t("voice_from", { nurse })}</span>
         <div className="flex items-center gap-3">
           <button
@@ -76,7 +76,7 @@ export function TeenMessage({ channel, name, nurse }: { channel: ReengageChannel
   }
 
   return (
-    <div className="flex items-center gap-3 rounded-2xl border bg-card p-3.5">
+    <div className="flex items-center gap-3 rounded-lg border bg-card p-3.5">
       <span className="grid size-10 shrink-0 place-items-center rounded-full bg-accent text-primary">
         <Phone aria-hidden className="size-5" />
       </span>

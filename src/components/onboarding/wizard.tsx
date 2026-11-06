@@ -136,7 +136,7 @@ export function OnboardingWizard({ schedule, homeHref, save = previewSave }: Wiz
       {step === "promise" && (
         <StepBody icon={<ShieldCheck className="size-10" />}>
           {heading(t("promiseTitle"))}
-          <p className="rounded-2xl border-2 border-primary bg-secondary p-5 font-heading text-xl font-semibold text-secondary-foreground">
+          <p className="rounded-lg border-2 border-primary bg-secondary p-5 text-xl font-semibold text-secondary-foreground">
             {t("promiseBody")}
           </p>
           <p className="text-lg">{t("promiseNote")}</p>
@@ -203,7 +203,7 @@ export function OnboardingWizard({ schedule, homeHref, save = previewSave }: Wiz
                 <label
                   key={key}
                   className={cn(
-                    "flex min-h-14 cursor-pointer items-center gap-3 rounded-2xl border-2 px-4 font-medium transition-colors has-[:focus-visible]:outline-3 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-ring",
+                    "flex min-h-14 cursor-pointer items-center gap-3 rounded-lg border-2 px-4 font-medium transition-colors has-[:focus-visible]:outline-3 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-ring",
                     checked ? "border-primary bg-secondary" : "border-border bg-card hover:bg-muted",
                   )}
                 >
@@ -236,9 +236,9 @@ export function OnboardingWizard({ schedule, homeHref, save = previewSave }: Wiz
           <p className="text-muted-foreground">{t("remindersBody")}</p>
           <ul className="flex flex-col gap-3">
             {schedule.map((slot) => (
-              <li key={slot.id} className="flex items-center justify-between gap-4 rounded-2xl border bg-card p-4">
+              <li key={slot.id} className="flex items-center justify-between gap-4 rounded-lg border bg-card p-4">
                 <label htmlFor={`rem-${slot.id}`} className="flex flex-col">
-                  <span className="font-heading text-lg font-semibold">{tHome(`slot_${slot.label}`)}</span>
+                  <span className="text-lg font-semibold">{tHome(`slot_${slot.label}`)}</span>
                   <span className="text-sm text-muted-foreground">
                     {t("medTime", { time: formatClock(slot.time, locale) })}
                   </span>
@@ -282,7 +282,7 @@ function StepBody({ icon, center, children }: { icon: React.ReactNode; center?: 
     <div className={cn("flex flex-1 flex-col gap-5", center && "text-center")}>
       <span
         aria-hidden
-        className={cn("grid size-20 place-items-center rounded-3xl bg-accent text-primary", center && "self-center")}
+        className={cn("grid size-20 place-items-center rounded-xl bg-accent text-primary", center && "self-center")}
       >
         {icon}
       </span>
@@ -293,7 +293,7 @@ function StepBody({ icon, center, children }: { icon: React.ReactNode; center?: 
 
 function InfoRow({ icon, text }: { icon: React.ReactNode; text: string }) {
   return (
-    <li className="flex items-start gap-3 rounded-2xl border bg-card p-4 text-lg">
+    <li className="flex items-start gap-3 rounded-lg border bg-card p-4 text-lg">
       <span aria-hidden className="text-primary">
         {icon}
       </span>

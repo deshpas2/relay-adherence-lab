@@ -14,8 +14,7 @@ import { buzz, usePrefs } from "./prefs-store";
 type ToggleKey = "highContrast" | "largeText" | "reduceMotion" | "haptics";
 
 const TOGGLES: ToggleKey[] = ["highContrast", "largeText", "reduceMotion", "haptics"];
-// Navy ("system") is the default look; light is the alternative.
-const THEMES: ThemeChoice[] = ["system", "light"];
+const THEMES: ThemeChoice[] = ["system", "light", "dark"];
 
 /**
  * The display + accessibility menu (Section 5): theme, high contrast,
@@ -48,17 +47,17 @@ export function A11yMenu({ className }: { className?: string }) {
       </Dialog.Trigger>
 
       <Dialog.Portal>
-        <Dialog.Backdrop className="fixed inset-0 z-40 bg-black/40 transition-opacity data-[ending-style]:opacity-0 data-[starting-style]:opacity-0" />
+        <Dialog.Backdrop className="fixed inset-0 z-40 bg-[#17283d]/55 transition-opacity data-[ending-style]:opacity-0 data-[starting-style]:opacity-0" />
         <Dialog.Popup
           className={cn(
             // Bottom sheet on phones, centered card on bigger screens.
-            "fixed inset-x-0 bottom-0 z-50 flex max-h-[90dvh] flex-col gap-6 overflow-y-auto rounded-t-3xl bg-card p-6 pb-[max(1.5rem,env(safe-area-inset-bottom))] text-card-foreground shadow-xl",
+            "fixed inset-x-0 bottom-0 z-50 flex max-h-[90dvh] flex-col gap-6 overflow-y-auto rounded-t-xl bg-card p-6 pb-[max(1.5rem,env(safe-area-inset-bottom))] text-card-foreground shadow-xl",
             "transition-transform data-[ending-style]:translate-y-full data-[starting-style]:translate-y-full",
-            "sm:inset-x-auto sm:bottom-auto sm:top-1/2 sm:left-1/2 sm:w-full sm:max-w-md sm:-translate-x-1/2 sm:-translate-y-1/2 sm:rounded-3xl",
+            "sm:inset-x-auto sm:bottom-auto sm:top-1/2 sm:left-1/2 sm:w-full sm:max-w-md sm:-translate-x-1/2 sm:-translate-y-1/2 sm:rounded-xl",
           )}
         >
           <div className="flex flex-col gap-1">
-            <Dialog.Title className="font-heading text-2xl font-semibold">
+            <Dialog.Title className="text-2xl font-semibold">
               {t("title")}
             </Dialog.Title>
             <Dialog.Description className="text-muted-foreground">
@@ -68,7 +67,7 @@ export function A11yMenu({ className }: { className?: string }) {
 
           <fieldset className="flex flex-col gap-2">
             <legend className="mb-2 font-medium">{t("theme")}</legend>
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-3 gap-2">
               {THEMES.map((theme) => {
                 const active = prefs.theme === theme;
                 return (
@@ -91,7 +90,7 @@ export function A11yMenu({ className }: { className?: string }) {
             </div>
           </fieldset>
 
-          <ul className="flex flex-col divide-y rounded-2xl border">
+          <ul className="flex flex-col divide-y rounded-lg border">
             {TOGGLES.map((key) => (
               <ToggleRow
                 key={key}

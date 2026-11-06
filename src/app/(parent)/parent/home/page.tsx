@@ -23,15 +23,15 @@ export default async function ParentHomePage() {
         <p className="mt-1 text-muted-foreground">{t("subtitle", { name: f.teenName })}</p>
       </div>
 
-      <section className="flex items-center gap-5 rounded-3xl border bg-card p-5">
+      <section className="flex items-center gap-5 rounded-xl border bg-card p-5">
         <ProgressRing value={f.onTimeRate} size={96} label={t("onTimeLabel", { pct })}>
           <span className="flex flex-col items-center leading-none">
-            <span className="font-heading text-2xl font-bold">{pct}%</span>
+            <span className="text-2xl font-bold">{pct}%</span>
             <span className="mt-1 text-[10px] font-bold tracking-wider text-muted-foreground uppercase">{t("onTime")}</span>
           </span>
         </ProgressRing>
         <div className="flex flex-col gap-1">
-          <p className="font-heading text-lg font-bold">{t("last14", { taken: f.takenLast14, total: f.totalLast14 })}</p>
+          <p className="text-lg font-bold">{t("last14", { taken: f.takenLast14, total: f.totalLast14 })}</p>
           <p className="text-sm text-muted-foreground">
             {t(sharing.mode === "minor_shared" ? "sharedMinor" : "sharedAdult", { name: f.teenName })}
           </p>
@@ -46,7 +46,7 @@ export default async function ParentHomePage() {
         <ConfirmList teenName={f.teenName} doses={[...f.doses]} />
       </section>
 
-      <p className="flex items-start gap-2 rounded-2xl border bg-card p-3 text-sm text-muted-foreground">
+      <p className="flex items-start gap-2 rounded-lg border bg-card p-3 text-sm text-muted-foreground">
         <Lock aria-hidden className="mt-0.5 size-4 shrink-0" />
         {t("safety", { name: f.teenName })}
       </p>

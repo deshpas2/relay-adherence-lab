@@ -35,7 +35,7 @@ export function DayStrip({ days, today }: { days: ExperimentDayRow[]; today: num
                 isToday && "border-2 border-primary",
               )}
             >
-              <span className="font-heading text-sm font-bold" aria-hidden>
+              <span className="text-sm font-bold" aria-hidden>
                 {day.arm}
               </span>
               <span aria-hidden className="grid h-4 place-items-center">

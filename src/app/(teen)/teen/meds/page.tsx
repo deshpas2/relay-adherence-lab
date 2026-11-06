@@ -22,7 +22,7 @@ export default async function MedsPage() {
           <li key={med.slug}>
             <Link
               href={`/teen/meds/${med.slug}`}
-              className="relative flex h-full flex-col gap-1 rounded-2xl border bg-card p-4 transition-colors hover:bg-muted"
+              className="relative flex h-full flex-col gap-1 rounded-lg border bg-card p-4 transition-colors hover:bg-muted"
             >
               <span className="absolute top-3 right-3 rounded-md bg-accent px-2 py-0.5 text-xs font-bold text-primary">
                 {t("xpBadge", { xp: xpRewards.medExplored })}
@@ -30,13 +30,13 @@ export default async function MedsPage() {
               <span className="grid h-20 place-items-center">
                 <PillArt form={med.form} color={med.color} size={58} />
               </span>
-              <span className="font-heading text-base font-bold">{med.content[locale].nick}</span>
+              <span className="text-base font-bold">{med.content[locale].nick}</span>
               <span className="text-sm text-muted-foreground">{med.name}</span>
             </Link>
           </li>
         ))}
       </ul>
-      <p className="flex items-start gap-2 rounded-2xl border bg-card p-3 text-sm text-muted-foreground">
+      <p className="flex items-start gap-2 rounded-lg border bg-card p-3 text-sm text-muted-foreground">
         <Lock aria-hidden className="mt-0.5 size-4 shrink-0" />
         {tDis("medScreen")}
       </p>

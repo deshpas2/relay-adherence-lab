@@ -133,7 +133,7 @@ export function ExperimentDesigner({ forYou, more, start = previewStart, suggest
           <h2 className="text-2xl">{title}</h2>
           <p>{draft.hypothesis}</p>
           {(["A", "B"] as const).map((arm) => (
-            <div key={arm} className="flex items-center gap-3 rounded-2xl bg-muted p-3">
+            <div key={arm} className="flex items-center gap-3 rounded-lg bg-muted p-3">
               <ArmBadge arm={arm} />
               <span className="flex flex-col">
                 <span className="text-sm text-muted-foreground">
@@ -148,7 +148,7 @@ export function ExperimentDesigner({ forYou, more, start = previewStart, suggest
               <li
                 key={d.day_index}
                 className={cn(
-                  "grid aspect-square place-items-center rounded-lg font-heading text-sm font-bold",
+                  "grid aspect-square place-items-center rounded-lg text-sm font-bold",
                   d.arm === "A" ? "bg-secondary text-secondary-foreground" : "bg-xp text-xp-foreground",
                 )}
               >
@@ -172,10 +172,10 @@ export function ExperimentDesigner({ forYou, more, start = previewStart, suggest
           <button
             type="button"
             onClick={() => setDraft(fromIdea(idea))}
-            className="flex w-full flex-col gap-2 rounded-2xl border-2 bg-card p-4 text-left transition-colors hover:border-primary hover:bg-muted"
+            className="flex w-full flex-col gap-2 rounded-lg border-2 bg-card p-4 text-left transition-colors hover:border-primary hover:bg-muted"
           >
             <span className="flex items-center justify-between gap-2">
-              <span className="font-heading text-lg font-semibold">{tIdea(`${idea.key}.title`)}</span>
+              <span className="text-lg font-semibold">{tIdea(`${idea.key}.title`)}</span>
               <span className="rounded-full bg-secondary px-2.5 py-0.5 text-xs font-semibold text-secondary-foreground">
                 {t(`factor_${idea.factor}`)}
               </span>

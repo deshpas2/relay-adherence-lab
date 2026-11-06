@@ -52,7 +52,7 @@ export default function StyleguidePage() {
 
       <section aria-labelledby="type" className="flex flex-col gap-2">
         <h2 id="type" className="text-2xl">Type</h2>
-        <p className="font-heading text-3xl font-semibold">
+        <p className="text-3xl font-semibold">
           Fredoka for headings
         </p>
         <p>Inter for body text. It stays at 16px or bigger so it is easy to read.</p>
@@ -90,7 +90,7 @@ export default function StyleguidePage() {
         </Card>
         <Card className="flex items-center gap-5">
           <ProgressRing value={7 / 14} label="Day 7 of 14">
-            <span className="font-heading text-xl font-semibold">7/14</span>
+            <span className="text-xl font-semibold">7/14</span>
           </ProgressRing>
           <div className="flex flex-col gap-1">
             <CardTitle>Morning Routine Challenge</CardTitle>

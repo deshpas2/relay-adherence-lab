@@ -34,7 +34,7 @@ export function CheckinForm() {
         <h1 className="text-3xl">{t("thanks_title")}</h1>
         <p className="max-w-[30ch] text-lg">{t(`thanks_${sent}`)}</p>
         {person && (
-          <p className="flex items-start gap-2 rounded-2xl bg-accent p-3 text-left text-sm">
+          <p className="flex items-start gap-2 rounded-lg bg-accent p-3 text-left text-sm">
             <HeartHandshake aria-hidden className="mt-0.5 size-4 shrink-0 text-primary" />
             {t("careSees")}
           </p>
@@ -72,7 +72,7 @@ export function CheckinForm() {
             <label
               key={w}
               className={cn(
-                "flex min-h-36 cursor-pointer flex-col items-center justify-center gap-2 rounded-3xl border-2 p-4 text-center transition-all has-[:focus-visible]:outline-3 has-[:focus-visible]:outline-ring",
+                "flex min-h-36 cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border-2 p-4 text-center transition-all has-[:focus-visible]:outline-3 has-[:focus-visible]:outline-ring",
                 on ? "scale-[1.02] border-primary bg-accent" : "border-border bg-card hover:bg-muted",
               )}
             >
@@ -89,7 +89,7 @@ export function CheckinForm() {
               <span className="grid size-16 place-items-center rounded-full" style={{ background: soft, color }}>
                 <Icon aria-hidden className="size-9" />
               </span>
-              <span className="font-heading text-lg font-bold">{t(`weather_${w}`)}</span>
+              <span className="text-lg font-bold">{t(`weather_${w}`)}</span>
               <span className="text-sm text-muted-foreground">{t(`hint_${w}`)}</span>
             </label>
           );

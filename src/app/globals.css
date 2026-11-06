@@ -3,10 +3,19 @@
 @import "shadcn/tailwind.css";
 @import "../styles/tokens.css";
 
-/* Navy is the default look, so `dark:` applies unless the light version is chosen. */
-@custom-variant dark (&:where(:root:not([data-theme="light"]) *));
+/* `dark:` follows the theme toggle, or the device when no choice is saved. */
+@custom-variant dark {
+  &:where([data-theme="dark"], [data-theme="dark"] *) {
+    @slot;
+  }
+  @media (prefers-color-scheme: dark) {
+    &:where(:root:not([data-theme="light"]), :root:not([data-theme="light"]) *) {
+      @slot;
+    }
+  }
+}
 
-/* Map the tokens in styles/tokens.css to Tailwind color names. */
+/* Map the tokens in styles/tokens.css to Tailwind names. */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -27,11 +36,18 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
 
+  --color-cyan: var(--cyan);
+  --color-cyan-strong: var(--cyan-strong);
   --color-xp: var(--xp);
   --color-xp-foreground: var(--xp-foreground);
   --color-xp-track: var(--xp-track);
   --color-success: var(--success);
   --color-success-soft: var(--success-soft);
+  --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-danger-foreground: var(--danger-foreground);
   --color-blue: var(--blue);
   --color-blue-soft: var(--blue-soft);
   --color-amber: var(--amber);
@@ -42,9 +58,9 @@
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
 
-  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
-  --font-heading: var(--font-sora), var(--font-manrope), ui-sans-serif, system-ui,
-    sans-serif;
+  /* Inter for the interface; Source Serif 4 for page and section titles only. */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-heading: var(--font-serif), "Source Serif Pro", Georgia, "Times New Roman", serif;
 
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
@@ -55,40 +71,71 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
+/* Depth comes from borders and surfaces, not shadows. Overlays keep a soft lift. */
+@theme {
+  --shadow-sm: 0 0 #0000;
+  --shadow-md: 0 1px 2px rgb(23 40 61 / 0.06);
+  --shadow-lg: 0 8px 24px rgb(23 40 61 / 0.12);
+  --shadow-xl: 0 12px 32px rgb(23 40 61 / 0.16);
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
   html {
     @apply font-sans;
+    font-feature-settings: "cv11", "ss01";
   }
   body {
-    @apply bg-background text-foreground text-base;
+    @apply bg-background text-foreground text-base leading-relaxed;
   }
+  /* Editorial serif for page and section titles; everything else is Inter. */
   h1,
-  h2,
+  h2 {
+    @apply font-heading font-semibold tracking-[-0.01em] text-balance;
+    line-height: 1.2;
+  }
   h3 {
-    @apply font-heading font-bold tracking-tight;
+    @apply font-sans font-semibold text-balance;
+  }
+  a {
+    text-underline-offset: 0.2em;
+    text-decoration-color: var(--cyan);
   }
   /* Visible focus ring everywhere, for keyboard users. */
   :focus-visible {
-    outline: 3px solid var(--ring);
+    outline: 2px solid var(--ring);
     outline-offset: 2px;
   }
 }
 
-/* Confetti burst (src/components/game/confetti.tsx). */
-@keyframes confetti-fall {
-  0% { transform: translate3d(0, 0, 0) rotate(0deg); opacity: 1; }
-  85% { opacity: 1; }
-  100% { transform: translate3d(var(--drift), 105vh, 0) rotate(var(--spin)); opacity: 0; }
+/* Smooth color change when the theme toggle is used (class added briefly). */
+html.theme-transition,
+html.theme-transition *,
+html.theme-transition *::before,
+html.theme-transition *::after {
+  transition:
+    background-color 350ms ease,
+    color 350ms ease,
+    border-color 350ms ease,
+    fill 350ms ease,
+    stroke 350ms ease !important;
 }
-.confetti-piece {
-  animation-name: confetti-fall;
-  animation-timing-function: cubic-bezier(0.25, 0.6, 0.4, 1);
-  animation-fill-mode: forwards;
+
+/* Bubble-up celebration (src/components/game/bubbles.tsx). */
+@keyframes bubble-up {
+  0% { transform: translate3d(0, 0, 0) scale(0.2); opacity: 0; }
+  12% { opacity: 1; }
+  35% { transform: translate3d(calc(var(--drift) * 0.4), calc(var(--rise) * -0.35), 0) scale(var(--scale)); }
+  70% { opacity: 1; }
+  100% { transform: translate3d(var(--drift), calc(var(--rise) * -1), 0) scale(calc(var(--scale) * 0.85)) rotate(var(--tilt)); opacity: 0; }
+}
+.bubble {
+  animation: bubble-up var(--dur) cubic-bezier(0.22, 0.8, 0.3, 1) var(--delay) both;
+  will-change: transform, opacity;
 }
 @media (prefers-reduced-motion: reduce) {
-  .confetti { display: none; }
+  .bubbles { display: none; }
 }
-:root[data-motion="reduce"] .confetti { display: none; }
+:root[data-motion="reduce"] .bubbles { display: none; }

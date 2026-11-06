@@ -34,7 +34,7 @@ export function NotifyLab() {
   return (
     <ul className="grid gap-3 sm:grid-cols-2">
       {KINDS.map(({ type, icon: Icon, opens, idea }) => (
-        <li key={type} className="flex flex-col gap-3 rounded-2xl border bg-card p-5">
+        <li key={type} className="flex flex-col gap-3 rounded-lg border bg-card p-5">
           <span className="grid size-11 place-items-center rounded-xl bg-accent text-primary">
             <Icon aria-hidden className="size-5" />
           </span>

@@ -17,9 +17,9 @@ export function WelcomeBack({ name, nurse, daysQuiet }: { name: string; nurse: s
   if (!open) return null;
 
   return (
-    <section aria-labelledby="welcome-back" className="flex flex-col gap-4 rounded-3xl border-2 border-primary/40 bg-accent p-5">
+    <section aria-labelledby="welcome-back" className="flex flex-col gap-4 rounded-xl border-2 border-primary/40 bg-accent p-5">
       <div className="flex items-start gap-3">
-        <span className="grid size-11 shrink-0 place-items-center rounded-2xl bg-primary text-primary-foreground">
+        <span className="grid size-11 shrink-0 place-items-center rounded-lg bg-primary text-primary-foreground">
           <HeartHandshake aria-hidden className="size-6" />
         </span>
         <div>

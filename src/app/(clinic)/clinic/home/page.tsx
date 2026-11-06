@@ -35,7 +35,7 @@ export default async function PatientsPage() {
           </span>
           <Link
             href="/clinic/enroll"
-            className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-primary px-4 text-sm font-bold text-primary-foreground hover:opacity-90"
+            className="inline-flex min-h-11 items-center gap-2 rounded-md bg-primary px-4 text-sm font-semibold text-primary-foreground hover:opacity-90"
           >
             <UserPlus aria-hidden className="size-4" /> {tE("button")}
           </Link>
@@ -46,9 +46,9 @@ export default async function PatientsPage() {
         <section
           key={p.id}
           role="alert"
-          className="flex flex-wrap items-center gap-4 rounded-xl border-2 border-[#e8a8a2] bg-[#fde8e8] p-4 text-[#7a1f17]"
+          className="flex flex-wrap items-center gap-4 rounded-lg border border-danger/40 bg-danger-soft p-4 text-foreground"
         >
-          <span className="grid size-10 shrink-0 place-items-center rounded-full bg-[#c0392b] text-white">
+          <span className="grid size-10 shrink-0 place-items-center rounded-full bg-danger text-danger-foreground">
             <Phone aria-hidden className="size-5" />
           </span>
           <div className="min-w-0 flex-1">
@@ -57,7 +57,7 @@ export default async function PatientsPage() {
           </div>
           <Link
             href={`/clinic/home/${p.id}`}
-            className="rounded-lg bg-[#c0392b] px-4 py-2.5 text-sm font-bold text-white hover:bg-[#a83226]"
+            className="inline-flex min-h-11 items-center rounded-md bg-danger px-4 text-sm font-semibold text-danger-foreground hover:opacity-90"
           >
             {tR("alertCta", { name: p.name.split(" ")[0] })}
           </Link>
@@ -67,11 +67,11 @@ export default async function PatientsPage() {
       <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
         <StatTile value={String(ps.length)} label={t("statPatients")} />
         <StatTile value={`${Math.round(mean * 100)}%`} label={t("statMeanOnTime")} color={adhColor(mean)} />
-        <StatTile value={String(attention)} label={t("statAttention")} color="#c0392b" />
+        <StatTile value={String(attention)} label={t("statAttention")} color="var(--danger)" />
         <StatTile value={String(running)} label={t("statRunning")} />
       </div>
 
-      <div className="overflow-x-auto rounded-xl border bg-card shadow-sm">
+      <div className="overflow-x-auto rounded-lg border bg-card">
         <table className="w-full min-w-[760px] text-left text-sm">
           <thead className="border-b text-[11px] font-bold tracking-wider text-muted-foreground uppercase">
             <tr>
@@ -94,7 +94,7 @@ export default async function PatientsPage() {
                   </Link>
                   <p className="text-xs text-muted-foreground">{t("age", { age: p.age })}</p>
                   {plans.get(p.id)?.active && (
-                    <span className="mt-1 inline-block rounded-md bg-[#fbf0d6] px-2 py-0.5 text-[11px] font-bold text-[#8a6210]">
+                    <span className="mt-1 inline-block rounded-sm bg-warning-soft px-2 py-0.5 text-[11px] font-semibold text-warning">
                       {tR("quietTag", { n: p.lastCheckinDays })}
                     </span>
                   )}

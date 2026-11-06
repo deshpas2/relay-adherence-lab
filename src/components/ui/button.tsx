@@ -23,9 +23,9 @@ const buttonVariants = cva(
         default:
           "h-11 gap-2 rounded-xl px-5 text-base has-data-[icon=inline-end]:pr-4 has-data-[icon=inline-start]:pl-4 [&_svg:not([class*='size-'])]:size-5",
         sm: "h-11 gap-1.5 rounded-lg px-3.5 text-sm [&_svg:not([class*='size-'])]:size-4",
-        lg: "h-13 gap-2 rounded-2xl px-6 text-lg font-semibold [&_svg:not([class*='size-'])]:size-5",
+        lg: "h-13 gap-2 rounded-lg px-6 text-lg font-semibold [&_svg:not([class*='size-'])]:size-5",
         // The big "Took it" style button.
-        xl: "h-16 w-full gap-3 rounded-2xl px-8 font-heading text-xl font-semibold [&_svg:not([class*='size-'])]:size-6",
+        xl: "h-16 w-full gap-3 rounded-lg px-8 text-xl font-semibold [&_svg:not([class*='size-'])]:size-6",
         icon: "size-11 rounded-xl [&_svg:not([class*='size-'])]:size-5",
       },
     },

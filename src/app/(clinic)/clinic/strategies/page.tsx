@@ -38,7 +38,7 @@ export default async function StrategiesPage() {
                     ) : (
                       <span className="flex items-center gap-2">
                         <span className="h-2 w-24 overflow-hidden rounded-full border bg-muted">
-                          <span className="block h-full bg-[#1f9d57]" style={{ width: `${r.pctAdopted}%` }} />
+                          <span className="block h-full bg-success" style={{ width: `${r.pctAdopted}%` }} />
                         </span>
                         <span className="font-bold tabular-nums">{r.pctAdopted}%</span>
                       </span>

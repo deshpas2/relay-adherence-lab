@@ -6,11 +6,11 @@ export type WeatherOrFog = Weather | "fog";
 
 /** Icon + color for each weather. The word is always shown next to it elsewhere. */
 export const WEATHER_STYLE: Record<WeatherOrFog, { icon: LucideIcon; color: string; soft: string }> = {
-  sunny: { icon: Sun, color: "#d99413", soft: "#fdf3dc" },
-  cloudy: { icon: CloudSun, color: "#5f7a90", soft: "#e9eef3" },
-  rainy: { icon: CloudRain, color: "#2f72c4", soft: "#e3eefb" },
-  stormy: { icon: CloudLightning, color: "#7c3aed", soft: "#efe7fd" },
-  fog: { icon: CloudFog, color: "#7b8794", soft: "#eceff2" },
+  sunny: { icon: Sun, color: "var(--warning)", soft: "var(--warning-soft)" },
+  cloudy: { icon: CloudSun, color: "var(--success)", soft: "var(--secondary)" },
+  rainy: { icon: CloudRain, color: "var(--cyan-strong)", soft: "var(--accent)" },
+  stormy: { icon: CloudLightning, color: "var(--primary-foreground)", soft: "var(--primary)" },
+  fog: { icon: CloudFog, color: "var(--muted-foreground)", soft: "var(--muted)" },
 };
 
 /** Weather icon in a soft circle, with its word beside it. */

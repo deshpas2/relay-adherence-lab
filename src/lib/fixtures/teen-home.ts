@@ -14,8 +14,8 @@ export const sampleTeenHome: TeenHomeData = {
       label: "morning",
       status: "pending",
       meds: [
-        { id: "pm-tac-am", name: "Tacrolimus", form: "capsule", color: "#f59e0b" },
-        { id: "pm-myc-am", name: "Mycophenolate", form: "tablet", color: "#60a5fa" },
+        { id: "pm-tac-am", name: "Tacrolimus", form: "capsule", color: "#3c717d" },
+        { id: "pm-myc-am", name: "Mycophenolate", form: "tablet", color: "#17283d" },
       ],
     },
     {
@@ -24,8 +24,8 @@ export const sampleTeenHome: TeenHomeData = {
       label: "evening",
       status: "pending",
       meds: [
-        { id: "pm-tac-pm", name: "Tacrolimus", form: "capsule", color: "#f59e0b" },
-        { id: "pm-myc-pm", name: "Mycophenolate", form: "tablet", color: "#60a5fa" },
+        { id: "pm-tac-pm", name: "Tacrolimus", form: "capsule", color: "#3c717d" },
+        { id: "pm-myc-pm", name: "Mycophenolate", form: "tablet", color: "#17283d" },
       ],
     },
   ],

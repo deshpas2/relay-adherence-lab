@@ -34,7 +34,7 @@ export function ResultReadout({ days, armA, armB }: ResultReadoutProps) {
     <section aria-labelledby="result" className="flex flex-col gap-3">
       <h2 id="result" className="text-xl">{t("resultHeading")}</h2>
       <Card className="flex flex-col gap-5">
-        <p aria-live="polite" className="font-heading text-xl font-semibold">
+        <p aria-live="polite" className="text-xl font-semibold">
           {tVerdict(result.verdict)}
         </p>
 
@@ -43,7 +43,7 @@ export function ResultReadout({ days, armA, armB }: ResultReadoutProps) {
             const winner = result.winner === row.arm;
             const pct = row.adh === null ? null : Math.round(row.adh * 100);
             return (
-              <li key={row.arm} className={cn("flex flex-col gap-2 rounded-2xl p-3", winner && "bg-accent")}>
+              <li key={row.arm} className={cn("flex flex-col gap-2 rounded-lg p-3", winner && "bg-accent")}>
                 <div className="flex items-center gap-3">
                   <ArmBadge arm={row.arm} />
                   <span className="flex-1 font-medium">{row.text}</span>

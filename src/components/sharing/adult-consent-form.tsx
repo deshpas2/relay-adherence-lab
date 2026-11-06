@@ -34,19 +34,19 @@ export function AdultConsentForm({ name, caregiver }: { name: string; caregiver:
 
       <ul className="flex flex-col gap-3">
         {POINTS.map(({ icon: Icon, key }) => (
-          <li key={key} className="flex items-start gap-3 rounded-2xl border bg-card p-4">
+          <li key={key} className="flex items-start gap-3 rounded-lg border bg-card p-4">
             <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-accent text-primary">
               <Icon aria-hidden className="size-5" />
             </span>
             <span>
-              <span className="block font-heading font-bold">{t(`${key}_title`)}</span>
+              <span className="block font-bold">{t(`${key}_title`)}</span>
               <span className="text-sm text-muted-foreground">{t(`${key}_body`, { caregiver })}</span>
             </span>
           </li>
         ))}
       </ul>
 
-      <div className={cn("flex items-center gap-4 rounded-2xl border-2 p-4", share ? "border-primary bg-accent" : "bg-card")}>
+      <div className={cn("flex items-center gap-4 rounded-lg border-2 p-4", share ? "border-primary bg-accent" : "bg-card")}>
         <label htmlFor={shareId} className="flex flex-1 cursor-pointer flex-col">
           <span className="font-semibold">{t("shareLabel", { caregiver })}</span>
           <span className="text-sm text-muted-foreground" aria-live="polite">
@@ -58,7 +58,7 @@ export function AdultConsentForm({ name, caregiver }: { name: string; caregiver:
         {share && <input type="hidden" name="share" value="on" />}
       </div>
 
-      <details className="rounded-2xl border bg-card p-4">
+      <details className="rounded-lg border bg-card p-4">
         <summary className="cursor-pointer font-semibold text-primary">{t("termsLink")}</summary>
         <ol className="mt-3 flex list-decimal flex-col gap-2 pl-5 text-sm">
           {[1, 2, 3, 4].map((n) => (

@@ -34,7 +34,7 @@ export function DoseCard({ slot, justLogged, busy, onTook, onNotYet, onMissed, h
   if (justLogged?.status === "missed") {
     return (
       <Card className="flex flex-col gap-3 text-center">
-        <p className="font-heading text-xl font-semibold">{t("missedLogged")}</p>
+        <p className="text-xl font-semibold">{t("missedLogged")}</p>
         <Link href="/teen/profile" className="font-semibold text-primary underline-offset-4 hover:underline">
           {t("newReminder")}
         </Link>

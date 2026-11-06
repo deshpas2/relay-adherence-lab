@@ -35,8 +35,8 @@ export function ShellNavLinks({ role, labels, variant }: ShellNavProps) {
           variant === "row" && "min-h-11 gap-3 px-3 text-base",
           active
             ? variant === "tab"
-              ? "text-primary"
-              : "bg-secondary text-secondary-foreground"
+              ? "text-foreground"
+              : "bg-accent text-accent-foreground shadow-[inset_2px_0_0_var(--cyan-strong)]"
             : "text-muted-foreground hover:bg-muted hover:text-foreground",
         )}
       >
@@ -44,7 +44,7 @@ export function ShellNavLinks({ role, labels, variant }: ShellNavProps) {
           className={cn(
             "grid place-items-center rounded-full transition-colors",
             variant === "tab" && "h-7 w-12",
-            variant === "tab" && active && "bg-secondary",
+            variant === "tab" && active && "bg-accent text-cyan-strong",
           )}
         >
           <Icon aria-hidden className="size-5" strokeWidth={active ? 2.5 : 2} />

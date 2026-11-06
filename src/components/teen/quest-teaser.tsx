@@ -12,7 +12,7 @@ export function QuestTeaser({ quest }: { quest: QuestSummary }) {
       <h2 id="quest" className="text-xl">{t("questHeading")}</h2>
       <Link
         href="/teen/experiments"
-        className="flex items-center gap-4 rounded-2xl border bg-card p-4 transition-colors hover:bg-muted"
+        className="flex items-center gap-4 rounded-lg border bg-card p-4 transition-colors hover:bg-muted"
       >
         <ProgressRing value={quest.day / quest.days} size={64} label={t("questDay", { day: quest.day, days: quest.days })}>
           <span className="text-sm font-semibold">
@@ -20,7 +20,7 @@ export function QuestTeaser({ quest }: { quest: QuestSummary }) {
           </span>
         </ProgressRing>
         <span className="flex flex-1 flex-col">
-          <span className="font-heading text-lg font-semibold">{quest.title}</span>
+          <span className="text-lg font-semibold">{quest.title}</span>
           <span className="text-sm text-muted-foreground">{t("questDay", { day: quest.day, days: quest.days })}</span>
         </span>
         <ChevronRight aria-hidden className="size-5 text-muted-foreground" />

@@ -55,7 +55,7 @@
     "title": "Haz Relay a tu manera",
     "description": "Cambia cómo se ve y se siente Relay.",
     "theme": "Colores",
-    "theme_system": "Azul marino",
+    "theme_system": "Como mi dispositivo",
     "theme_light": "Claro",
     "theme_dark": "Oscuro",
     "highContrast": "Alto contraste",
@@ -67,7 +67,8 @@
     "haptics": "Vibrar con avisos",
     "hapticsHint": "Tu teléfono vibra con los avisos, si puede",
     "language": "Idioma",
-    "done": "Listo"
+    "done": "Listo",
+    "toggleTheme": "Modo oscuro"
   },
   "Auth": {
     "signInTitle": "Hola de nuevo",

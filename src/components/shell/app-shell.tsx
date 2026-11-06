@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import { A11yMenu } from "@/components/a11y/a11y-menu";
+import { ThemeToggle } from "@/components/a11y/theme-toggle";
 import { ROLE_HOME, type AppRole } from "@/lib/routes";
 import { HtmlAppAttr } from "./html-app-attr";
 import { Logo } from "./logo";
@@ -46,7 +47,7 @@ export function AppShell({ role, children }: { role: AppRole; children: ReactNod
           <nav aria-label={t("label")} className="flex flex-1 flex-col gap-1">
             <ShellNavLinks role={role} labels={labels} variant="row" />
           </nav>
-          <A11yMenu />
+          <div className="flex items-center gap-2"><ThemeToggle /><A11yMenu /></div>
         </aside>
 
         <div className="flex min-w-0 flex-1 flex-col">
@@ -54,7 +55,7 @@ export function AppShell({ role, children }: { role: AppRole; children: ReactNod
           <header className="sticky top-[env(safe-area-inset-top,0px)] z-30 flex flex-col gap-2 border-b bg-card/95 px-4 py-2 backdrop-blur md:hidden">
             <div className="flex items-center justify-between">
               <Logo href={home} />
-              <A11yMenu />
+              <div className="flex items-center gap-2"><ThemeToggle /><A11yMenu /></div>
             </div>
             <nav aria-label={t("label")} className="-mx-1 flex gap-1 overflow-x-auto">
               <ShellNavLinks role={role} labels={labels} variant="row" />
@@ -77,7 +78,7 @@ export function AppShell({ role, children }: { role: AppRole; children: ReactNod
       <header className="sticky top-[env(safe-area-inset-top,0px)] z-30 border-b bg-background/90 backdrop-blur">
         <div className="mx-auto flex w-full max-w-lg items-center justify-between px-4 py-2">
           <Logo href={home} />
-          <A11yMenu />
+          <div className="flex items-center gap-2"><ThemeToggle /><A11yMenu /></div>
         </div>
       </header>
 

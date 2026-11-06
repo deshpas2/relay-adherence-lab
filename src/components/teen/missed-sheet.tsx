@@ -19,7 +19,7 @@ export function MissedSheet({ open, onOpenChange, onConfirm }: MissedSheetProps)
   const t = useTranslations("TeenHome");
   return (
     <Sheet open={open} onOpenChange={onOpenChange} title={t("missedTitle")} description={t("missedBody")}>
-      <p className="flex items-start gap-3 rounded-2xl bg-secondary p-4 text-secondary-foreground">
+      <p className="flex items-start gap-3 rounded-lg bg-secondary p-4 text-secondary-foreground">
         <HeartHandshake aria-hidden className="mt-0.5 size-5 shrink-0" />
         {t("missedCareTeam")}
       </p>

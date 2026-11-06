@@ -27,7 +27,7 @@ export const sampleMeds: SampleMed[] = [
     slug: "tacrolimus",
     name: "Tacrolimus",
     form: "capsule",
-    color: "#2f8f55",
+    color: "#3c717d",
     content: {
       en: {
         nick: "The Peacekeeper",
@@ -65,7 +65,7 @@ export const sampleMeds: SampleMed[] = [
     slug: "mycophenolate",
     name: "Mycophenolate",
     form: "tablet",
-    color: "#2563ab",
+    color: "#17283d",
     content: {
       en: {
         nick: "The Shield",
@@ -99,7 +99,7 @@ export const sampleMeds: SampleMed[] = [
     slug: "prednisone",
     name: "Prednisone",
     form: "tablet",
-    color: "#c0603a",
+    color: "#7f9a88",
     content: {
       en: {
         nick: "The Firefighter",
