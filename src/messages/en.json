@@ -2,5 +2,20 @@
   "App": {
     "name": "Relay",
     "tagline": "Small tests. Your routine. Your wins."
+  },
+  "ActionErrors": {
+    "invalid_email": "Please check your email address.",
+    "invalid_password": "Use at least 8 characters.",
+    "invalid_name": "Please add a name. Keep it under 50 letters.",
+    "invalid_role": "Please pick teen or parent.",
+    "invalid_credentials": "That email or password didn't match. Try again.",
+    "weak_password": "Try a stronger password.",
+    "rate_limited": "That was a lot of tries. Wait a minute, then try again.",
+    "invalid_invite": "That code didn't work. Check it, or ask your teen for a new one.",
+    "invalid_share_level": "Please pick what to share.",
+    "not_found": "We couldn't find that link.",
+    "link_expired": "That email link has run out. Ask for a new one.",
+    "no_profile": "We couldn't finish setting up your account. Please try again.",
+    "failed": "Something went wrong on our side. Please try again."
   }
 }

@@ -2,5 +2,20 @@
   "App": {
     "name": "Relay",
     "tagline": "Pequeñas pruebas. Tu rutina. Tus logros."
+  },
+  "ActionErrors": {
+    "invalid_email": "Revisa tu correo electrónico.",
+    "invalid_password": "Usa al menos 8 caracteres.",
+    "invalid_name": "Escribe un nombre de menos de 50 letras.",
+    "invalid_role": "Elige adolescente o padre o madre.",
+    "invalid_credentials": "El correo o la contraseña no coinciden. Inténtalo de nuevo.",
+    "weak_password": "Prueba una contraseña más segura.",
+    "rate_limited": "Fueron muchos intentos. Espera un minuto y vuelve a intentarlo.",
+    "invalid_invite": "Ese código no funcionó. Revísalo o pide uno nuevo a tu hijo o hija.",
+    "invalid_share_level": "Elige qué quieres compartir.",
+    "not_found": "No encontramos ese enlace.",
+    "link_expired": "Ese enlace del correo ya venció. Pide uno nuevo.",
+    "no_profile": "No pudimos terminar de crear tu cuenta. Inténtalo de nuevo.",
+    "failed": "Algo salió mal de nuestro lado. Inténtalo de nuevo."
   }
 }
