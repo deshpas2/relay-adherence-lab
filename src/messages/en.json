@@ -42,7 +42,7 @@
     "comingSoon": "This screen is on the way.",
     "home": "Home",
     "meds": "My meds",
-    "quests": "Quests",
+    "quests": "Lab",
     "me": "Me",
     "confirm": "Confirm",
     "family": "My teen",
@@ -55,7 +55,7 @@
     "title": "Make Relay yours",
     "description": "Change how Relay looks and feels.",
     "theme": "Colors",
-    "theme_system": "Match my phone",
+    "theme_system": "Navy",
     "theme_light": "Light",
     "theme_dark": "Dark",
     "highContrast": "High contrast",
@@ -330,5 +330,16 @@
       "title": "Two weeks of mornings",
       "description": "Log your morning meds for 14 days."
     }
+  },
+  "Meds": {
+    "title": "Your medicines",
+    "intro": "Tap one to meet it. Learning why it matters earns XP.",
+    "xpBadge": "+{xp} XP",
+    "back": "Your medicines",
+    "whyHeading": "Why it matters to you",
+    "goodToKnow": "Good to know",
+    "learned": "Got it. I understand the why.",
+    "learnedDone": "You learned the why.",
+    "learnedXp": "+{xp} XP for meeting {name}"
   }
 }

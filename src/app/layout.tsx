@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fredoka, Inter } from "next/font/google";
+import { Manrope, Sora } from "next/font/google";
 import { cookies } from "next/headers";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getTranslations } from "next-intl/server";
@@ -8,14 +8,14 @@ import { Toaster } from "@/components/ui/toast";
 import { parsePrefs, prefsCookie, prefsToHtmlAttrs } from "@/lib/prefs";
 import "./globals.css";
 
-// Body text: Inter. Headings: Fredoka (rounded, friendly).
-const inter = Inter({
-  variable: "--font-inter",
+// Body text: Manrope. Headings: Sora. Same pairing as the demo prototype.
+const manrope = Manrope({
+  variable: "--font-manrope",
   subsets: ["latin"],
 });
 
-const fredoka = Fredoka({
-  variable: "--font-fredoka",
+const sora = Sora({
+  variable: "--font-sora",
   subsets: ["latin"],
 });
 
@@ -34,7 +34,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang={locale}
       {...prefsToHtmlAttrs(prefs)}
-      className={`${inter.variable} ${fredoka.variable} h-full antialiased`}
+      className={`${manrope.variable} ${sora.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <NextIntlClientProvider>

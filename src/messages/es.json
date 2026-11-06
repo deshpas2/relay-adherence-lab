@@ -42,7 +42,7 @@
     "comingSoon": "Esta pantalla viene pronto.",
     "home": "Inicio",
     "meds": "Mis medicinas",
-    "quests": "Misiones",
+    "quests": "Laboratorio",
     "me": "Yo",
     "confirm": "Confirmar",
     "family": "Mi hijo/a",
@@ -55,7 +55,7 @@
     "title": "Haz Relay a tu manera",
     "description": "Cambia cómo se ve y se siente Relay.",
     "theme": "Colores",
-    "theme_system": "Como mi teléfono",
+    "theme_system": "Azul marino",
     "theme_light": "Claro",
     "theme_dark": "Oscuro",
     "highContrast": "Alto contraste",
@@ -330,5 +330,16 @@
       "title": "Dos semanas de mañanas",
       "description": "Anota tus medicinas de la mañana por 14 días."
     }
+  },
+  "Meds": {
+    "title": "Tus medicinas",
+    "intro": "Toca una para conocerla. Aprender por qué importa te da XP.",
+    "xpBadge": "+{xp} XP",
+    "back": "Tus medicinas",
+    "whyHeading": "Por qué te importa",
+    "goodToKnow": "Bueno saber",
+    "learned": "Entendido. Ya sé por qué.",
+    "learnedDone": "Ya sabes por qué.",
+    "learnedXp": "+{xp} XP por conocer a {name}"
   }
 }

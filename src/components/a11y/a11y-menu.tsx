@@ -14,7 +14,8 @@ import { buzz, usePrefs } from "./prefs-store";
 type ToggleKey = "highContrast" | "largeText" | "reduceMotion" | "haptics";
 
 const TOGGLES: ToggleKey[] = ["highContrast", "largeText", "reduceMotion", "haptics"];
-const THEMES: ThemeChoice[] = ["system", "light", "dark"];
+// Navy ("system") is the default look; light is the alternative.
+const THEMES: ThemeChoice[] = ["system", "light"];
 
 /**
  * The display + accessibility menu (Section 5): theme, high contrast,
@@ -67,7 +68,7 @@ export function A11yMenu({ className }: { className?: string }) {
 
           <fieldset className="flex flex-col gap-2">
             <legend className="mb-2 font-medium">{t("theme")}</legend>
-            <div className="grid grid-cols-3 gap-2">
+            <div className="grid grid-cols-2 gap-2">
               {THEMES.map((theme) => {
                 const active = prefs.theme === theme;
                 return (

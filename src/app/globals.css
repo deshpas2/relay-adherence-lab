@@ -3,17 +3,8 @@
 @import "shadcn/tailwind.css";
 @import "../styles/tokens.css";
 
-/* `dark:` classes follow the user's theme choice, or the system when none is set. */
-@custom-variant dark {
-  &:where([data-theme="dark"], [data-theme="dark"] *) {
-    @slot;
-  }
-  @media (prefers-color-scheme: dark) {
-    &:where(:root:not([data-theme="light"]), :root:not([data-theme="light"]) *) {
-      @slot;
-    }
-  }
-}
+/* Navy is the default look, so `dark:` applies unless the light version is chosen. */
+@custom-variant dark (&:where(:root:not([data-theme="light"]) *));
 
 /* Map the tokens in styles/tokens.css to Tailwind color names. */
 @theme inline {
@@ -41,6 +32,9 @@
   --color-xp-track: var(--xp-track);
   --color-success: var(--success);
   --color-success-soft: var(--success-soft);
+  --color-blue: var(--blue);
+  --color-blue-soft: var(--blue-soft);
+  --color-amber: var(--amber);
 
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
@@ -48,8 +42,8 @@
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
 
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-heading: var(--font-fredoka), var(--font-inter), ui-rounded, system-ui,
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-sora), var(--font-manrope), ui-sans-serif, system-ui,
     sans-serif;
 
   --radius-sm: calc(var(--radius) * 0.6);
@@ -74,7 +68,7 @@
   h1,
   h2,
   h3 {
-    @apply font-heading font-semibold tracking-tight;
+    @apply font-heading font-bold tracking-tight;
   }
   /* Visible focus ring everywhere, for keyboard users. */
   :focus-visible {

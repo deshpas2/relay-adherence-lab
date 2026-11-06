@@ -1,202 +1,140 @@
 /*
- * Relay design tokens (Section 5).
- * Every color lives here. Components use them through Tailwind names
+ * Relay design tokens, matching the demo prototype:
+ * a deep-navy teen/parent world with green + blue accents, and a clean
+ * light clinician portal. Components use these through Tailwind names
  * (bg-primary, text-xp, ...), mapped in globals.css.
  *
- * Switches on <html>:
- *   data-theme="light" | "dark"   user's choice (none = follow the system)
- *   data-app="clinic"             calmer blue/slate for the clinician app
- *                                 (on <html> or on the clinic AppShell wrapper)
- *   data-contrast="high"          a11y: high contrast
- *   data-text="large"             a11y: larger text
+ * Switches on <html> (or a wrapper):
+ *   data-theme="light"     user picked the light version (default is navy)
+ *   data-app="clinic"      light blue-slate clinician portal
+ *   data-contrast="high"   a11y: high contrast
+ *   data-text="large"      a11y: larger text
  */
 
-/* ---------- Teen app, light (default) ---------- */
+/* ---------- Teen + parent: deep navy (default) ---------- */
 :root {
-  color-scheme: light;
+  color-scheme: dark;
 
-  --background: #f6f6ff;
-  --foreground: #1e1b3a;
-  --card: #ffffff;
-  --card-foreground: #1e1b3a;
-  --popover: #ffffff;
-  --popover-foreground: #1e1b3a;
+  --background: #081621;
+  --foreground: #edf4f8;
+  --card: #0f2534;
+  --card-foreground: #edf4f8;
+  --popover: #0f2534;
+  --popover-foreground: #edf4f8;
 
-  --primary: #4f46e5; /* indigo */
-  --primary-foreground: #ffffff;
-  --secondary: #e9e8ff;
-  --secondary-foreground: #2e2a7a;
-  --muted: #eeeef8;
-  --muted-foreground: #5c5a78;
-  --accent: #ecfccb;
-  --accent-foreground: #1e1b3a;
+  --primary: #34c56a; /* green */
+  --primary-foreground: #042b12;
+  --secondary: #16303f;
+  --secondary-foreground: #edf4f8;
+  --muted: #16303f;
+  --muted-foreground: #8ba7bc;
+  --accent: #0f3222; /* green-soft */
+  --accent-foreground: #edf4f8;
 
-  /* game colors */
-  --xp: #a3e635; /* lime: fills only, never text on white */
-  --xp-foreground: #1e1b3a;
-  --xp-track: #e4e4f2;
-  --success: #15803d;
-  --success-soft: #dcfce7;
+  --blue: #4a9eff;
+  --blue-soft: #102a44;
+  --amber: #e6a23c;
 
-  /* used sparingly: form errors only, never for missed doses */
-  --destructive: #c2410c;
+  --xp: #34c56a;
+  --xp-foreground: #042b12;
+  --xp-track: #264a5f;
+  --success: #34c56a;
+  --success-soft: #0f3222;
 
-  --border: #dddcef;
-  --input: #cfcde6;
-  --ring: #4f46e5;
+  /* form errors only, never for missed doses */
+  --destructive: #e8625f;
 
-  --chart-1: #4f46e5;
-  --chart-2: #84cc16;
-  --chart-3: #0ea5e9;
-  --chart-4: #f59e0b;
-  --chart-5: #a855f7;
+  --border: #1d3b4d;
+  --input: #264a5f;
+  --ring: #34c56a;
+
+  --chart-1: #34c56a;
+  --chart-2: #4a9eff;
+  --chart-3: #e6a23c;
+  --chart-4: #e8625f;
+  --chart-5: #8ba7bc;
 
   --radius: 1rem;
 }
 
-/* ---------- Teen app, dark ---------- */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    color-scheme: dark;
-    --background: #12111f;
-    --foreground: #eeedff;
-    --card: #1c1a30;
-    --card-foreground: #eeedff;
-    --popover: #1c1a30;
-    --popover-foreground: #eeedff;
-    --primary: #8b85ff;
-    --primary-foreground: #12111f;
-    --secondary: #2a2750;
-    --secondary-foreground: #dcdaff;
-    --muted: #23213a;
-    --muted-foreground: #a9a7c6;
-    --accent: #2c3a14;
-    --accent-foreground: #eeedff;
-    --xp: #bef264;
-    --xp-foreground: #12111f;
-    --xp-track: #2e2c48;
-    --success: #4ade80;
-    --success-soft: #14321f;
-    --destructive: #fb923c;
-    --border: #312e52;
-    --input: #3a3760;
-    --ring: #8b85ff;
-  }
-}
-:root[data-theme="dark"] {
-  color-scheme: dark;
-  --background: #12111f;
-  --foreground: #eeedff;
-  --card: #1c1a30;
-  --card-foreground: #eeedff;
-  --popover: #1c1a30;
-  --popover-foreground: #eeedff;
-  --primary: #8b85ff;
-  --primary-foreground: #12111f;
-  --secondary: #2a2750;
-  --secondary-foreground: #dcdaff;
-  --muted: #23213a;
-  --muted-foreground: #a9a7c6;
-  --accent: #2c3a14;
-  --accent-foreground: #eeedff;
-  --xp: #bef264;
-  --xp-foreground: #12111f;
-  --xp-track: #2e2c48;
-  --success: #4ade80;
-  --success-soft: #14321f;
-  --destructive: #fb923c;
-  --border: #312e52;
-  --input: #3a3760;
-  --ring: #8b85ff;
+/* ---------- Teen + parent: light version (chosen in settings) ---------- */
+:root[data-theme="light"] {
+  color-scheme: light;
+  --background: #f2f6f9;
+  --foreground: #0d2433;
+  --card: #ffffff;
+  --card-foreground: #0d2433;
+  --popover: #ffffff;
+  --popover-foreground: #0d2433;
+  --primary: #1f9d57;
+  --primary-foreground: #ffffff;
+  --secondary: #e6eef3;
+  --secondary-foreground: #0d2433;
+  --muted: #e6eef3;
+  --muted-foreground: #4f6b7e;
+  --accent: #e2f5e9;
+  --accent-foreground: #0d2433;
+  --blue: #2563ab;
+  --blue-soft: #e5eefb;
+  --amber: #b07d16;
+  --xp: #1f9d57;
+  --xp-foreground: #ffffff;
+  --xp-track: #d4dfe7;
+  --success: #1f9d57;
+  --success-soft: #e2f5e9;
+  --destructive: #c0392b;
+  --border: #d8e2ea;
+  --input: #c3d1dc;
+  --ring: #1f9d57;
+  --chart-1: #1f9d57;
+  --chart-2: #2563ab;
+  --chart-3: #b07d16;
+  --chart-4: #c0392b;
+  --chart-5: #5f7186;
 }
 
-/* ---------- Clinician app: calmer blue/slate ----------
- * These match data-app on <html> or on any wrapper element, so the clinic
- * AppShell gets its colors on first paint. */
+/* ---------- Clinician portal: clean light blue-slate ----------
+ * Matches data-app on <html> or on the clinic shell wrapper, so the portal
+ * gets its colors on first paint. */
 [data-app="clinic"] {
-  --background: #f5f7fa;
-  --foreground: #172033;
-  --card-foreground: #172033;
-  --popover-foreground: #172033;
-  --primary: #2f5f9e;
+  color-scheme: light;
+  --background: #eef1f5;
+  --foreground: #17304a;
+  --card: #ffffff;
+  --card-foreground: #17304a;
+  --popover: #ffffff;
+  --popover-foreground: #17304a;
+  --primary: #163a5f; /* navy */
   --primary-foreground: #ffffff;
-  --secondary: #e3eaf4;
-  --secondary-foreground: #1f3a60;
-  --muted: #eceff4;
-  --muted-foreground: #556070;
-  --border: #d8dee8;
-  --input: #c9d1dd;
-  --ring: #2f5f9e;
-  --radius: 0.625rem;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"])[data-app="clinic"],
-  :root:not([data-theme="light"]) [data-app="clinic"] {
-    --background: #0f141c;
-    --foreground: #e6ebf2;
-    --card: #18202b;
-    --card-foreground: #e6ebf2;
-    --popover: #18202b;
-    --popover-foreground: #e6ebf2;
-    --primary: #7aa7e0;
-    --primary-foreground: #0f141c;
-    --secondary: #223046;
-    --secondary-foreground: #d5e2f3;
-    --muted: #1d2633;
-    --muted-foreground: #9aa6b6;
-    --border: #2a3545;
-    --input: #344155;
-    --ring: #7aa7e0;
-  }
-}
-:root[data-theme="dark"][data-app="clinic"],
-:root[data-theme="dark"] [data-app="clinic"] {
-  --background: #0f141c;
-  --foreground: #e6ebf2;
-  --card: #18202b;
-  --card-foreground: #e6ebf2;
-  --popover: #18202b;
-  --popover-foreground: #e6ebf2;
-  --primary: #7aa7e0;
-  --primary-foreground: #0f141c;
-  --secondary: #223046;
-  --secondary-foreground: #d5e2f3;
-  --muted: #1d2633;
-  --muted-foreground: #9aa6b6;
-  --border: #2a3545;
-  --input: #344155;
-  --ring: #7aa7e0;
+  --secondary: #e5eefb;
+  --secondary-foreground: #163a5f;
+  --muted: #eef1f5;
+  --muted-foreground: #5f7186;
+  --accent: #e5eefb;
+  --accent-foreground: #163a5f;
+  --blue: #2563ab;
+  --blue-soft: #e5eefb;
+  --amber: #b07d16;
+  --xp: #1f9d57;
+  --xp-foreground: #ffffff;
+  --xp-track: #e3e8ef;
+  --success: #1f9d57;
+  --success-soft: #e2f5e9;
+  --destructive: #c0392b;
+  --border: #e3e8ef;
+  --input: #d4dce6;
+  --ring: #2563ab;
+  --chart-1: #1f9d57;
+  --chart-2: #2563ab;
+  --chart-3: #b07d16;
+  --chart-4: #c0392b;
+  --chart-5: #5f7186;
+  --radius: 0.75rem;
 }
 
 /* ---------- Accessibility: high contrast (wins over everything above) ---------- */
 :root[data-contrast="high"],
 :root[data-contrast="high"] [data-app] {
-  color-scheme: light;
-  --background: #ffffff;
-  --foreground: #000000;
-  --card: #ffffff;
-  --card-foreground: #000000;
-  --popover: #ffffff;
-  --popover-foreground: #000000;
-  --primary: #2a1fb8;
-  --primary-foreground: #ffffff;
-  --secondary: #ffffff;
-  --secondary-foreground: #000000;
-  --muted: #f2f2f2;
-  --muted-foreground: #000000;
-  --accent: #ffffff;
-  --accent-foreground: #000000;
-  --xp: #3f6212;
-  --xp-foreground: #ffffff;
-  --xp-track: #d4d4d4;
-  --success: #14532d;
-  --success-soft: #ffffff;
-  --border: #000000;
-  --input: #000000;
-  --ring: #000000;
-}
-:root[data-contrast="high"][data-theme="dark"],
-:root[data-contrast="high"][data-theme="dark"] [data-app] {
   color-scheme: dark;
   --background: #000000;
   --foreground: #ffffff;
@@ -204,7 +142,7 @@
   --card-foreground: #ffffff;
   --popover: #000000;
   --popover-foreground: #ffffff;
-  --primary: #ffff00;
+  --primary: #5dff8f;
   --primary-foreground: #000000;
   --secondary: #000000;
   --secondary-foreground: #ffffff;
@@ -212,14 +150,40 @@
   --muted-foreground: #ffffff;
   --accent: #000000;
   --accent-foreground: #ffffff;
-  --xp: #ffff00;
+  --xp: #5dff8f;
   --xp-foreground: #000000;
   --xp-track: #555555;
-  --success: #7fff7f;
+  --success: #5dff8f;
   --success-soft: #000000;
   --border: #ffffff;
   --input: #ffffff;
   --ring: #ffff00;
+}
+:root[data-contrast="high"][data-theme="light"],
+:root[data-contrast="high"][data-theme="light"] [data-app] {
+  color-scheme: light;
+  --background: #ffffff;
+  --foreground: #000000;
+  --card: #ffffff;
+  --card-foreground: #000000;
+  --popover: #ffffff;
+  --popover-foreground: #000000;
+  --primary: #0b5d2a;
+  --primary-foreground: #ffffff;
+  --secondary: #ffffff;
+  --secondary-foreground: #000000;
+  --muted: #f2f2f2;
+  --muted-foreground: #000000;
+  --accent: #ffffff;
+  --accent-foreground: #000000;
+  --xp: #0b5d2a;
+  --xp-foreground: #ffffff;
+  --xp-track: #d4d4d4;
+  --success: #0b5d2a;
+  --success-soft: #ffffff;
+  --border: #000000;
+  --input: #000000;
+  --ring: #000000;
 }
 
 /* ---------- Accessibility: large text ---------- */
