@@ -17,5 +17,23 @@
     "link_expired": "Ese enlace del correo ya venció. Pide uno nuevo.",
     "no_profile": "No pudimos terminar de crear tu cuenta. Inténtalo de nuevo.",
     "failed": "Algo salió mal de nuestro lado. Inténtalo de nuevo."
+  },
+  "Disclaimers": {
+    "medScreen": "Educación de muestra, revisada por tu equipo de atención. No es consejo médico."
+  },
+  "ExperimentVerdict": {
+    "a_winning": "Tu rutina de ahora va ganando por ahora.",
+    "b_winning": "Tu idea nueva va ganando por ahora.",
+    "too_close": "Está muy parejo. Sigue adelante.",
+    "not_enough_data": "Aún faltan días. Sigue adelante.",
+    "caveat": "Esta prueba es pequeña, así que el resultado puede cambiar."
+  },
+  "Notifications": {
+    "halfway_title": "¡Vas a la mitad!",
+    "halfway_body": "Buen trabajo con tu prueba.",
+    "complete_title": "Tu prueba terminó.",
+    "complete_body": "Mira qué funcionó mejor.",
+    "confirm_request_title": "{name} registró una dosis.",
+    "confirm_request_body": "¿Lo viste? Toca para confirmar."
   }
 }

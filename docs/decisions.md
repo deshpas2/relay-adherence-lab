@@ -36,3 +36,27 @@ Choices made where BUILD_GUIDE.md is silent or out of date.
 - **The proxy loads `profiles.role` on each request,** as Section 4 asks, although the Next 16 docs advise against database reads there. Revisit this if it slows pages down.
 - **Clinician enrollment is not built.** Section 4 says to seed `care_links` for the demo. A real flow needs a way for the teen to consent, such as a code, which needs a schema change.
 - **Invite codes don't expire,** because `guardian_links` has no expiry column. They have 50 bits of randomness and work once.
+
+## Engines and copy lint (Lane Backend, ahead of Phase 3)
+
+Built early because they need no database or UI.
+
+### Copy lint (`src/lib/content/lint.ts`)
+
+- **Whole-word matching.** The guide's plain regex rejects its own "You're halfway!", so patterns match whole words and their other forms.
+- **Stricter than the guide.** It also catches rewordings like "take twice as much", "you should've" and brand names such as Prograf.
+- **Spanish has its own word lists and uses the Crawford grade formula,** because English formulas overrate Spanish. The Spanish lists need a fluent reviewer.
+- **Reading level:** strings under 5 words aren't scored, and strings under 8 words get 3 extra grades of tolerance, because the formulas are unreliable on short text. Catalog medicine names don't count toward the score.
+- **The English med-screen disclaimer is exempt from the reading-level check only.** Its wording is fixed by the hard rules and it scores 7.6.
+- **The lint is a safety net, not a review.** Word lists can't catch every unsafe sentence or every medicine name, so clinician review of copy is still needed.
+- **Seeded copy isn't linted yet.** `tests/content/lint.test.ts` covers the messages files. Add the seed strings when Lane DB's seed lands, passing the real catalog from `medications`.
+
+### Engines (`src/lib/engine/`)
+
+- **On time means status `taken`.** `late` counts as taken for adherence but not as on time, so it earns no on-time XP. It never loses XP.
+- **Not-yet-logged experiment days are left out** of per-arm rates, and `nMin` is the logged-day count of the smaller arm.
+- **Arms alternate A, B, A, B,** as the guide says. A fixed order keeps the engine deterministic.
+- **The engines return codes, not copy.** `Verdict` maps to `ExperimentVerdict.*` in the messages files.
+- **The halfway pop-up doesn't use the guide's "Morning pills are working great so far."** That may be untrue for a given teen's test, which would break the honest-verdict rule. It says "Nice work sticking with your test."
+- **Attention thresholds are placeholders for a clinician to confirm:** no log for 3 days, or an on-time rate down by 15 points or more. The guide doesn't set them.
+- **Achievement rules aren't built.** They depend on the keys in Lane DB's seed.

@@ -17,5 +17,23 @@
     "link_expired": "That email link has run out. Ask for a new one.",
     "no_profile": "We couldn't finish setting up your account. Please try again.",
     "failed": "Something went wrong on our side. Please try again."
+  },
+  "Disclaimers": {
+    "medScreen": "Sample education, reviewed by your care team. Not medical advice."
+  },
+  "ExperimentVerdict": {
+    "a_winning": "Your current routine is ahead so far.",
+    "b_winning": "Your new idea is ahead so far.",
+    "too_close": "Too close to call. Keep going.",
+    "not_enough_data": "Not enough days yet. Keep going.",
+    "caveat": "This is a small test, so the result could change."
+  },
+  "Notifications": {
+    "halfway_title": "You're halfway!",
+    "halfway_body": "Nice work sticking with your test.",
+    "complete_title": "Your test is done.",
+    "complete_body": "See what won.",
+    "confirm_request_title": "{name} logged a dose.",
+    "confirm_request_body": "Did you see it? Tap to confirm."
   }
 }
