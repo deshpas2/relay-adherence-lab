@@ -1,0 +1,137 @@
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { ArrowLeft } from "lucide-react";
+import { getTranslations } from "next-intl/server";
+import { adhColor, DoseHeatmap, Panel, StatTile, StatusPill } from "@/components/clinic/bits";
+import { ClinicActions } from "@/components/clinic/clinic-actions";
+import { TrendChart } from "@/components/clinic/trend-chart";
+import { getSamplePatient } from "@/lib/fixtures/clinic";
+
+// Routine-only ideas a clinician can suggest (sample library).
+const IDEAS = [
+  "Keep meds next to my toothbrush",
+  "A backup in my school or gym bag",
+  "A parent checks in at breakfast",
+  "A short reason why with each reminder",
+  "Take meds somewhere private at school",
+];
+
+export default async function PatientPage({ params }: PageProps<"/clinic/home/[id]">) {
+  const { id } = await params;
+  const p = getSamplePatient(id);
+  if (!p) notFound();
+  const t = await getTranslations("Clinic");
+  const tV = await getTranslations("ExperimentVerdict");
+  const first = p.name.split(" ")[0];
+  const pct = (x: number | null) => (x === null ? "–" : `${Math.round(x * 100)}%`);
+
+  return (
+    <div className="flex flex-col gap-5">
+      <Link href="/clinic/home" className="inline-flex min-h-11 items-center gap-2 self-start text-sm font-bold text-blue">
+        <ArrowLeft aria-hidden className="size-4" /> {t("patientsTitle")}
+      </Link>
+
+      <header className="flex flex-wrap items-start justify-between gap-3">
+        <div className="min-w-0">
+          <h1 className="text-2xl">{p.name}</h1>
+          <p className="text-sm text-muted-foreground">
+            {t("age", { age: p.age })} · {p.story}
+          </p>
+        </div>
+        <div className="flex items-center gap-2">
+          <StatusPill status={p.status} />
+          <span className="rounded-md border px-2 py-1 text-[11px] font-bold tracking-wider text-muted-foreground uppercase">
+            {t("simulated")}
+          </span>
+        </div>
+      </header>
+
+      <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
+        <StatTile value={pct(p.onTime)} label={t("statSelfReported")} color={adhColor(p.onTime)} />
+        <StatTile value={pct(p.verified)} label={t("statParentVerified")} />
+        <StatTile value={String(p.experiments.length)} label={t("statExperiments")} />
+        <StatTile value={t("daysAgo", { n: p.lastCheckinDays })} label={t("statLastCheckin")} />
+      </div>
+
+      <Panel title={t("trendTitle")}>
+        <TrendChart
+          data={p.trend}
+          labels={{
+            selfReported: t("selfReported"),
+            verified: t("parentVerified"),
+            target: t("target"),
+            summary: t("trendSummary", { from: p.trend[0].selfReported, to: p.trend[7].selfReported }),
+          }}
+        />
+        <h3 className="mt-5 mb-2 font-sans text-xs font-bold tracking-wider text-muted-foreground uppercase">
+          {t("heatmapTitle")}
+        </h3>
+        <DoseHeatmap doses={p.doses} />
+      </Panel>
+
+      <div className="grid gap-5 md:grid-cols-2">
+        <Panel title={t("focusTitle")}>
+          <p className="font-heading text-2xl font-bold">{t(`barrier_${p.primary}`)}</p>
+          <p className="mb-3 text-xs font-semibold text-blue">{t("teenChosen")}</p>
+          <div className="flex flex-wrap gap-2">
+            {p.barriers.map((b) => (
+              <span
+                key={b}
+                className={
+                  b === p.primary
+                    ? "rounded-full bg-primary px-3 py-1 text-xs font-semibold text-primary-foreground"
+                    : "rounded-full border bg-muted px-3 py-1 text-xs font-semibold"
+                }
+              >
+                {t(`barrier_${b}`)}
+              </span>
+            ))}
+          </div>
+          <h3 className="mt-4 mb-2 font-sans text-xs font-bold tracking-wider text-muted-foreground uppercase">
+            {t("planTitle")}
+          </h3>
+          <p className="rounded-lg border bg-muted px-3 py-2.5 font-medium">{p.plan}</p>
+        </Panel>
+
+        <Panel title={t("experimentsTitle")}>
+          <ul className="flex flex-col divide-y">
+            {p.experiments.map((e) => (
+              <li key={e.id} className="flex flex-col gap-2 py-3 first:pt-0 last:pb-0">
+                <div className="flex items-start justify-between gap-3">
+                  <p className="font-semibold">{e.hypothesis}</p>
+                  <span className="shrink-0 rounded-full bg-secondary px-2.5 py-0.5 text-xs font-bold text-secondary-foreground">
+                    {e.status === "active" ? t("running") : t(`decision_${e.decision ?? "rerun"}`)}
+                  </span>
+                </div>
+                {(
+                  [
+                    ["A", e.armA, e.result.aAdh],
+                    ["B", e.armB, e.result.bAdh],
+                  ] as const
+                ).map(([arm, text, adh]) => (
+                  <div key={arm} className="grid grid-cols-[1fr_5rem_2.5rem] items-center gap-3 text-xs">
+                    <span className="truncate font-medium">
+                      {arm} · {text}
+                    </span>
+                    <span className="h-2 overflow-hidden rounded-full border bg-muted">
+                      <span
+                        className="block h-full"
+                        style={{ width: pct(adh), background: e.result.winner === arm ? "#1f9d57" : "#5f7186" }}
+                      />
+                    </span>
+                    <span className="text-right font-bold tabular-nums">{pct(adh)}</span>
+                  </div>
+                ))}
+                <p className="text-xs text-muted-foreground">{tV(e.result.verdict)}</p>
+              </li>
+            ))}
+          </ul>
+        </Panel>
+      </div>
+
+      <Panel title={t("actionsTitle")}>
+        <ClinicActions first={first} ideas={IDEAS} />
+      </Panel>
+    </div>
+  );
+}
