@@ -1,12 +1,16 @@
 import Link from "next/link";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, Phone } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { adhColor, MiniBar, StatTile, StatusPill } from "@/components/clinic/bits";
 import { samplePatients } from "@/lib/fixtures/clinic";
+import { reengagementPlan } from "@/lib/engine/reengage";
 
 // TODO(backend): enrolled patients from care_links + v_attention_list.
 export default async function PatientsPage() {
   const t = await getTranslations("Clinic");
+  const tR = await getTranslations("Reengage");
+  const plans = new Map(samplePatients.map((p) => [p.id, reengagementPlan(p.lastCheckinDays, p.reengageDone)]));
+  const callNeeded = samplePatients.filter((p) => plans.get(p.id)?.callNeeded);
   const ps = samplePatients;
   const mean = ps.reduce((s, p) => s + p.onTime, 0) / ps.length;
   const attention = ps.filter((p) => p.status !== "green").length;
@@ -26,6 +30,28 @@ export default async function PatientsPage() {
           {t("simulated")}
         </span>
       </header>
+
+      {callNeeded.map((p) => (
+        <section
+          key={p.id}
+          role="alert"
+          className="flex flex-wrap items-center gap-4 rounded-xl border-2 border-[#e8a8a2] bg-[#fde8e8] p-4 text-[#7a1f17]"
+        >
+          <span className="grid size-10 shrink-0 place-items-center rounded-full bg-[#c0392b] text-white">
+            <Phone aria-hidden className="size-5" />
+          </span>
+          <div className="min-w-0 flex-1">
+            <p className="font-bold">{tR("alertTitle", { name: p.name, n: p.lastCheckinDays })}</p>
+            <p className="text-sm">{tR("alertBody")}</p>
+          </div>
+          <Link
+            href={`/clinic/home/${p.id}`}
+            className="rounded-lg bg-[#c0392b] px-4 py-2.5 text-sm font-bold text-white hover:bg-[#a83226]"
+          >
+            {tR("alertCta", { name: p.name.split(" ")[0] })}
+          </Link>
+        </section>
+      ))}
 
       <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
         <StatTile value={String(ps.length)} label={t("statPatients")} />
@@ -55,6 +81,11 @@ export default async function PatientsPage() {
                     {p.name}
                   </Link>
                   <p className="text-xs text-muted-foreground">{t("age", { age: p.age })}</p>
+                  {plans.get(p.id)?.active && (
+                    <span className="mt-1 inline-block rounded-md bg-[#fbf0d6] px-2 py-0.5 text-[11px] font-bold text-[#8a6210]">
+                      {tR("quietTag", { n: p.lastCheckinDays })}
+                    </span>
+                  )}
                 </td>
                 <td className="px-3 py-3.5">{t(`barrier_${p.primary}`)}</td>
                 <td className="px-3 py-3.5 tabular-nums">

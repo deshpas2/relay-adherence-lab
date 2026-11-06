@@ -4,8 +4,10 @@ import { ArrowLeft } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { adhColor, DoseHeatmap, Panel, StatTile, StatusPill } from "@/components/clinic/bits";
 import { ClinicActions } from "@/components/clinic/clinic-actions";
+import { ReengagePanel } from "@/components/clinic/reengage-panel";
 import { TrendChart } from "@/components/clinic/trend-chart";
-import { getSamplePatient } from "@/lib/fixtures/clinic";
+import { getSamplePatient, SAMPLE_NURSE } from "@/lib/fixtures/clinic";
+import { reengagementPlan } from "@/lib/engine/reengage";
 
 // Routine-only ideas a clinician can suggest (sample library).
 const IDEAS = [
@@ -24,6 +26,13 @@ export default async function PatientPage({ params }: PageProps<"/clinic/home/[i
   const tV = await getTranslations("ExperimentVerdict");
   const first = p.name.split(" ")[0];
   const pct = (x: number | null) => (x === null ? "–" : `${Math.round(x * 100)}%`);
+  const quiet = reengagementPlan(p.lastCheckinDays, p.reengageDone).active;
+  const tR = await getTranslations("Reengage");
+  const reaching = (
+    <Panel title={tR("panelTitle")} className={quiet ? "border-[#e8a8a2]" : undefined}>
+      <ReengagePanel name={first} nurse={SAMPLE_NURSE} daysQuiet={p.lastCheckinDays} done={p.reengageDone ?? []} />
+    </Panel>
+  );
 
   return (
     <div className="flex flex-col gap-5">
@@ -45,6 +54,8 @@ export default async function PatientPage({ params }: PageProps<"/clinic/home/[i
           </span>
         </div>
       </header>
+
+      {quiet && reaching}
 
       <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
         <StatTile value={pct(p.onTime)} label={t("statSelfReported")} color={adhColor(p.onTime)} />
@@ -128,6 +139,8 @@ export default async function PatientPage({ params }: PageProps<"/clinic/home/[i
           </ul>
         </Panel>
       </div>
+
+      {!quiet && reaching}
 
       <Panel title={t("actionsTitle")}>
         <ClinicActions first={first} ideas={IDEAS} />

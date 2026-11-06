@@ -6,6 +6,10 @@
  */
 import { buildExperimentDays, computeResult, type ExperimentResult } from "@/lib/engine/experiment";
 import type { DoseStatus } from "@/lib/engine/types";
+import type { ReengageChannel } from "@/lib/engine/reengage";
+
+/** The nurse who knows each sample teen (records day-10 voice notes). */
+export const SAMPLE_NURSE = "Nurse Ana";
 
 export type ClinicBarrier =
   | "forget"
@@ -47,7 +51,10 @@ type PatientSeed = {
   adh: number;
   verif: number;
   status: PatientStatus;
+  /** Days since the teen's last activity (dose log, check-in or visit). */
   lastCheckinDays: number;
+  /** Person-led re-engagement steps already handled. */
+  reengageDone?: ReengageChannel[];
   experiments: ExperimentSpec[];
 };
 
@@ -64,15 +71,15 @@ const SEEDS: PatientSeed[] = [
   {
     id: "kai", name: "Kai T.", age: 17, primary: "embarrassed", barriers: ["embarrassed", "schedule_changes"],
     story: "Won't take meds where friends can see. The school-day dose is the weak point.",
-    plan: "A private spot at school, discreet reminders", adh: 0.9, verif: 0.35, status: "green", lastCheckinDays: 5,
+    plan: "A private spot at school, discreet reminders", adh: 0.9, verif: 0.35, status: "green", lastCheckinDays: 1,
     experiments: [
       { barrier: "embarrassed", factor: "place", hypothesis: "Taking my meds somewhere private at school will feel easier.", armA: "At the lunch table", armB: "Somewhere private", baseMiss: 0.44, effect: 0.7, easeA: 1, easeB: 4, status: "done", decision: "adopted", daysLogged: 14 },
     ],
   },
   {
     id: "diego", name: "Diego S.", age: 14, primary: "feel_fine", barriers: ["feel_fine", "unclear_who"],
-    story: "Feels healthy, so the reason why slips. Testing whether a short why helps.",
-    plan: "Reason-why reminders, check-in with mom after dinner", adh: 0.7, verif: 0.6, status: "red", lastCheckinDays: 6,
+    story: "Feels healthy, so the reason why slips. Has not opened the app in 15 days.",
+    plan: "Reason-why reminders, check-in with mom after dinner", adh: 0.7, verif: 0.6, status: "red", lastCheckinDays: 15, reengageDone: ["nurse_voice"],
     experiments: [
       { barrier: "feel_fine", factor: "style", hypothesis: "A short reason why with each reminder will help me stick with it.", armA: "Plain reminder", armB: "Reminder with a reason why", baseMiss: 0.42, effect: 0.6, easeA: 3, easeB: 4, status: "active", daysLogged: 7 },
     ],
@@ -80,7 +87,7 @@ const SEEDS: PatientSeed[] = [
   {
     id: "aaliyah", name: "Aaliyah B.", age: 15, primary: "side_effects", barriers: ["side_effects", "mood"],
     story: "Side effects wear on her. Her first experiment came back too close to call.",
-    plan: "Meds on the nightstand, mom checks in", adh: 0.78, verif: 0.45, status: "amber", lastCheckinDays: 1,
+    plan: "Meds on the nightstand, mom checks in", adh: 0.78, verif: 0.45, status: "amber", lastCheckinDays: 8,
     experiments: [
       { barrier: "side_effects", factor: "style", hypothesis: "Logging how I feel each day will help me talk to my care team.", armA: "No feeling log", armB: "One-tap feeling log", baseMiss: 0.38, effect: 0.12, easeA: 3, easeB: 3, status: "done", decision: "rerun", daysLogged: 14 },
     ],
@@ -96,7 +103,7 @@ const SEEDS: PatientSeed[] = [
   {
     id: "priya", name: "Priya K.", age: 13, primary: "forget", barriers: ["forget", "unclear_who"],
     story: "Newly handling her own meds. Running a cue experiment with family support.",
-    plan: "Breakfast and bedtime check-in with a parent", adh: 0.92, verif: 0.8, status: "green", lastCheckinDays: 3,
+    plan: "Breakfast and bedtime check-in with a parent", adh: 0.92, verif: 0.8, status: "amber", lastCheckinDays: 3,
     experiments: [
       { barrier: "forget", factor: "who", hypothesis: "A quick check-in from a parent will help me remember.", armA: "I remember on my own", armB: "A parent checks in", baseMiss: 0.38, effect: 0.6, easeA: 3, easeB: 4, status: "active", daysLogged: 11 },
     ],

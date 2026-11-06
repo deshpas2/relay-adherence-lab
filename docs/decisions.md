@@ -27,3 +27,12 @@ Choices made where BUILD_GUIDE.md is silent or out of date.
 - **Teen-written experiment ideas are checked with `lintCopy`** and rejected on any dosing or medicine-name match, so a teen can't set up "take half" or "skip the morning dose" as an experiment. Lane Backend should run the same check in `startExperiment`.
 - **"Keep option X" is only offered when the engine names a winner.** With "too close" or "not enough data", the teen can run it again or drop it.
 - **Experiment pages show a "Preview: go to the next day" button outside production,** so a demo can walk through all 14 days.
+
+## Re-engagement ladder (teen goes quiet)
+
+- **"Quiet" = days since the teen's last activity** (dose log, check-in or opening the app). Any activity resets it to 0 and the ladder stops. Logic: `src/lib/engine/reengage.ts` (tested).
+- **Steps stay with the teen and get more personal:** day 3 app notification, day 7 text, day 10 voice note from their own nurse, day 14 care-team phone call. App and text are automatic; the voice note and the call wait for a person and show as "Needs recording" / "Call needed".
+- **Day 14 raises a red alert at the top of the clinician's patient list** until the call is logged (reached / left a message / no answer).
+- **Texts and notifications never mention health or meds,** because they show on lock screens. The voice note is from the teen's own nurse, who is already bound by confidentiality. Parents are not part of the ladder.
+- **Coming back is guilt-free:** a "Welcome back" card says nothing was lost, and shows the nurse's voice note if one was sent.
+- **Sending is simulated for now.** TODO(backend): a daily job runs `reengagementPlan` per enrolled teen, writes `notifications` (app), sends the text through an SMS provider, stores voice notes in Storage, and creates care-team tasks. Thresholds (3/7/10/14) are placeholders for the care team to confirm.
