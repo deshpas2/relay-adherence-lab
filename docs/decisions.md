@@ -31,6 +31,7 @@ Everything the guide's schema defines exists unchanged. Additions only add colum
 - **Nobody can sign themselves up as a clinician.**
   - A profile is created automatically at sign-up. Teen or parent comes from `user_metadata.role`; clinician only from `app_metadata.role`, which only the service role can set.
   - If the metadata has no role, no profile is created and the app inserts one (teen or parent only).
+  - **Creating a clinician:** Supabase's admin API (`auth.admin.createUser`) writes `app_metadata` after the user row is inserted, so the trigger never sees the clinician role. Staff create the user, then insert the `profiles` row with the service-role key, which is what `supabase/seed/demo.mts` does.
 - **Clinician enrollment (`care_links`) is staff/seed only.** If a clinician could enroll any teen id, anyone with a clinician account could read any teen. A teen-issued clinic code can replace this later.
 - **`dose_logs.verified` can't be set by any client.** The trigger on `parent_confirmations` sets it, and changing a dose's status afterwards clears it.
 - **XP can't be faked.** `game_state`, `quest_progress` and `achievement_unlocks` are read-only for clients, and server actions write them with `lib/supabase/admin.ts` (service role). A teen starts with a `game_state` row automatically.

@@ -97,7 +97,16 @@ async function createPerson(p: Omit<Person, "email">): Promise<string> {
       app_metadata: p.role === "clinician" ? { role: "clinician" } : {},
     }),
   );
-  return user!.id;
+  // GoTrue writes app_metadata after the auth row is inserted, so the
+  // sign-up trigger can't see the clinician role. Staff create clinician
+  // profiles directly with the service role (clients never can).
+  if (p.role === "clinician") {
+    check(
+      `clinician profile ${email}`,
+      await admin.from("profiles").upsert({ id: user.id, role: "clinician", display_name: p.name }),
+    );
+  }
+  return user.id;
 }
 
 // ---------------------------------------------------------------------------
@@ -177,7 +186,9 @@ async function insert<T extends keyof Database["public"]["Tables"]>(
   // Chunk to stay well under request size limits.
   for (let i = 0; i < rows.length; i += 500) {
     // The generic insert overloads can't narrow a table-name type parameter.
-    const { error } = await admin.from(table).insert(rows.slice(i, i + 500) as never);
+    // defaultToNull: false — in a bulk insert, a column some rows omit gets
+    // its default instead of null.
+    const { error } = await admin.from(table).insert(rows.slice(i, i + 500) as never, { defaultToNull: false });
     if (error) throw new Error(`${table}: ${error.message}`);
   }
 }
