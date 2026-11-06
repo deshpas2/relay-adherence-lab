@@ -5,7 +5,8 @@ Source of truth: **BUILD_GUIDE.md**. If it's silent on something, pick the simpl
 ## Commands
 ```
 npm run dev | build | start | lint | typecheck | test
-supabase gen types typescript --local > src/lib/types/database.ts   # after any schema change
+npm run db:push    # apply migrations to the hosted project (Lane DB only)
+npm run db:types   # regenerate src/lib/types/database.ts after any schema change
 ```
 
 ## Hard rules (safety — enforce in code and copy)

@@ -369,7 +369,7 @@ where p.role='teen' group by p.id, p.display_name;
   - Teen → parent: teen generates an `invite_code` (a `guardian_links` row, status `pending`); parent enters it → status `active`. Teen sets `share_level`.
   - Clinician → teen: clinician enrolls a patient (creates `care_links`). For the demo, seed these.
 - **Supabase clients:** one server client (cookies) for Server Components/Actions, one browser client for Realtime. Put both in `lib/supabase/`.
-- Generate types after every schema change: `supabase gen types typescript --local > src/lib/types/database.ts`. This is the shared contract.
+- Generate types after every schema change: `npm run db:types`. This is the shared contract.
 
 ---
 
@@ -496,7 +496,8 @@ Source of truth: BUILD_GUIDE.md. If it's silent, pick the simplest option and no
 
 ## Commands
 npm run dev | build | start | lint | typecheck | test
-supabase gen types typescript --local > src/lib/types/database.ts   # after any schema change
+npm run db:push    # apply migrations to the hosted project (Lane DB only)
+npm run db:types   # regenerate src/lib/types/database.ts after any schema change
 
 ## Hard rules (safety)
 - Never show/suggest/change a dose or whether to take a med. Relay changes routine, not prescriptions. Dose questions → care team.
@@ -521,7 +522,7 @@ supabase gen types typescript --local > src/lib/types/database.ts   # after any 
 ````
 
 ## Appendix B — Env & setup
-`.env.local`: `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY` (server only). Supabase CLI for local migrations (`supabase start`, `supabase db reset`). Vercel project: add the same env vars. Never commit the service-role key.
+`.env.local`: `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY` (server only). No Docker: everyone uses one hosted Supabase project. Link once with `npx supabase login` and `npx supabase link --project-ref <ref>`, then use `npm run db:push` and `npm run db:types`. Vercel project: add the same env vars. Never commit the service-role key.
 
 ## Appendix C — Open content questions for the DEAP team / clinician window
 - The real "why this medicine" text for each med (we ship vetted placeholders).

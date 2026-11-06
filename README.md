@@ -10,7 +10,7 @@ cp .env.local.example .env.local   # then add your Supabase keys
 npm run dev
 ```
 
-Local Supabase (`npx supabase start`) needs Docker.
+The project uses a hosted Supabase project, so Docker is not needed. To work on the schema, link once with `npx supabase login` and `npx supabase link --project-ref <ref>`, then use `npm run db:push` and `npm run db:types`.
 
 ## Checks
 

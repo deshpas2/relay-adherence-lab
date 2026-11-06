@@ -1,5 +1,5 @@
 // Placeholder until the Phase 1 migrations exist. Replace by running:
-//   supabase gen types typescript --local > src/lib/types/database.ts
+//   npm run db:types
 export type Database = {
   public: {
     Tables: Record<string, never>;
