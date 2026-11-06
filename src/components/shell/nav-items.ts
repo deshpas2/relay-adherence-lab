@@ -20,18 +20,18 @@ export type NavItem = {
 
 export const NAV_ITEMS: Record<AppRole, NavItem[]> = {
   teen: [
-    { href: "/home", labelKey: "home", icon: House },
-    { href: "/meds", labelKey: "meds", icon: Pill },
-    { href: "/experiments", labelKey: "quests", icon: FlaskConical },
-    { href: "/profile", labelKey: "me", icon: User },
+    { href: "/teen/home", labelKey: "home", icon: House },
+    { href: "/teen/meds", labelKey: "meds", icon: Pill },
+    { href: "/teen/experiments", labelKey: "quests", icon: FlaskConical },
+    { href: "/teen/profile", labelKey: "me", icon: User },
   ],
   parent: [
-    { href: "/confirm", labelKey: "confirm", icon: ShieldCheck },
-    { href: "/family", labelKey: "family", icon: Users },
+    { href: "/parent/home", labelKey: "confirm", icon: ShieldCheck },
+    { href: "/parent/family", labelKey: "family", icon: Users },
   ],
   clinician: [
-    { href: "/patients", labelKey: "patients", icon: Users },
-    { href: "/strategies", labelKey: "strategies", icon: Trophy },
-    { href: "/overview", labelKey: "overview", icon: ChartColumn },
+    { href: "/clinic/home", labelKey: "patients", icon: Users },
+    { href: "/clinic/strategies", labelKey: "strategies", icon: Trophy },
+    { href: "/clinic/overview", labelKey: "overview", icon: ChartColumn },
   ],
 };
