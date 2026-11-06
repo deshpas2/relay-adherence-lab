@@ -18,6 +18,24 @@
     "no_profile": "We couldn't finish setting up your account. Please try again.",
     "failed": "Something went wrong on our side. Please try again."
   },
+  "Disclaimers": {
+    "medScreen": "Sample education, reviewed by your care team. Not medical advice."
+  },
+  "ExperimentVerdict": {
+    "a_winning": "Your current routine is ahead so far.",
+    "b_winning": "Your new idea is ahead so far.",
+    "too_close": "Too close to call. Keep going.",
+    "not_enough_data": "Not enough days yet. Keep going.",
+    "caveat": "This is a small test, so the result could change."
+  },
+  "Notifications": {
+    "halfway_title": "You're halfway!",
+    "halfway_body": "Nice work sticking with your test.",
+    "complete_title": "Your test is done.",
+    "complete_body": "See what won.",
+    "confirm_request_title": "{name} logged a dose.",
+    "confirm_request_body": "Did you see it? Tap to confirm."
+  },
   "Nav": {
     "label": "Main",
     "skip": "Go to main content",
@@ -172,5 +190,145 @@
     "doneBody": "Now let's find what works for you.",
     "questComplete": "Quest done: Get started",
     "goHome": "Go to Home"
+  },
+  "Experiments": {
+    "pageTitle": "Quests",
+    "activeHeading": "Your test",
+    "questsHeading": "Quests",
+    "newTest": "Start a new test",
+    "noActive": "No test running yet. Start one to find what works for you.",
+    "dayOf": "Day {day} of {days}",
+    "todayOption": "Today: option {arm}",
+    "option": "Option {arm}",
+    "optionAHint": "Your usual way",
+    "optionBHint": "Your new idea",
+    "xpReward": "+{xp} XP",
+    "questDone": "Done",
+    "calendar": "Your 14 days",
+    "dayCell": "Day {day}, option {arm}: {status}",
+    "status_taken": "on time",
+    "status_late": "late",
+    "status_missed": "missed",
+    "status_skipped": "missed",
+    "status_none": "not logged yet",
+    "status_today": "today",
+    "logTitle": "How did today go?",
+    "logArm": "Today is an option {arm} day",
+    "logStatus": "Your meds today",
+    "logOnTime": "On time",
+    "logLate": "Late",
+    "logMissed": "Missed",
+    "easeQuestion": "How easy was it?",
+    "easeHard": "Hard",
+    "easeEasy": "Easy",
+    "easeN": "{n} out of 5",
+    "saveDay": "Save today",
+    "saving": "Saving…",
+    "pickStatus": "Pick how today went.",
+    "pickEase": "Pick how easy it was.",
+    "savedTitle": "Saved. See you tomorrow.",
+    "savedNext": "Tomorrow is an option {arm} day.",
+    "previewNextDay": "Preview: go to the next day",
+    "resultHeading": "How it's going",
+    "onTime": "On time",
+    "ease": "Ease",
+    "easeAvg": "{n} of 5",
+    "noData": "No days yet",
+    "daysLogged": "{n} of {total} days logged",
+    "ahead": "Ahead",
+    "decisionTitle": "Your test is done",
+    "decisionBody": "What do you want to do next?",
+    "adopt": "Keep option {arm}",
+    "adoptHint": "Make it part of your routine.",
+    "rerun": "Run it again",
+    "rerunHint": "Get more days to be sure.",
+    "drop": "Drop this test",
+    "dropHint": "Try a different idea.",
+    "decided_adopted": "You kept option {arm}. Nice work.",
+    "decided_rerun": "A new round starts soon.",
+    "decided_dropped": "Done. Try a new idea any time.",
+    "adoptXp": "+{xp} XP for finding what works",
+    "dayXp": "+{xp} XP",
+    "designerTitle": "Start a new test",
+    "designerBody": "Pick an idea to try for 2 weeks. Each day you switch between your usual way and the new idea.",
+    "forYou": "Ideas for you",
+    "moreIdeas": "More ideas",
+    "ownIdea": "Write my own",
+    "ownTitle": "My own test",
+    "ownA": "Your usual way",
+    "ownB": "Your new idea",
+    "ownHypothesis": "What do you think will happen?",
+    "ownHint": "Keep it about your routine: where, reminders, or who helps.",
+    "unsafe": "Let's keep tests about your routine. Ask your care team about meds or doses.",
+    "fillBoth": "Fill in both options.",
+    "useIdea": "Use this idea",
+    "reviewTitle": "Your plan",
+    "reviewBody": "For 14 days, you switch each day: option A, then option B.",
+    "startTest": "Start my test",
+    "started": "Your test starts today",
+    "startedBody": "Log each day to see what works for you.",
+    "goQuests": "Go to Quests",
+    "seeTest": "See my test",
+    "factor_place": "Place",
+    "factor_cue": "Reminder",
+    "factor_who": "Helper",
+    "factor_style": "Routine",
+    "sampleData": "Sample data for now. Not a real person."
+  },
+  "ExperimentIdeas": {
+    "toothbrush": {
+      "title": "The Toothbrush Trick",
+      "hypothesis": "Keeping my pills next to my toothbrush will help me remember.",
+      "armA": "My usual way",
+      "armB": "Pills next to my toothbrush"
+    },
+    "nightBefore": {
+      "title": "The Night-Before Plan",
+      "hypothesis": "Setting out my pills the night before will make mornings easier.",
+      "armA": "Get pills out in the morning",
+      "armB": "Set pills out the night before"
+    },
+    "ownRoom": {
+      "title": "My Own Spot",
+      "hypothesis": "Taking my meds in a private spot will feel easier.",
+      "armA": "Where I take them now",
+      "armB": "In my own room"
+    },
+    "friendText": {
+      "title": "Buddy Check",
+      "hypothesis": "A text from a friend will help me remember when I'm out.",
+      "armA": "I remember on my own",
+      "armB": "A friend texts me"
+    },
+    "parentCheck": {
+      "title": "Team Up",
+      "hypothesis": "A quick check-in from my parent will help me remember.",
+      "armA": "I remember on my own",
+      "armB": "My parent checks in"
+    },
+    "pillCase": {
+      "title": "Pack It",
+      "hypothesis": "A pill case in my bag will help when I'm away from home.",
+      "armA": "My usual way",
+      "armB": "A pill case in my bag"
+    }
+  },
+  "Quests": {
+    "onboard": {
+      "title": "Get started",
+      "description": "Finish setting up Relay."
+    },
+    "firstExperiment": {
+      "title": "First test",
+      "description": "Finish your first 2-week test."
+    },
+    "exploreMeds": {
+      "title": "Med explorer",
+      "description": "Learn about one of your meds."
+    },
+    "twoWeeksMornings": {
+      "title": "Two weeks of mornings",
+      "description": "Log your morning meds for 14 days."
+    }
   }
 }

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { ArrowLeft, Eye, HeartPulse, PartyPopper, ShieldCheck, Sparkles, Users } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { ErrorBox } from "@/components/auth/fields";
-import { formatClock } from "@/components/teen/level";
+import { formatClock } from "@/lib/format-clock";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { BarrierStep } from "./barrier-step";

@@ -6,7 +6,7 @@ import { Check, Clock, PartyPopper } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { formatClock } from "./level";
+import { formatClock } from "@/lib/format-clock";
 import { MedChip } from "./med-chip";
 import { MissedSheet } from "./missed-sheet";
 import type { DoseSlot } from "./types";

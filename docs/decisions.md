@@ -19,3 +19,11 @@ Choices made where BUILD_GUIDE.md is silent or out of date.
 - **Every tap target is at least 44px**, so the shadcn button's small sizes (`xs`, `icon-xs`, `icon-sm`, `icon-lg`) were removed.
 - **Pages follow Lane Backend's URL scheme:** `/teen/*`, `/parent/*`, `/clinic/*`, each landing on `/home` (parent home = confirm list, clinic home = patients). `src/lib/routes.ts` copies `roleHome` until lane-be is merged, then should be replaced by `src/lib/auth/routing.ts`.
 - **The clinic colors switch on via `data-app="clinic"` on the shell wrapper** (correct on first paint), and also on `<html>` after load so pop-ups match.
+
+## Phase 3 — Lane Frontend (experiments + game UI)
+
+- **Engine and lint files are copied unchanged from lane-be** (`src/lib/engine/*`, `src/lib/content/lint.ts` and their tests), so the screens use the real `computeResult`, `experimentMilestone`, `levelProgress` and `lintCopy`. Being identical, they merge without conflicts.
+- **The idea library leaves out the `timing` factor.** Dose times belong to the care team, so library ideas only change place, cues, who helps, or routine style. Library text is placeholder content for clinician review.
+- **Teen-written experiment ideas are checked with `lintCopy`** and rejected on any dosing or medicine-name match, so a teen can't set up "take half" or "skip the morning dose" as an experiment. Lane Backend should run the same check in `startExperiment`.
+- **"Keep option X" is only offered when the engine names a winner.** With "too close" or "not enough data", the teen can run it again or drop it.
+- **Experiment pages show a "Preview: go to the next day" button outside production,** so a demo can walk through all 14 days.

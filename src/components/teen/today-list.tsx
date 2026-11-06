@@ -3,7 +3,7 @@
 import { Check, Circle, Minus } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
-import { formatClock } from "./level";
+import { formatClock } from "@/lib/format-clock";
 import type { DoseSlot } from "./types";
 
 /** Today's schedule at a glance. Missed doses look neutral, never red. */

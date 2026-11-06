@@ -18,6 +18,24 @@
     "no_profile": "No pudimos terminar de crear tu cuenta. Inténtalo de nuevo.",
     "failed": "Algo salió mal de nuestro lado. Inténtalo de nuevo."
   },
+  "Disclaimers": {
+    "medScreen": "Educación de muestra, revisada por tu equipo de atención. No es consejo médico."
+  },
+  "ExperimentVerdict": {
+    "a_winning": "Tu rutina de ahora va ganando por ahora.",
+    "b_winning": "Tu idea nueva va ganando por ahora.",
+    "too_close": "Está muy parejo. Sigue adelante.",
+    "not_enough_data": "Aún faltan días. Sigue adelante.",
+    "caveat": "Esta prueba es pequeña, así que el resultado puede cambiar."
+  },
+  "Notifications": {
+    "halfway_title": "¡Vas a la mitad!",
+    "halfway_body": "Buen trabajo con tu prueba.",
+    "complete_title": "Tu prueba terminó.",
+    "complete_body": "Mira qué funcionó mejor.",
+    "confirm_request_title": "{name} registró una dosis.",
+    "confirm_request_body": "¿Lo viste? Toca para confirmar."
+  },
   "Nav": {
     "label": "Principal",
     "skip": "Ir al contenido principal",
@@ -172,5 +190,145 @@
     "doneBody": "Ahora vamos a ver qué te funciona.",
     "questComplete": "Misión hecha: Empezar",
     "goHome": "Ir a Inicio"
+  },
+  "Experiments": {
+    "pageTitle": "Misiones",
+    "activeHeading": "Tu prueba",
+    "questsHeading": "Misiones",
+    "newTest": "Empezar una prueba nueva",
+    "noActive": "Aún no tienes una prueba. Empieza una para ver qué te funciona.",
+    "dayOf": "Día {day} de {days}",
+    "todayOption": "Hoy: opción {arm}",
+    "option": "Opción {arm}",
+    "optionAHint": "Tu forma de siempre",
+    "optionBHint": "Tu idea nueva",
+    "xpReward": "+{xp} XP",
+    "questDone": "Hecha",
+    "calendar": "Tus 14 días",
+    "dayCell": "Día {day}, opción {arm}: {status}",
+    "status_taken": "a tiempo",
+    "status_late": "tarde",
+    "status_missed": "no tomada",
+    "status_skipped": "no tomada",
+    "status_none": "sin anotar",
+    "status_today": "hoy",
+    "logTitle": "¿Cómo te fue hoy?",
+    "logArm": "Hoy es un día de opción {arm}",
+    "logStatus": "Tus medicinas hoy",
+    "logOnTime": "A tiempo",
+    "logLate": "Tarde",
+    "logMissed": "No las tomé",
+    "easeQuestion": "¿Qué tan fácil fue?",
+    "easeHard": "Difícil",
+    "easeEasy": "Fácil",
+    "easeN": "{n} de 5",
+    "saveDay": "Guardar hoy",
+    "saving": "Guardando…",
+    "pickStatus": "Elige cómo te fue hoy.",
+    "pickEase": "Elige qué tan fácil fue.",
+    "savedTitle": "Guardado. Nos vemos mañana.",
+    "savedNext": "Mañana es un día de opción {arm}.",
+    "previewNextDay": "Vista previa: ir al día siguiente",
+    "resultHeading": "Cómo va",
+    "onTime": "A tiempo",
+    "ease": "Facilidad",
+    "easeAvg": "{n} de 5",
+    "noData": "Aún no hay días",
+    "daysLogged": "{n} de {total} días anotados",
+    "ahead": "Adelante",
+    "decisionTitle": "Tu prueba terminó",
+    "decisionBody": "¿Qué quieres hacer ahora?",
+    "adopt": "Quedarme con la opción {arm}",
+    "adoptHint": "Hazla parte de tu rutina.",
+    "rerun": "Hacerla otra vez",
+    "rerunHint": "Más días para estar seguro.",
+    "drop": "Dejar esta prueba",
+    "dropHint": "Prueba otra idea.",
+    "decided_adopted": "Te quedaste con la opción {arm}. Buen trabajo.",
+    "decided_rerun": "Pronto empieza otra ronda.",
+    "decided_dropped": "Listo. Prueba otra idea cuando quieras.",
+    "adoptXp": "+{xp} XP por encontrar lo que funciona",
+    "dayXp": "+{xp} XP",
+    "designerTitle": "Empezar una prueba nueva",
+    "designerBody": "Elige una idea para probar 2 semanas. Cada día cambias entre tu forma de siempre y la idea nueva.",
+    "forYou": "Ideas para ti",
+    "moreIdeas": "Más ideas",
+    "ownIdea": "Escribir mi propia idea",
+    "ownTitle": "Mi propia prueba",
+    "ownA": "Tu forma de siempre",
+    "ownB": "Tu idea nueva",
+    "ownHypothesis": "¿Qué crees que va a pasar?",
+    "ownHint": "Que sea sobre tu rutina: dónde, recordatorios o quién te ayuda.",
+    "unsafe": "Las pruebas son sobre tu rutina. Pregunta a tu equipo de atención sobre medicinas o dosis.",
+    "fillBoth": "Escribe las dos opciones.",
+    "useIdea": "Usar esta idea",
+    "reviewTitle": "Tu plan",
+    "reviewBody": "Por 14 días cambias cada día: opción A y luego opción B.",
+    "startTest": "Empezar mi prueba",
+    "started": "Tu prueba empieza hoy",
+    "startedBody": "Anota cada día para ver qué te funciona.",
+    "goQuests": "Ir a Misiones",
+    "seeTest": "Ver mi prueba",
+    "factor_place": "Lugar",
+    "factor_cue": "Recordatorio",
+    "factor_who": "Ayuda",
+    "factor_style": "Rutina",
+    "sampleData": "Datos de muestra por ahora. No es una persona real."
+  },
+  "ExperimentIdeas": {
+    "toothbrush": {
+      "title": "El truco del cepillo",
+      "hypothesis": "Tener mis pastillas junto al cepillo de dientes me ayudará a recordar.",
+      "armA": "Mi forma de siempre",
+      "armB": "Pastillas junto al cepillo"
+    },
+    "nightBefore": {
+      "title": "El plan de la noche",
+      "hypothesis": "Dejar listas mis pastillas la noche anterior hará más fáciles las mañanas.",
+      "armA": "Sacar las pastillas en la mañana",
+      "armB": "Dejarlas listas la noche anterior"
+    },
+    "ownRoom": {
+      "title": "Mi lugar",
+      "hypothesis": "Tomar mis medicinas en un lugar privado será más fácil.",
+      "armA": "Donde las tomo ahora",
+      "armB": "En mi cuarto"
+    },
+    "friendText": {
+      "title": "Con un amigo",
+      "hypothesis": "Un mensaje de un amigo me ayudará a recordar cuando salgo.",
+      "armA": "Me acuerdo solo",
+      "armB": "Un amigo me manda un mensaje"
+    },
+    "parentCheck": {
+      "title": "En equipo",
+      "hypothesis": "Que mi papá o mamá me pregunte me ayudará a recordar.",
+      "armA": "Me acuerdo solo",
+      "armB": "Mi papá o mamá me pregunta"
+    },
+    "pillCase": {
+      "title": "Llévalas",
+      "hypothesis": "Un pastillero en mi mochila me ayudará cuando estoy fuera de casa.",
+      "armA": "Mi forma de siempre",
+      "armB": "Un pastillero en mi mochila"
+    }
+  },
+  "Quests": {
+    "onboard": {
+      "title": "Empezar",
+      "description": "Termina de configurar Relay."
+    },
+    "firstExperiment": {
+      "title": "Primera prueba",
+      "description": "Termina tu primera prueba de 2 semanas."
+    },
+    "exploreMeds": {
+      "title": "Explorador",
+      "description": "Aprende sobre una de tus medicinas."
+    },
+    "twoWeeksMornings": {
+      "title": "Dos semanas de mañanas",
+      "description": "Anota tus medicinas de la mañana por 14 días."
+    }
   }
 }

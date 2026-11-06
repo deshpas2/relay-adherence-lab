@@ -4,7 +4,7 @@ import { useState, useTransition } from "react";
 import { useTranslations } from "next-intl";
 import { toast } from "@/components/ui/toast";
 import { DoseCard } from "./dose-card";
-import { levelProgress } from "./level";
+import { levelProgress } from "@/lib/engine/game";
 import { TodayList } from "./today-list";
 import type { DoseSlot, TeenHomeData } from "./types";
 import { XPSummary } from "./xp-summary";

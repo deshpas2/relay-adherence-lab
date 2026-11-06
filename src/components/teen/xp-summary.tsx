@@ -4,11 +4,12 @@ import { useTranslations } from "next-intl";
 import { Card } from "@/components/ui/card";
 import { LevelBadge } from "@/components/game/level-badge";
 import { XPBar } from "@/components/game/xp-bar";
-import { levelProgress } from "./level";
+import { levelProgress } from "@/lib/engine/game";
 
 export function XPSummary({ xp }: { xp: number }) {
   const t = useTranslations("TeenHome");
-  const { level, xpIntoLevel, xpToNext, levelSize } = levelProgress(xp);
+  const { level, xpIntoLevel, xpToNext, levelStartXp, nextLevelXp } = levelProgress(xp);
+  const levelSize = nextLevelXp - levelStartXp;
 
   return (
     <Card className="flex items-center gap-4">
