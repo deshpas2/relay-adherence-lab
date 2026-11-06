@@ -10,7 +10,9 @@
     "typecheck": "next typegen && tsc --noEmit",
     "test": "vitest run",
     "db:push": "supabase db push --remote",
-    "db:types": "supabase gen types --lang=typescript --remote > src/lib/types/database.ts"
+    "db:types": "supabase gen types --lang=typescript --remote > src/lib/types/database.ts",
+    "db:seed:demo": "node --env-file=.env.local supabase/seed/demo.mts",
+    "db:smoke": "node --env-file=.env.local supabase/seed/smoke.mts"
   },
   "dependencies": {
     "@base-ui/react": "^1.9.0",
@@ -29,6 +31,7 @@
     "zustand": "^5.0.16"
   },
   "devDependencies": {
+    "@electric-sql/pglite": "^0.5.15",
     "@tailwindcss/turbopack": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
