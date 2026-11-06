@@ -9,6 +9,8 @@ import { Card } from "@/components/ui/card";
 import { toast } from "@/components/ui/toast";
 import { computeResult, experimentMilestone } from "@/lib/engine/experiment";
 import { xpRewards } from "@/lib/engine/game";
+import { Confetti } from "@/components/game/confetti";
+import { sendReminder } from "@/lib/push/client";
 import { DayStrip } from "./day-strip";
 import { DecisionPanel } from "./decision-panel";
 import { LogDayCard } from "./log-day-card";
@@ -40,11 +42,14 @@ export function ExperimentRunView({
   experiment,
   actions = previewActions,
   preview = false,
+  celebrate = false,
 }: {
   experiment: Experiment;
   actions?: ExperimentActions;
   /** Shows a button to jump to the next day, for demos. */
   preview?: boolean;
+  /** Opened from the "test is done" notification: celebrate on arrival. */
+  celebrate?: boolean;
 }) {
   const t = useTranslations("Experiments");
   const tNote = useTranslations("Notifications");
@@ -52,6 +57,7 @@ export function ExperimentRunView({
   const [today, setToday] = useState(experiment.today);
   const [decision, setDecision] = useState(experiment.decision);
   const [busy, startTransition] = useTransition();
+  const [party, setParty] = useState(celebrate);
 
   const total = days.length;
   const logged = days.filter((d) => d.status !== null).length;
@@ -70,6 +76,12 @@ export function ExperimentRunView({
 
       const milestone = experimentMilestone(logged, logged + 1, total);
       if (milestone) toast(`${tNote(`${milestone}_title`)} ${tNote(`${milestone}_body`)}`, "info");
+      if (milestone === "complete") {
+        setParty(true);
+        // Also lets the phone know, so the result is one tap away later.
+        // TODO(backend): the server sends this in logExperimentDay instead.
+        sendReminder({ teen: "me", type: "complete" }).catch(() => {});
+      }
     });
   }
 
@@ -83,6 +95,13 @@ export function ExperimentRunView({
 
   return (
     <div className="flex flex-col gap-6">
+      {party && <Confetti />}
+      {party && (
+        <div role="status" className="rounded-3xl bg-accent p-5 text-center">
+          <p className="font-heading text-2xl font-bold">{t("celebrateTitle")}</p>
+          <p className="text-muted-foreground">{t("celebrateBody")}</p>
+        </div>
+      )}
       <header className="flex items-center gap-4">
         <ProgressRing value={logged / total} size={84} label={t("daysLogged", { n: logged, total })}>
           <span className="font-heading text-lg font-semibold">

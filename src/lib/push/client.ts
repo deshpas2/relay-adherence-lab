@@ -41,8 +41,15 @@ export async function enablePush(): Promise<PushStatus> {
   return res.ok ? "on" : "off";
 }
 
-/** Asks the server to send a teen's personalized reminder to subscribed phones. */
-export async function sendReminder(body: { teen: string; prefs?: Record<string, unknown> }) {
+export type PushKind = "reminder" | "suggest" | "complete" | "checkin";
+
+/** Asks the server to send one of a teen's notifications to subscribed phones. */
+export async function sendReminder(body: {
+  teen: string;
+  type?: PushKind;
+  idea?: string;
+  prefs?: Record<string, unknown>;
+}) {
   const res = await fetch("/api/push/send", {
     method: "POST",
     headers: { "Content-Type": "application/json" },

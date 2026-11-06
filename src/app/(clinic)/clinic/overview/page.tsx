@@ -2,10 +2,13 @@ import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 import { adhColor, Panel, StatTile, StatusPill } from "@/components/clinic/bits";
 import { samplePatients, type ClinicBarrier } from "@/lib/fixtures/clinic";
+import { WEATHER_STYLE } from "@/components/forecast/weather";
+import { SIGNAL_ORDER, weatherSignal } from "@/lib/engine/forecast";
 
 // TODO(backend): v_clinic_overview (Section 3.5).
 export default async function OverviewPage() {
   const t = await getTranslations("Clinic");
+  const tF = await getTranslations("Forecast");
   const ps = samplePatients;
   const exps = ps.flatMap((p) => p.experiments);
   const finished = exps.filter((e) => e.status === "done").length;
@@ -21,6 +24,9 @@ export default async function OverviewPage() {
   const barriers = [...counts.entries()].sort((a, b) => b[1] - a[1]);
   const maxB = Math.max(...barriers.map(([, n]) => n));
   const attention = ps.filter((p) => p.status !== "green").sort((a, b) => a.onTime - b.onTime);
+  const forecast = [...ps].sort(
+    (a, b) => SIGNAL_ORDER.indexOf(weatherSignal(a.weather)) - SIGNAL_ORDER.indexOf(weatherSignal(b.weather)),
+  );
 
   return (
     <div className="flex flex-col gap-5">
@@ -33,6 +39,32 @@ export default async function OverviewPage() {
           {t("simulated")}
         </span>
       </header>
+
+      <Panel title={tF("title")}>
+        <p className="-mt-2 mb-4 text-sm text-muted-foreground">{tF("subtitle")}</p>
+        <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+          {forecast.map((p) => {
+            const w = p.weather ?? "fog";
+            const { icon: Icon, color, soft } = WEATHER_STYLE[w];
+            return (
+              <li key={p.id}>
+                <Link
+                  href={`/clinic/home/${p.id}`}
+                  className="flex h-full flex-col items-center gap-1.5 rounded-xl border p-3 text-center transition-colors hover:border-[#2563ab]"
+                  style={{ background: soft }}
+                >
+                  <Icon aria-hidden className="size-9" style={{ color }} />
+                  <span className="text-sm font-bold">{p.name}</span>
+                  <span className="text-xs font-semibold" style={{ color }}>
+                    {tF(`weather_${w}`)}
+                  </span>
+                  <span className="text-[11px] text-muted-foreground">{tF(`signal_${weatherSignal(p.weather)}`)}</span>
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      </Panel>
 
       <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
         <StatTile value={`${Math.round(mean * 100)}%`} label={t("statMeanOnTime")} color={adhColor(mean)} />

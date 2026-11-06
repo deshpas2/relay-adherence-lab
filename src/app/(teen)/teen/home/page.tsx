@@ -9,7 +9,7 @@ import { sampleTeenHome } from "@/lib/fixtures/teen-home";
 // experiment instead of sample data, and pass logSlot={...} to HomeView.
 // Demo: /teen/home?quiet=15 shows what a teen sees coming back after 15 quiet days.
 export default async function TeenHomePage({ searchParams }: PageProps<"/teen/home">) {
-  const { quiet } = await searchParams;
+  const { quiet, from } = await searchParams;
   const daysQuiet = Number(typeof quiet === "string" ? quiet : 0) || 0;
   const t = await getTranslations("TeenHome");
   const data = sampleTeenHome;
@@ -17,7 +17,7 @@ export default async function TeenHomePage({ searchParams }: PageProps<"/teen/ho
   return (
     <div className="flex flex-col gap-6">
       {daysQuiet >= 3 && <WelcomeBack name={data.displayName} nurse={SAMPLE_NURSE} daysQuiet={daysQuiet} />}
-      <HomeView data={data} />
+      <HomeView data={data} fromReminder={from === "reminder"} />
       {data.quest && <QuestTeaser quest={data.quest} />}
       <p className="text-center text-xs text-muted-foreground">{t("sampleData")}</p>
     </div>

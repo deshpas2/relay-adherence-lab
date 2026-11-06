@@ -6,12 +6,15 @@ import { Check, Clock, PartyPopper } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
 import { formatClock } from "@/lib/format-clock";
 import { MedChip } from "./med-chip";
 import { MissedSheet } from "./missed-sheet";
 import type { DoseSlot } from "./types";
 
 type DoseCardProps = {
+  /** Opened from the reminder notification: draw attention to this card. */
+  highlight?: boolean;
   slot: DoseSlot | null;
   /** The slot that was just logged, so the card can say thanks. */
   justLogged: DoseSlot | null;
@@ -22,7 +25,7 @@ type DoseCardProps = {
 };
 
 /** The "Next up" card with the big Took it button. */
-export function DoseCard({ slot, justLogged, busy, onTook, onNotYet, onMissed }: DoseCardProps) {
+export function DoseCard({ slot, justLogged, busy, onTook, onNotYet, onMissed, highlight = false }: DoseCardProps) {
   const t = useTranslations("TeenHome");
   const locale = useLocale();
   const [missedOpen, setMissedOpen] = useState(false);
@@ -50,7 +53,10 @@ export function DoseCard({ slot, justLogged, busy, onTook, onNotYet, onMissed }:
   }
 
   return (
-    <Card className="flex flex-col gap-5 border-2 border-primary/30 p-6">
+    <Card
+      id="dose-card"
+      className={cn("flex scroll-mt-24 flex-col gap-5 border-2 border-primary/30 p-6", highlight && "border-primary ring-4 ring-primary/30 motion-safe:animate-pulse [animation-iteration-count:2]")}
+    >
       <div className="flex items-start justify-between gap-3">
         <div className="flex flex-col">
           <span className="text-sm font-semibold uppercase tracking-wider text-primary">{t("nextUp")}</span>

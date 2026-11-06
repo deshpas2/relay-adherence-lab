@@ -7,18 +7,14 @@ import { ClinicActions } from "@/components/clinic/clinic-actions";
 import { ReengagePanel } from "@/components/clinic/reengage-panel";
 import { MessagePlanPanel } from "@/components/personal/message-plan-panel";
 import { getSampleProfile } from "@/lib/fixtures/personal";
+import { ideaLibrary } from "@/lib/fixtures/experiments";
+import { WeatherBadge } from "@/components/forecast/weather";
+import { weatherSignal } from "@/lib/engine/forecast";
 import { TrendChart } from "@/components/clinic/trend-chart";
 import { getSamplePatient, SAMPLE_NURSE } from "@/lib/fixtures/clinic";
 import { reengagementPlan } from "@/lib/engine/reengage";
 
-// Routine-only ideas a clinician can suggest (sample library).
-const IDEAS = [
-  "Keep meds next to my toothbrush",
-  "A backup in my school or gym bag",
-  "A parent checks in at breakfast",
-  "A short reason why with each reminder",
-  "Take meds somewhere private at school",
-];
+
 
 export default async function PatientPage({ params }: PageProps<"/clinic/home/[id]">) {
   const { id } = await params;
@@ -31,6 +27,9 @@ export default async function PatientPage({ params }: PageProps<"/clinic/home/[i
   const quiet = reengagementPlan(p.lastCheckinDays, p.reengageDone).active;
   const tR = await getTranslations("Reengage");
   const tP = await getTranslations("Personal");
+  const tF = await getTranslations("Forecast");
+  const tIdea = await getTranslations("ExperimentIdeas");
+  const ideas = ideaLibrary.map((i) => ({ key: i.key, title: tIdea(`${i.key}.title`), hypothesis: tIdea(`${i.key}.hypothesis`) }));
   const profile = getSampleProfile(p.id, await getLocale());
   const reaching = (
     <Panel title={tR("panelTitle")} className={quiet ? "border-[#e8a8a2]" : undefined}>
@@ -67,6 +66,15 @@ export default async function PatientPage({ params }: PageProps<"/clinic/home/[i
         <StatTile value={String(p.experiments.length)} label={t("statExperiments")} />
         <StatTile value={t("daysAgo", { n: p.lastCheckinDays })} label={t("statLastCheckin")} />
       </div>
+
+      <section className="flex flex-wrap items-center gap-x-4 gap-y-2 rounded-xl border bg-card px-5 py-3 shadow-sm">
+        <span className="text-xs font-bold tracking-wider text-muted-foreground uppercase">{tF("colWeather")}</span>
+        <WeatherBadge weather={p.weather ?? "fog"} label={tF(`weather_${p.weather ?? "fog"}`)} />
+        <span className="text-sm font-semibold">{tF(`signal_${weatherSignal(p.weather)}`)}</span>
+        <span className="text-sm text-muted-foreground">
+          {p.weather ? tF("replied", { n: p.weatherDays }) : tF("noReply")}
+        </span>
+      </section>
 
       <Panel title={t("trendTitle")}>
         <TrendChart
@@ -153,7 +161,7 @@ export default async function PatientPage({ params }: PageProps<"/clinic/home/[i
       {!quiet && reaching}
 
       <Panel title={t("actionsTitle")}>
-        <ClinicActions first={first} ideas={IDEAS} />
+        <ClinicActions teenId={p.id} first={first} ideas={ideas} />
       </Panel>
     </div>
   );

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { useTranslations } from "next-intl";
 import { toast } from "@/components/ui/toast";
 import { DoseCard } from "./dose-card";
@@ -25,7 +25,16 @@ const previewLog: LogSlotAction = async (_slotId, status) => {
   return { xpGained: status === "taken" ? 10 : 0, loggedAt };
 };
 
-export function HomeView({ data, logSlot = previewLog }: { data: TeenHomeData; logSlot?: LogSlotAction }) {
+export function HomeView({
+  data,
+  logSlot = previewLog,
+  fromReminder = false,
+}: {
+  data: TeenHomeData;
+  logSlot?: LogSlotAction;
+  /** Opened from the med reminder notification. */
+  fromReminder?: boolean;
+}) {
   const t = useTranslations("TeenHome");
   const [slots, setSlots] = useState(data.slots);
   const [xp, setXp] = useState(data.xp);
@@ -33,6 +42,10 @@ export function HomeView({ data, logSlot = previewLog }: { data: TeenHomeData; l
   // Slots the teen said "Not yet" to; they move to the back of the line.
   const [later, setLater] = useState<string[]>([]);
   const [busy, startTransition] = useTransition();
+
+  useEffect(() => {
+    if (fromReminder) document.getElementById("dose-card")?.scrollIntoView({ block: "center" });
+  }, [fromReminder]);
 
   const pending = slots.filter((s) => s.status === "pending");
   const next =
@@ -64,6 +77,7 @@ export function HomeView({ data, logSlot = previewLog }: { data: TeenHomeData; l
       </div>
 
       <DoseCard
+        highlight={fromReminder}
         slot={justLogged ? null : next}
         justLogged={justLogged}
         busy={busy}

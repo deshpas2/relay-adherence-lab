@@ -76,3 +76,19 @@
     outline-offset: 2px;
   }
 }
+
+/* Confetti burst (src/components/game/confetti.tsx). */
+@keyframes confetti-fall {
+  0% { transform: translate3d(0, 0, 0) rotate(0deg); opacity: 1; }
+  85% { opacity: 1; }
+  100% { transform: translate3d(var(--drift), 105vh, 0) rotate(var(--spin)); opacity: 0; }
+}
+.confetti-piece {
+  animation-name: confetti-fall;
+  animation-timing-function: cubic-bezier(0.25, 0.6, 0.4, 1);
+  animation-fill-mode: forwards;
+}
+@media (prefers-reduced-motion: reduce) {
+  .confetti { display: none; }
+}
+:root[data-motion="reduce"] .confetti { display: none; }

@@ -45,3 +45,10 @@ Choices made where BUILD_GUIDE.md is silent or out of date.
 - **Reasons are shown** to the teen ("Why this message") and the care team (Message plan panel), so the personalization is never a black box.
 - **Live push for the demo:** web push (VAPID keys in `.env.local`), a service worker at `public/sw.js`, subscriptions stored in `.data/` (gitignored), and `/api/push/subscribe` + `/api/push/send`. The send endpoint builds the text on the server from a known teen id, so it can't be used to push arbitrary words. The phone reaches the laptop through a Cloudflare quick tunnel (`npx cloudflared tunnel --url http://localhost:3000`), allowed in `next.config.ts`.
 - TODO(backend): save preferences on profiles, learn `typicalDelayMin` from dose_logs, store subscriptions per teen, and send from a scheduled job at `sendAt`.
+
+## Notification types + Relay Forecast
+
+- **Four push types, each opening the screen that acts on it:** med reminder → `/teen/home?from=reminder` (dose card highlighted); care-team suggestion → `/teen/experiments/new?suggested=<idea>` (plan ready, "Suggested by your care team", Start my test); test finished → `/teen/experiments/<id>?done=1` (result + confetti + keep/rerun/drop); weather check-in → `/teen/checkin`. The server writes every word from a known teen + type; discreet mode swaps each for neutral wording.
+- **Relay Forecast:** teens report their week as Sunny / Cloudy / Rainy / Stormy (always icon + word). Care signals: doing well / watch / check in soon / needs a person; no reply is Fog. Logic in `src/lib/engine/forecast.ts`. Check-ins go out Mondays and Thursdays. Stormy and Fog should create a care-team task (TODO(backend), same path as the re-engagement ladder).
+- **Clinic forecast** on Overview shows every teen as a weather tile, worst first; the patient list and patient page show this week's weather.
+- **`/notify` is a demo remote** that sends each type to subscribed phones. Not linked from the apps.

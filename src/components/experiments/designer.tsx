@@ -2,7 +2,7 @@
 
 import { useState, useTransition } from "react";
 import Link from "next/link";
-import { ArrowLeft, Lightbulb, PencilLine, Rocket } from "lucide-react";
+import { ArrowLeft, Lightbulb, PencilLine, Rocket, Stethoscope } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { ErrorBox, TextField } from "@/components/auth/fields";
 import { Button, buttonVariants } from "@/components/ui/button";
@@ -45,13 +45,25 @@ type DesignerProps = {
   forYou: IdeaTemplate[];
   more: IdeaTemplate[];
   start?: StartExperiment;
+  /** Opened from a care-team suggestion: start on this idea's plan. */
+  suggested?: IdeaTemplate | null;
 };
 
-export function ExperimentDesigner({ forYou, more, start = previewStart }: DesignerProps) {
+export function ExperimentDesigner({ forYou, more, start = previewStart, suggested = null }: DesignerProps) {
   const t = useTranslations("Experiments");
   const tIdea = useTranslations("ExperimentIdeas");
   const locale = useLocale();
-  const [draft, setDraft] = useState<NewExperiment | null>(null);
+  const [draft, setDraft] = useState<NewExperiment | null>(() =>
+    suggested
+      ? {
+          ideaKey: suggested.key,
+          factor: suggested.factor,
+          hypothesis: tIdea(`${suggested.key}.hypothesis`),
+          armA: tIdea(`${suggested.key}.armA`),
+          armB: tIdea(`${suggested.key}.armB`),
+        }
+      : null,
+  );
   const [writing, setWriting] = useState(false);
   const [own, setOwn] = useState({ armA: "", armB: "", hypothesis: "" });
   const [error, setError] = useState<string | null>(null);
@@ -113,6 +125,11 @@ export function ExperimentDesigner({ forYou, more, start = previewStart }: Desig
           <p className="text-muted-foreground">{t("reviewBody")}</p>
         </div>
         <Card className="flex flex-col gap-4">
+          {suggested && draft.ideaKey === suggested.key && (
+            <span className="inline-flex items-center gap-2 self-start rounded-full bg-blue-soft px-3 py-1 text-sm font-bold text-blue">
+              <Stethoscope aria-hidden className="size-4" /> {t("suggestedBanner")}
+            </span>
+          )}
           <h2 className="text-2xl">{title}</h2>
           <p>{draft.hypothesis}</p>
           {(["A", "B"] as const).map((arm) => (

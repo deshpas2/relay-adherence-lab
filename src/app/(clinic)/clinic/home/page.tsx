@@ -4,11 +4,13 @@ import { getTranslations } from "next-intl/server";
 import { adhColor, MiniBar, StatTile, StatusPill } from "@/components/clinic/bits";
 import { samplePatients } from "@/lib/fixtures/clinic";
 import { reengagementPlan } from "@/lib/engine/reengage";
+import { WeatherBadge } from "@/components/forecast/weather";
 
 // TODO(backend): enrolled patients from care_links + v_attention_list.
 export default async function PatientsPage() {
   const t = await getTranslations("Clinic");
   const tR = await getTranslations("Reengage");
+  const tF = await getTranslations("Forecast");
   const plans = new Map(samplePatients.map((p) => [p.id, reengagementPlan(p.lastCheckinDays, p.reengageDone)]));
   const callNeeded = samplePatients.filter((p) => plans.get(p.id)?.callNeeded);
   const ps = samplePatients;
@@ -61,10 +63,11 @@ export default async function PatientsPage() {
       </div>
 
       <div className="overflow-x-auto rounded-xl border bg-card shadow-sm">
-        <table className="w-full min-w-[640px] text-left text-sm">
+        <table className="w-full min-w-[760px] text-left text-sm">
           <thead className="border-b text-[11px] font-bold tracking-wider text-muted-foreground uppercase">
             <tr>
               <th className="px-5 py-3">{t("colPatient")}</th>
+              <th className="px-3 py-3">{tF("colWeather")}</th>
               <th className="px-3 py-3">{t("colBarrier")}</th>
               <th className="px-3 py-3">{t("colOnTime")}</th>
               <th className="px-3 py-3">{t("colVerified")}</th>
@@ -86,6 +89,9 @@ export default async function PatientsPage() {
                       {tR("quietTag", { n: p.lastCheckinDays })}
                     </span>
                   )}
+                </td>
+                <td className="px-3 py-3.5">
+                  <WeatherBadge weather={p.weather ?? "fog"} label={tF(`weather_${p.weather ?? "fog"}`)} className="text-sm" />
                 </td>
                 <td className="px-3 py-3.5">{t(`barrier_${p.primary}`)}</td>
                 <td className="px-3 py-3.5 tabular-nums">
