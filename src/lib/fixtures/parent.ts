@@ -1,6 +1,7 @@
 /** SAMPLE DATA ONLY — simulated family, not real people. */
 export const sampleFamily = {
-  teenName: "Maya",
+  // Same sample teen as the teen app, so both sides tell one story.
+  teenName: "Sam",
   inviteCode: "K7QM4-XP2R9",
   shareLevel: "adherence" as const,
   onTimeRate: 0.86,

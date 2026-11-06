@@ -2,11 +2,15 @@ import { Link2, ShieldCheck } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { CaregiverCheckin } from "@/components/parent/caregiver-checkin";
 import { sampleFamily } from "@/lib/fixtures/parent";
+import { ParentPrivate } from "@/components/sharing/parent-private";
+import { caregiverCanSee } from "@/lib/engine/consent";
+import { getTeenSharing } from "@/lib/sharing/state";
 
 // TODO(backend): link status from guardian_links; save the check-in for the care team.
 export default async function FamilyPage() {
   const t = await getTranslations("Parent");
   const f = sampleFamily;
+  const sharing = await getTeenSharing();
 
   return (
     <div className="flex flex-col gap-6">
@@ -16,8 +20,12 @@ export default async function FamilyPage() {
         <Link2 aria-hidden className="size-6 text-primary" />
         <p className="text-sm text-muted-foreground">{t("linkedTo", { name: f.teenName })}</p>
         <p className="font-heading text-2xl font-bold tracking-[0.14em] text-primary">{f.inviteCode}</p>
-        <p className="text-sm text-muted-foreground">{t(`share_${f.shareLevel}`, { name: f.teenName })}</p>
+        <p className="text-sm text-muted-foreground">
+          {t(sharing.mode === "minor_shared" ? "sharedMinor" : sharing.mode === "adult_shared" ? "sharedAdult" : "sharedNone", { name: f.teenName })}
+        </p>
       </section>
+
+      {!caregiverCanSee(sharing.mode) && <ParentPrivate name={f.teenName} mode={sharing.mode} />}
 
       <section aria-labelledby="checkin" className="flex flex-col gap-3">
         <div>

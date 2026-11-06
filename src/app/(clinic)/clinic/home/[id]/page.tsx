@@ -10,6 +10,7 @@ import { getSampleProfile } from "@/lib/fixtures/personal";
 import { ideaLibrary } from "@/lib/fixtures/experiments";
 import { WeatherBadge } from "@/components/forecast/weather";
 import { weatherSignal } from "@/lib/engine/forecast";
+import { sharingMode } from "@/lib/engine/consent";
 import { TrendChart } from "@/components/clinic/trend-chart";
 import { getSamplePatient, SAMPLE_NURSE } from "@/lib/fixtures/clinic";
 import { reengagementPlan } from "@/lib/engine/reengage";
@@ -28,6 +29,8 @@ export default async function PatientPage({ params }: PageProps<"/clinic/home/[i
   const tR = await getTranslations("Reengage");
   const tP = await getTranslations("Personal");
   const tF = await getTranslations("Forecast");
+  const tE = await getTranslations("Enroll");
+  const share = sharingMode(p.age, p.age >= 18 ? { share: p.adultShare ?? false, agreedAt: "" } : null);
   const tIdea = await getTranslations("ExperimentIdeas");
   const ideas = ideaLibrary.map((i) => ({ key: i.key, title: tIdea(`${i.key}.title`), hypothesis: tIdea(`${i.key}.hypothesis`) }));
   const profile = getSampleProfile(p.id, await getLocale());
@@ -49,6 +52,7 @@ export default async function PatientPage({ params }: PageProps<"/clinic/home/[i
           <p className="text-sm text-muted-foreground">
             {t("age", { age: p.age })} · {p.story}
           </p>
+          <p className="mt-1 text-xs font-semibold text-blue">{tE(`share_${share}`)}</p>
         </div>
         <div className="flex items-center gap-2">
           <StatusPill status={p.status} />

@@ -52,3 +52,12 @@ Choices made where BUILD_GUIDE.md is silent or out of date.
 - **Relay Forecast:** teens report their week as Sunny / Cloudy / Rainy / Stormy (always icon + word). Care signals: doing well / watch / check in soon / needs a person; no reply is Fog. Logic in `src/lib/engine/forecast.ts`. Check-ins go out Mondays and Thursdays. Stormy and Fog should create a care-team task (TODO(backend), same path as the re-engagement ladder).
 - **Clinic forecast** on Overview shows every teen as a weather tile, worst first; the patient list and patient page show this week's weather.
 - **`/notify` is a demo remote** that sends each type to subscribed phones. Not linked from the apps.
+
+## Age-based caregiver sharing (turning 18)
+
+- **Clinicians enter month + year of birth at enrollment, not the full date.** It gives the age and the month the patient turns 18 (birthday counted as the 1st of the month) while storing less about minors than a birth date. Program ages 8–25. Logic: `src/lib/engine/consent.ts` (tested).
+- **Under 18, all Relay data is shared with the caregiver** and the teen can't turn it off; the Me tab says so and when they'll get to choose. This replaces the earlier teen-controlled `share_level` for minors.
+- **At 18, the first app open shows the adult terms screen** (every teen page redirects there until it's done): plain-language changes, a share-with-caregiver toggle that starts **off**, the terms, an "I agree" checkbox, and "Take me to the app" (disabled until ticked). Until they agree, the caregiver sees nothing. They can change sharing later in the Me tab.
+- **When an adult isn't sharing, the parent app shows no data at all**, only a short note.
+- **The terms text is sample wording** and needs legal review.
+- **Demo storage:** the sample teen's birth month and consent live in httpOnly cookies, and `/notify` has "Sam is 17 / Sam turns 18" buttons. The parent app now follows Sam so both sides tell one story. TODO(backend): birth month/year on the patient record, consent + share choice on guardian_links, enforced by RLS so a caregiver's query returns nothing when sharing is off.

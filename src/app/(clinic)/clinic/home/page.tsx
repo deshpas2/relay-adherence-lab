@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ChevronRight, Phone } from "lucide-react";
+import { ChevronRight, Phone, UserPlus } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { adhColor, MiniBar, StatTile, StatusPill } from "@/components/clinic/bits";
 import { samplePatients } from "@/lib/fixtures/clinic";
@@ -11,6 +11,7 @@ export default async function PatientsPage() {
   const t = await getTranslations("Clinic");
   const tR = await getTranslations("Reengage");
   const tF = await getTranslations("Forecast");
+  const tE = await getTranslations("Enroll");
   const plans = new Map(samplePatients.map((p) => [p.id, reengagementPlan(p.lastCheckinDays, p.reengageDone)]));
   const callNeeded = samplePatients.filter((p) => plans.get(p.id)?.callNeeded);
   const ps = samplePatients;
@@ -28,9 +29,17 @@ export default async function PatientsPage() {
           <h1 className="text-2xl">{t("patientsTitle")}</h1>
           <p className="text-sm text-muted-foreground">{t("patientsSub")}</p>
         </div>
-        <span className="rounded-md border px-2 py-1 text-[11px] font-bold tracking-wider text-muted-foreground uppercase">
-          {t("simulated")}
-        </span>
+        <div className="flex items-center gap-2">
+          <span className="rounded-md border px-2 py-1 text-[11px] font-bold tracking-wider text-muted-foreground uppercase">
+            {t("simulated")}
+          </span>
+          <Link
+            href="/clinic/enroll"
+            className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-primary px-4 text-sm font-bold text-primary-foreground hover:opacity-90"
+          >
+            <UserPlus aria-hidden className="size-4" /> {tE("button")}
+          </Link>
+        </div>
       </header>
 
       {callNeeded.map((p) => (

@@ -56,6 +56,8 @@ type PatientSeed = {
   lastCheckinDays: number;
   /** Person-led re-engagement steps already handled. */
   reengageDone?: ReengageChannel[];
+  /** 18+ only: whether the patient chose to share with their caregiver. */
+  adultShare?: boolean;
   /** Latest weather check-in, or null for no reply (fog). */
   weather: Weather | null;
   /** Days since that reply. */
@@ -100,7 +102,7 @@ const SEEDS: PatientSeed[] = [
   {
     id: "sam", name: "Sam W.", age: 18, primary: "schedule_changes", barriers: ["schedule_changes", "activities"],
     story: "Rotating night shifts. Testing a pill case that goes to every shift.",
-    plan: "Pill case in my work bag", adh: 0.9, verif: 0.2, status: "green", lastCheckinDays: 0, weather: "sunny", weatherDays: 0,
+    plan: "Pill case in my work bag", adh: 0.9, verif: 0.2, status: "green", lastCheckinDays: 0, weather: "sunny", weatherDays: 0, adultShare: false,
     experiments: [
       { barrier: "schedule_changes", factor: "place", hypothesis: "A pill case in my work bag will help on shift days.", armA: "Meds stay at home", armB: "Pill case in my work bag", baseMiss: 0.4, effect: 0.72, easeA: 2, easeB: 5, status: "done", decision: "adopted", daysLogged: 14 },
     ],

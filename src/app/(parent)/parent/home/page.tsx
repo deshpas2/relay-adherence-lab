@@ -3,12 +3,18 @@ import { getTranslations } from "next-intl/server";
 import { ProgressRing } from "@/components/game/progress-ring";
 import { ConfirmList } from "@/components/parent/confirm-list";
 import { sampleFamily } from "@/lib/fixtures/parent";
+import { ParentPrivate } from "@/components/sharing/parent-private";
+import { caregiverCanSee } from "@/lib/engine/consent";
+import { getTeenSharing } from "@/lib/sharing/state";
 
 // TODO(backend): the linked teen, their share_level, and doses awaiting confirmation.
 export default async function ParentHomePage() {
   const t = await getTranslations("Parent");
   const f = sampleFamily;
   const pct = Math.round(f.onTimeRate * 100);
+  const sharing = await getTeenSharing();
+  // At 18+, nothing is shown unless the patient chose to share.
+  if (!caregiverCanSee(sharing.mode)) return <ParentPrivate name={f.teenName} mode={sharing.mode} />;
 
   return (
     <div className="flex flex-col gap-6">
@@ -26,7 +32,9 @@ export default async function ParentHomePage() {
         </ProgressRing>
         <div className="flex flex-col gap-1">
           <p className="font-heading text-lg font-bold">{t("last14", { taken: f.takenLast14, total: f.totalLast14 })}</p>
-          <p className="text-sm text-muted-foreground">{t("sharedBy", { name: f.teenName })}</p>
+          <p className="text-sm text-muted-foreground">
+            {t(sharing.mode === "minor_shared" ? "sharedMinor" : "sharedAdult", { name: f.teenName })}
+          </p>
         </div>
       </section>
 
