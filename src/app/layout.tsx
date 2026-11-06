@@ -4,6 +4,7 @@ import { cookies } from "next/headers";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getTranslations } from "next-intl/server";
 import { PrefsProvider } from "@/components/a11y/prefs-provider";
+import { Toaster } from "@/components/ui/toast";
 import { parsePrefs, prefsCookie, prefsToHtmlAttrs } from "@/lib/prefs";
 import "./globals.css";
 
@@ -37,7 +38,10 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="min-h-full flex flex-col">
         <NextIntlClientProvider>
-          <PrefsProvider initial={prefs}>{children}</PrefsProvider>
+          <PrefsProvider initial={prefs}>
+            {children}
+            <Toaster />
+          </PrefsProvider>
         </NextIntlClientProvider>
       </body>
     </html>
