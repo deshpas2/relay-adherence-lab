@@ -36,3 +36,12 @@ Choices made where BUILD_GUIDE.md is silent or out of date.
 - **Texts and notifications never mention health or meds,** because they show on lock screens. The voice note is from the teen's own nurse, who is already bound by confidentiality. Parents are not part of the ladder.
 - **Coming back is guilt-free:** a "Welcome back" card says nothing was lost, and shows the nurse's voice note if one was sent.
 - **Sending is simulated for now.** TODO(backend): a daily job runs `reengagementPlan` per enrolled teen, writes `notifications` (app), sends the text through an SMS provider, stores voice notes in Storage, and creates care-team tasks. Thresholds (3/7/10/14) are placeholders for the care team to confirm.
+
+## Personalization layer + live push (demo)
+
+- **`src/lib/engine/personalize.ts` picks when and what** for each reminder from the teen's profile: tone (playful / direct / warm), discreet mode, quiet hours, the learned typical delay, their biggest barrier, and any strategy they kept. It returns message keys + reasons, not text, so all wording stays in the reviewed, copy-linted library (`Personal` in the messages files). Nothing is AI-written.
+- **Timing safety:** only the reminder moves. It goes out between 0 and 30 minutes before the care team's dose time, never after it, and the dose time is never changed. A teen who usually logs late gets it earlier; quiet hours push it earlier (or, if the dose itself is in quiet hours, 5 minutes before).
+- **Discreet mode** sends "Check-in time / Tap to open Relay" with no strategy, barrier or health words.
+- **Reasons are shown** to the teen ("Why this message") and the care team (Message plan panel), so the personalization is never a black box.
+- **Live push for the demo:** web push (VAPID keys in `.env.local`), a service worker at `public/sw.js`, subscriptions stored in `.data/` (gitignored), and `/api/push/subscribe` + `/api/push/send`. The send endpoint builds the text on the server from a known teen id, so it can't be used to push arbitrary words. The phone reaches the laptop through a Cloudflare quick tunnel (`npx cloudflared tunnel --url http://localhost:3000`), allowed in `next.config.ts`.
+- TODO(backend): save preferences on profiles, learn `typicalDelayMin` from dose_logs, store subscriptions per teen, and send from a scheduled job at `sendAt`.

@@ -1,10 +1,12 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { adhColor, DoseHeatmap, Panel, StatTile, StatusPill } from "@/components/clinic/bits";
 import { ClinicActions } from "@/components/clinic/clinic-actions";
 import { ReengagePanel } from "@/components/clinic/reengage-panel";
+import { MessagePlanPanel } from "@/components/personal/message-plan-panel";
+import { getSampleProfile } from "@/lib/fixtures/personal";
 import { TrendChart } from "@/components/clinic/trend-chart";
 import { getSamplePatient, SAMPLE_NURSE } from "@/lib/fixtures/clinic";
 import { reengagementPlan } from "@/lib/engine/reengage";
@@ -28,6 +30,8 @@ export default async function PatientPage({ params }: PageProps<"/clinic/home/[i
   const pct = (x: number | null) => (x === null ? "–" : `${Math.round(x * 100)}%`);
   const quiet = reengagementPlan(p.lastCheckinDays, p.reengageDone).active;
   const tR = await getTranslations("Reengage");
+  const tP = await getTranslations("Personal");
+  const profile = getSampleProfile(p.id, await getLocale());
   const reaching = (
     <Panel title={tR("panelTitle")} className={quiet ? "border-[#e8a8a2]" : undefined}>
       <ReengagePanel name={first} nurse={SAMPLE_NURSE} daysQuiet={p.lastCheckinDays} done={p.reengageDone ?? []} />
@@ -139,6 +143,12 @@ export default async function PatientPage({ params }: PageProps<"/clinic/home/[i
           </ul>
         </Panel>
       </div>
+
+      {profile && (
+        <Panel title={tP("planTitle")}>
+          <MessagePlanPanel teenId={p.id} profile={profile} />
+        </Panel>
+      )}
 
       {!quiet && reaching}
 

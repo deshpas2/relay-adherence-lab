@@ -6,6 +6,7 @@ import {
   Pill,
   ShieldCheck,
   Trophy,
+  User,
   Users,
 } from "lucide-react";
 import type { AppRole } from "@/lib/routes";
@@ -22,6 +23,7 @@ export const NAV_ITEMS: Record<AppRole, NavItem[]> = {
     { href: "/teen/home", labelKey: "home", icon: House },
     { href: "/teen/meds", labelKey: "meds", icon: Pill },
     { href: "/teen/experiments", labelKey: "quests", icon: FlaskConical },
+    { href: "/teen/profile", labelKey: "me", icon: User },
   ],
   parent: [
     { href: "/parent/home", labelKey: "confirm", icon: ShieldCheck },

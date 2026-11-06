@@ -29,7 +29,7 @@ export function TourStep({ onDone }: { onDone: () => void }) {
         </div>
 
         {/* mini tab bar */}
-        <div className="grid w-full grid-cols-3 gap-1 rounded-2xl bg-card p-1.5 shadow-sm" aria-hidden>
+        <div className="grid w-full gap-1 rounded-2xl bg-card p-1.5 shadow-sm" style={{ gridTemplateColumns: `repeat(${TABS.length}, minmax(0, 1fr))` }} aria-hidden>
           {TABS.map((item, i) => {
             const Icon = item.icon;
             const active = i === index;
