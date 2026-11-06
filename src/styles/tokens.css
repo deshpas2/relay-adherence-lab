@@ -1,1 +1,247 @@
-/* Relay design tokens. Lane Frontend fills this in during Phase 1 (Section 5). */
+/*
+ * Relay design tokens (Section 5).
+ * Every color lives here. Components use them through Tailwind names
+ * (bg-primary, text-xp, ...), mapped in globals.css.
+ *
+ * Switches on <html>:
+ *   data-theme="light" | "dark"   user's choice (none = follow the system)
+ *   data-app="clinic"             calmer blue/slate for the clinician app
+ *                                 (on <html> or on the clinic AppShell wrapper)
+ *   data-contrast="high"          a11y: high contrast
+ *   data-text="large"             a11y: larger text
+ */
+
+/* ---------- Teen app, light (default) ---------- */
+:root {
+  color-scheme: light;
+
+  --background: #f6f6ff;
+  --foreground: #1e1b3a;
+  --card: #ffffff;
+  --card-foreground: #1e1b3a;
+  --popover: #ffffff;
+  --popover-foreground: #1e1b3a;
+
+  --primary: #4f46e5; /* indigo */
+  --primary-foreground: #ffffff;
+  --secondary: #e9e8ff;
+  --secondary-foreground: #2e2a7a;
+  --muted: #eeeef8;
+  --muted-foreground: #5c5a78;
+  --accent: #ecfccb;
+  --accent-foreground: #1e1b3a;
+
+  /* game colors */
+  --xp: #a3e635; /* lime: fills only, never text on white */
+  --xp-foreground: #1e1b3a;
+  --xp-track: #e4e4f2;
+  --success: #15803d;
+  --success-soft: #dcfce7;
+
+  /* used sparingly: form errors only, never for missed doses */
+  --destructive: #c2410c;
+
+  --border: #dddcef;
+  --input: #cfcde6;
+  --ring: #4f46e5;
+
+  --chart-1: #4f46e5;
+  --chart-2: #84cc16;
+  --chart-3: #0ea5e9;
+  --chart-4: #f59e0b;
+  --chart-5: #a855f7;
+
+  --radius: 1rem;
+}
+
+/* ---------- Teen app, dark ---------- */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --background: #12111f;
+    --foreground: #eeedff;
+    --card: #1c1a30;
+    --card-foreground: #eeedff;
+    --popover: #1c1a30;
+    --popover-foreground: #eeedff;
+    --primary: #8b85ff;
+    --primary-foreground: #12111f;
+    --secondary: #2a2750;
+    --secondary-foreground: #dcdaff;
+    --muted: #23213a;
+    --muted-foreground: #a9a7c6;
+    --accent: #2c3a14;
+    --accent-foreground: #eeedff;
+    --xp: #bef264;
+    --xp-foreground: #12111f;
+    --xp-track: #2e2c48;
+    --success: #4ade80;
+    --success-soft: #14321f;
+    --destructive: #fb923c;
+    --border: #312e52;
+    --input: #3a3760;
+    --ring: #8b85ff;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --background: #12111f;
+  --foreground: #eeedff;
+  --card: #1c1a30;
+  --card-foreground: #eeedff;
+  --popover: #1c1a30;
+  --popover-foreground: #eeedff;
+  --primary: #8b85ff;
+  --primary-foreground: #12111f;
+  --secondary: #2a2750;
+  --secondary-foreground: #dcdaff;
+  --muted: #23213a;
+  --muted-foreground: #a9a7c6;
+  --accent: #2c3a14;
+  --accent-foreground: #eeedff;
+  --xp: #bef264;
+  --xp-foreground: #12111f;
+  --xp-track: #2e2c48;
+  --success: #4ade80;
+  --success-soft: #14321f;
+  --destructive: #fb923c;
+  --border: #312e52;
+  --input: #3a3760;
+  --ring: #8b85ff;
+}
+
+/* ---------- Clinician app: calmer blue/slate ----------
+ * These match data-app on <html> or on any wrapper element, so the clinic
+ * AppShell gets its colors on first paint. */
+[data-app="clinic"] {
+  --background: #f5f7fa;
+  --foreground: #172033;
+  --card-foreground: #172033;
+  --popover-foreground: #172033;
+  --primary: #2f5f9e;
+  --primary-foreground: #ffffff;
+  --secondary: #e3eaf4;
+  --secondary-foreground: #1f3a60;
+  --muted: #eceff4;
+  --muted-foreground: #556070;
+  --border: #d8dee8;
+  --input: #c9d1dd;
+  --ring: #2f5f9e;
+  --radius: 0.625rem;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"])[data-app="clinic"],
+  :root:not([data-theme="light"]) [data-app="clinic"] {
+    --background: #0f141c;
+    --foreground: #e6ebf2;
+    --card: #18202b;
+    --card-foreground: #e6ebf2;
+    --popover: #18202b;
+    --popover-foreground: #e6ebf2;
+    --primary: #7aa7e0;
+    --primary-foreground: #0f141c;
+    --secondary: #223046;
+    --secondary-foreground: #d5e2f3;
+    --muted: #1d2633;
+    --muted-foreground: #9aa6b6;
+    --border: #2a3545;
+    --input: #344155;
+    --ring: #7aa7e0;
+  }
+}
+:root[data-theme="dark"][data-app="clinic"],
+:root[data-theme="dark"] [data-app="clinic"] {
+  --background: #0f141c;
+  --foreground: #e6ebf2;
+  --card: #18202b;
+  --card-foreground: #e6ebf2;
+  --popover: #18202b;
+  --popover-foreground: #e6ebf2;
+  --primary: #7aa7e0;
+  --primary-foreground: #0f141c;
+  --secondary: #223046;
+  --secondary-foreground: #d5e2f3;
+  --muted: #1d2633;
+  --muted-foreground: #9aa6b6;
+  --border: #2a3545;
+  --input: #344155;
+  --ring: #7aa7e0;
+}
+
+/* ---------- Accessibility: high contrast (wins over everything above) ---------- */
+:root[data-contrast="high"],
+:root[data-contrast="high"] [data-app] {
+  color-scheme: light;
+  --background: #ffffff;
+  --foreground: #000000;
+  --card: #ffffff;
+  --card-foreground: #000000;
+  --popover: #ffffff;
+  --popover-foreground: #000000;
+  --primary: #2a1fb8;
+  --primary-foreground: #ffffff;
+  --secondary: #ffffff;
+  --secondary-foreground: #000000;
+  --muted: #f2f2f2;
+  --muted-foreground: #000000;
+  --accent: #ffffff;
+  --accent-foreground: #000000;
+  --xp: #3f6212;
+  --xp-foreground: #ffffff;
+  --xp-track: #d4d4d4;
+  --success: #14532d;
+  --success-soft: #ffffff;
+  --border: #000000;
+  --input: #000000;
+  --ring: #000000;
+}
+:root[data-contrast="high"][data-theme="dark"],
+:root[data-contrast="high"][data-theme="dark"] [data-app] {
+  color-scheme: dark;
+  --background: #000000;
+  --foreground: #ffffff;
+  --card: #000000;
+  --card-foreground: #ffffff;
+  --popover: #000000;
+  --popover-foreground: #ffffff;
+  --primary: #ffff00;
+  --primary-foreground: #000000;
+  --secondary: #000000;
+  --secondary-foreground: #ffffff;
+  --muted: #1a1a1a;
+  --muted-foreground: #ffffff;
+  --accent: #000000;
+  --accent-foreground: #ffffff;
+  --xp: #ffff00;
+  --xp-foreground: #000000;
+  --xp-track: #555555;
+  --success: #7fff7f;
+  --success-soft: #000000;
+  --border: #ffffff;
+  --input: #ffffff;
+  --ring: #ffff00;
+}
+
+/* ---------- Accessibility: large text ---------- */
+:root[data-text="large"] {
+  font-size: 118.75%; /* 16px -> 19px base */
+}
+
+/* ---------- Accessibility: reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+:root[data-motion="reduce"] *,
+:root[data-motion="reduce"] *::before,
+:root[data-motion="reduce"] *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}

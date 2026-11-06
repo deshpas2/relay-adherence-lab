@@ -2,5 +2,38 @@
   "App": {
     "name": "Relay",
     "tagline": "Small tests. Your routine. Your wins."
+  },
+  "Nav": {
+    "label": "Main",
+    "skip": "Skip to main content",
+    "comingSoon": "This screen is on the way.",
+    "home": "Home",
+    "meds": "My meds",
+    "quests": "Quests",
+    "me": "Me",
+    "confirm": "Confirm",
+    "family": "My teen",
+    "patients": "Patients",
+    "strategies": "Strategies",
+    "overview": "Overview"
+  },
+  "Settings": {
+    "open": "Display settings",
+    "title": "Make Relay yours",
+    "description": "Change how Relay looks and feels.",
+    "theme": "Colors",
+    "theme_system": "Match my phone",
+    "theme_light": "Light",
+    "theme_dark": "Dark",
+    "highContrast": "High contrast",
+    "highContrastHint": "Stronger colors and edges",
+    "largeText": "Bigger text",
+    "largeTextHint": "Makes all the words larger",
+    "reduceMotion": "Less motion",
+    "reduceMotionHint": "Turns off moving effects",
+    "haptics": "Buzz for alerts",
+    "hapticsHint": "Your phone buzzes for alerts, if it can",
+    "language": "Language",
+    "done": "Done"
   }
 }
