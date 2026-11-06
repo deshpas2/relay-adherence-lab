@@ -11,8 +11,10 @@ const source = readFileSync(join(__dirname, "..", "..", "src", "lib", "types", "
 
 /** { relation: { column: nullable } } parsed from each `Row: {…}` block. */
 function rowsFromTypes(section: "Tables" | "Views"): Record<string, Record<string, boolean>> {
-  const start = source.indexOf(`    ${section}: {`);
-  const end = source.indexOf(section === "Tables" ? "    Views: {" : "    Functions: {");
+  // Only the `public` schema (the generator also emits graphql_public).
+  const publicStart = source.indexOf("\n  public: {");
+  const start = source.indexOf(`    ${section}: {`, publicStart);
+  const end = source.indexOf(section === "Tables" ? "    Views: {" : "    Functions: {", publicStart);
   const body = source.slice(start, end);
   const out: Record<string, Record<string, boolean>> = {};
   for (const m of body.matchAll(/\n {6}(\w+): \{\n {8}Row: \{\n([\s\S]*?)\n {8}\}/g)) {
